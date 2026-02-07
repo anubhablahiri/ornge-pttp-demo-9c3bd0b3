@@ -10,6 +10,12 @@ import { getTransportByRef, mockTransports } from '@/data/mockTransports';
 import { useApp } from '@/lib/i18n';
 import LanguageToggle from '@/components/LanguageToggle';
 
+function getTrackPrefix(format: string) {
+  if (format === 'desktop') return '/desktop';
+  if (format === 'tablet') return '/tablet';
+  return '';
+}
+
 export default function Login() {
   const navigate = useNavigate();
   const { t } = useApp();
