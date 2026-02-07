@@ -38,15 +38,15 @@ export default function TransportHeader({ transport }: Props) {
       </div>
 
       <div className="grid grid-cols-1 gap-2 text-sm">
-        <div className="flex items-center gap-2">
-          <div className="w-2 h-2 rounded-full bg-primary shrink-0" />
-          <span className="text-muted-foreground">{t('dash.from')}</span>
-          <span className="font-medium text-foreground truncate">{transport.originFacility}</span>
+        <div className="flex items-start gap-2">
+          <div className="w-2 h-2 rounded-full bg-primary shrink-0 mt-1.5" />
+          <span className="text-muted-foreground shrink-0">{t('dash.from')}</span>
+          <span className="font-medium text-foreground break-words min-w-0">{transport.originFacility}</span>
         </div>
-        <div className="flex items-center gap-2">
-          <div className="w-2 h-2 rounded-full bg-success shrink-0" />
-          <span className="text-muted-foreground">{t('dash.to')}</span>
-          <span className="font-medium text-foreground truncate">{transport.destinationFacility}</span>
+        <div className="flex items-start gap-2">
+          <div className="w-2 h-2 rounded-full bg-success shrink-0 mt-1.5" />
+          <span className="text-muted-foreground shrink-0">{t('dash.to')}</span>
+          <span className="font-medium text-foreground break-words min-w-0">{transport.destinationFacility}</span>
         </div>
       </div>
     </div>

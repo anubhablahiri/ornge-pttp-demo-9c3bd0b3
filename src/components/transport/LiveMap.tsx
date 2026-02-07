@@ -1,14 +1,14 @@
-import { useEffect, useState, useRef } from 'react';
-import { Transport, getCurrentStatusIndex } from '@/data/mockTransports';
+import { Transport, getCurrentStatusIndex, isTransportComplete } from '@/data/mockTransports';
 import { useApp } from '@/lib/i18n';
-import { Plane, Truck } from 'lucide-react';
+import { Plane, Truck, CheckCircle2 } from 'lucide-react';
 
 interface Props {
   transport: Transport;
 }
 
-// Simplified 4-phase mapping from 10 milestones
-function getPhase(idx: number): number {
+// Simplified 5-phase mapping from 10 milestones
+function getPhase(idx: number, isComplete: boolean): number {
+  if (isComplete) return 4; // Completed
   if (idx <= 2) return 0; // Preparing
   if (idx <= 4) return 1; // En route to pickup
   if (idx <= 6) return 2; // With patient
@@ -18,14 +18,16 @@ function getPhase(idx: number): number {
 export default function LiveMap({ transport }: Props) {
   const { t } = useApp();
   const currentIdx = getCurrentStatusIndex(transport);
-  const phase = getPhase(currentIdx);
+  const complete = isTransportComplete(transport);
+  const phase = getPhase(currentIdx, complete);
   const isAir = transport.mode === 'air';
 
   const phases = [
-    { key: 'phase.preparing', en: 'Preparing for transport', fr: 'Préparation du transport' },
-    { key: 'phase.enroutePickup', en: 'En route to patient pickup', fr: 'En route vers la prise en charge' },
-    { key: 'phase.withPatient', en: 'With patient', fr: 'Avec le patient' },
-    { key: 'phase.enrouteDropoff', en: 'En route to patient dropoff', fr: 'En route vers la destination' },
+    { en: 'Preparing', fr: 'Préparation' },
+    { en: 'En route to pickup', fr: 'En route (prise en charge)' },
+    { en: 'With patient', fr: 'Avec le patient' },
+    { en: 'En route to dropoff', fr: 'En route (destination)' },
+    { en: 'Completed', fr: 'Terminé' },
   ];
 
   const statusMessages: Record<string, { en: string; fr: string }> = {
@@ -33,6 +35,7 @@ export default function LiveMap({ transport }: Props) {
     '1': { en: `The team is en route to ${transport.originFacility}. Estimated arrival in about ${transport.etaPickup || '—'}.`, fr: `L'équipe est en route vers ${transport.originFacility}. Arrivée estimée dans environ ${transport.etaPickup || '—'}.` },
     '2': { en: `The team is with your family member at ${transport.originFacility}.`, fr: `L'équipe est avec votre proche à ${transport.originFacility}.` },
     '3': { en: `En route to ${transport.destinationFacility}. Estimated arrival in about ${transport.etaDestination || '—'}.`, fr: `En route vers ${transport.destinationFacility}. Arrivée estimée dans environ ${transport.etaDestination || '—'}.` },
+    '4': { en: 'The transport has been completed successfully. Your family member has been transferred to the care team.', fr: 'Le transport a été complété avec succès. Votre proche a été transféré à l\'équipe soignante.' },
   };
 
   const { lang } = useApp();
@@ -69,22 +72,33 @@ export default function LiveMap({ transport }: Props) {
 
                 {/* Icon */}
                 <div className="relative">
-                  <VehicleIcon
-                    className={`h-5 w-5 ${
-                      isCompleted || isActive
-                        ? 'text-primary'
-                        : 'text-muted-foreground/30'
-                    } ${isActive ? 'animate-pulse' : ''}`}
-                    strokeWidth={2.5}
-                  />
+                  {i === 4 ? (
+                    <CheckCircle2
+                      className={`h-5 w-5 ${
+                        isCompleted || isActive
+                          ? 'text-primary'
+                          : 'text-muted-foreground/30'
+                      } ${isActive ? 'animate-pulse' : ''}`}
+                      strokeWidth={2.5}
+                    />
+                  ) : (
+                    <VehicleIcon
+                      className={`h-5 w-5 ${
+                        isCompleted || isActive
+                          ? 'text-primary'
+                          : 'text-muted-foreground/30'
+                      } ${isActive ? 'animate-pulse' : ''}`}
+                      strokeWidth={2.5}
+                    />
+                  )}
                 </div>
               </div>
             );
           })}
 
           {/* Connecting lines between icons */}
-          <div className="absolute left-0 right-0 top-[44px] flex items-center px-[12%]">
-            {[0, 1, 2].map((i) => {
+          <div className="absolute left-0 right-0 top-[44px] flex items-center px-[10%]">
+            {[0, 1, 2, 3].map((i) => {
               const segCompleted = i < phase;
               const segActive = i === phase - 1 || i === phase;
               return (

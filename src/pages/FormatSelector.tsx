@@ -1,4 +1,5 @@
 import { useNavigate } from 'react-router-dom';
+import { useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { Smartphone, Tablet, Monitor } from 'lucide-react';
 import orngeLogo from '@/assets/ornge-logo.png';
@@ -14,6 +15,16 @@ const formats: { id: DeviceFormat; icon: typeof Smartphone; key: string; descKey
 export default function FormatSelector() {
   const navigate = useNavigate();
   const { t, setDeviceFormat } = useApp();
+
+  // Auto-redirect actual mobile devices straight to login
+  useEffect(() => {
+    const isTouchDevice = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
+    const isSmallScreen = window.innerWidth <= 768;
+    if (isTouchDevice && isSmallScreen) {
+      setDeviceFormat('mobile');
+      navigate('/login', { replace: true });
+    }
+  }, [navigate, setDeviceFormat]);
 
   const handleSelect = (format: DeviceFormat) => {
     setDeviceFormat(format);
