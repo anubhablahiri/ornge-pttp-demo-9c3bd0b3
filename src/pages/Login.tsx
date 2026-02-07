@@ -45,12 +45,6 @@ export default function Login() {
 
   return (
     <div className="min-h-screen flex flex-col items-center justify-center bg-background px-4">
-      {deviceFormat !== 'mobile' && (
-        <Link to="/" className="absolute top-4 left-4 flex items-center gap-1.5 text-sm text-muted-foreground hover:text-foreground transition-colors">
-          <ArrowLeft className="h-4 w-4" />
-          {t('login.backPlatform')}
-        </Link>
-      )}
       <div className="absolute top-4 right-4">
         <LanguageToggle />
       </div>
@@ -121,6 +115,13 @@ export default function Login() {
         <p className="text-xs text-muted-foreground text-center mt-5 px-4">
           {t('login.privacy')}
         </p>
+
+        {deviceFormat !== 'mobile' && (
+          <Link to="/" className="flex items-center justify-center gap-1.5 mt-4 text-sm text-muted-foreground hover:text-foreground transition-colors">
+            <ArrowLeft className="h-4 w-4" />
+            {t('login.backPlatform')}
+          </Link>
+        )}
       </motion.div>
     </div>
   );
