@@ -14,7 +14,6 @@ export default function Login() {
   const navigate = useNavigate();
   const { t } = useApp();
   const [refNumber, setRefNumber] = useState('ORN-2025-4821');
-  const [lastName, setLastName] = useState('Mitchell');
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
 
