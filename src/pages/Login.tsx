@@ -36,10 +36,6 @@ export default function Login() {
     }, 800);
   };
 
-  const handleDemo = () => {
-    navigate(`/track/${mockTransports[0].id}`);
-  };
-
   return (
     <div className="min-h-screen flex flex-col items-center justify-center bg-background px-4">
       <div className="absolute top-4 right-4">
