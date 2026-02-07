@@ -36,6 +36,7 @@ export default function LiveMap({ transport }: Props) {
     '1': { en: `The team is en route to ${transport.originFacility}. Estimated arrival in about ${transport.etaPickup || '—'}.`, fr: `L'équipe est en route vers ${transport.originFacility}. Arrivée estimée dans environ ${transport.etaPickup || '—'}.` },
     '2': { en: `The team is with your family member at ${transport.originFacility}.`, fr: `L'équipe est avec votre proche à ${transport.originFacility}.` },
     '3': { en: `En route to ${transport.destinationFacility}. Estimated arrival in about ${transport.etaDestination || '—'}.`, fr: `En route vers ${transport.destinationFacility}. Arrivée estimée dans environ ${transport.etaDestination || '—'}.` },
+    '4': { en: 'The transport has been completed successfully. Your family member has been transferred to the care team.', fr: 'Le transport a été complété avec succès. Votre proche a été transféré à l\'équipe soignante.' },
   };
 
   const { lang } = useApp();
