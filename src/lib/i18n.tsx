@@ -13,7 +13,8 @@ interface AppContextType {
 
 const translations: Record<string, Record<Lang, string>> = {
   // Format selector
-  'format.title': { en: 'Select Demo Format', fr: 'Sélectionner le format démo' },
+  'format.welcome': { en: 'Welcome to Family Transport Tracking Portal Demo', fr: 'Bienvenue sur la démo du portail de suivi de transport familial' },
+  'format.title': { en: 'Choose Platform', fr: 'Choisir la plateforme' },
   'format.subtitle': { en: 'Choose a device view for the demo experience', fr: 'Choisissez une vue appareil pour la démo' },
   'format.mobile': { en: 'Mobile', fr: 'Mobile' },
   'format.mobile.desc': { en: 'Optimized for smartphones', fr: 'Optimisé pour smartphones' },
