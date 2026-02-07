@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import { Shield, ArrowRight, Eye } from 'lucide-react';
+import { Shield, ArrowRight } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
@@ -34,10 +34,6 @@ export default function Login() {
       }
       setLoading(false);
     }, 800);
-  };
-
-  const handleDemo = () => {
-    navigate(`/track/${mockTransports[0].id}`);
   };
 
   return (
@@ -107,12 +103,6 @@ export default function Login() {
             </Button>
           </form>
 
-          <div className="mt-5 pt-4 border-t border-border">
-            <Button variant="outline" className="w-full h-11 rounded-lg" onClick={handleDemo}>
-              <Eye className="h-4 w-4 mr-2" />
-              {t('login.sample')}
-            </Button>
-          </div>
         </div>
 
         <p className="text-xs text-muted-foreground text-center mt-5 px-4">
