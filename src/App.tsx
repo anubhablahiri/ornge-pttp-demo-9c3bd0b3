@@ -22,6 +22,8 @@ const App = () => (
             <Route path="/" element={<FormatSelector />} />
             <Route path="/login" element={<Login />} />
             <Route path="/track/:id" element={<Dashboard />} />
+            <Route path="/tablet/track/:id" element={<Dashboard />} />
+            <Route path="/desktop/track/:id" element={<Dashboard />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
         </BrowserRouter>

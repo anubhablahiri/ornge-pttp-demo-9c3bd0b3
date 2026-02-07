@@ -34,7 +34,7 @@ export default function Login() {
     setTimeout(() => {
       const transport = getTransportByRef(refNumber);
       if (transport) {
-        navigate(`/track/${transport.id}`);
+        navigate(`${getTrackPrefix(deviceFormat)}/track/${transport.id}`);
       } else {
         setError(t('login.error.notFound'));
       }
