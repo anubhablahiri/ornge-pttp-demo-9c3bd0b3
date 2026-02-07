@@ -87,8 +87,8 @@ export default function LiveMap({ transport }: Props) {
           })}
 
           {/* Connecting lines between icons */}
-          <div className="absolute left-0 right-0 top-[44px] flex items-center px-[12%]">
-            {[0, 1, 2].map((i) => {
+          <div className="absolute left-0 right-0 top-[44px] flex items-center px-[10%]">
+            {[0, 1, 2, 3].map((i) => {
               const segCompleted = i < phase;
               const segActive = i === phase - 1 || i === phase;
               return (
