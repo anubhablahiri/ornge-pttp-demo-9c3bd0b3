@@ -86,7 +86,7 @@ export default function Dashboard() {
               </div>
 
               {/* Main content: 2 columns */}
-              <div className="grid grid-cols-2 gap-4">
+              <div className="grid gap-4" style={{ gridTemplateColumns: '1fr 2fr' }}>
                 {/* Left column: Support, Updates, Details, Admin */}
                 <div className="space-y-4">
                   <motion.div {...anim(0.1)}><FamilySupport /></motion.div>
