@@ -38,6 +38,15 @@ export default function AdminToggle({ transport, onUpdate }: Props) {
     onUpdate({ ...transport, notifications: [...transport.notifications, delayNotif] });
   };
 
+  const removeLastDelay = () => {
+    const lastDelayIdx = [...transport.notifications].reverse().findIndex((n) => n.type === 'delay');
+    if (lastDelayIdx === -1) return;
+    const idx = transport.notifications.length - 1 - lastDelayIdx;
+    onUpdate({ ...transport, notifications: transport.notifications.filter((_, i) => i !== idx) });
+  };
+
+  const hasDelays = transport.notifications.some((n) => n.type === 'delay');
+
   return (
     <div className="bg-card rounded-xl border-2 border-dashed border-warning/40 shadow-sm overflow-hidden">
       <button
