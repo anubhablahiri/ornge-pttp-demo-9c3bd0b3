@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { useParams, useNavigate, Link } from 'react-router-dom';
+import { useParams, useNavigate, Link, useLocation } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { ArrowLeft, RefreshCw } from 'lucide-react';
 import { mockTransports, Transport } from '@/data/mockTransports';
@@ -18,7 +18,19 @@ import { useApp } from '@/lib/i18n';
 export default function Dashboard() {
   const { id } = useParams<{ id: string }>();
   const navigate = useNavigate();
-  const { t, deviceFormat } = useApp();
+  const location = useLocation();
+  const { t, setDeviceFormat } = useApp();
+
+  // Derive device format from URL prefix
+  const urlFormat = location.pathname.startsWith('/desktop/') ? 'desktop'
+    : location.pathname.startsWith('/tablet/') ? 'tablet'
+    : 'mobile';
+  const deviceFormat = urlFormat;
+
+  // Sync context so child components can use it
+  useEffect(() => {
+    setDeviceFormat(urlFormat);
+  }, [urlFormat, setDeviceFormat]);
   const [transport, setTransport] = useState<Transport | null>(null);
   const [lastRefresh, setLastRefresh] = useState(new Date());
 
@@ -54,7 +66,7 @@ export default function Dashboard() {
       <header className="sticky top-0 z-50 bg-card/95 backdrop-blur-sm border-b border-border px-4 py-3">
         <div className={`${maxW} mx-auto flex items-center justify-between`}>
           <div className="flex items-center gap-3">
-            <Link to="/" className="p-1.5 rounded-lg hover:bg-accent transition-colors">
+            <Link to={deviceFormat === 'mobile' ? '/login' : '/'} className="p-1.5 rounded-lg hover:bg-accent transition-colors">
               <ArrowLeft className="h-5 w-5 text-foreground" />
             </Link>
             <img src={orngeLogo} alt="Ornge" className="h-7" />

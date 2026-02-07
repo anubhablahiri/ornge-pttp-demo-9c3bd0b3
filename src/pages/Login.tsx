@@ -10,9 +10,15 @@ import { getTransportByRef, mockTransports } from '@/data/mockTransports';
 import { useApp } from '@/lib/i18n';
 import LanguageToggle from '@/components/LanguageToggle';
 
+function getTrackPrefix(format: string) {
+  if (format === 'desktop') return '/desktop';
+  if (format === 'tablet') return '/tablet';
+  return '';
+}
+
 export default function Login() {
   const navigate = useNavigate();
-  const { t } = useApp();
+  const { t, deviceFormat } = useApp();
   const [refNumber, setRefNumber] = useState('ORN-2025-4821');
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
@@ -28,7 +34,7 @@ export default function Login() {
     setTimeout(() => {
       const transport = getTransportByRef(refNumber);
       if (transport) {
-        navigate(`/track/${transport.id}`);
+        navigate(`${getTrackPrefix(deviceFormat)}/track/${transport.id}`);
       } else {
         setError(t('login.error.notFound'));
       }
