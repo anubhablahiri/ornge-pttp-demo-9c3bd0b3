@@ -1,5 +1,5 @@
 import { useEffect, useState, useRef } from 'react';
-import { Transport, getCurrentStatusIndex } from '@/data/mockTransports';
+import { Transport, getCurrentStatusIndex, isTransportComplete } from '@/data/mockTransports';
 import { useApp } from '@/lib/i18n';
 import { Plane, Truck } from 'lucide-react';
 
