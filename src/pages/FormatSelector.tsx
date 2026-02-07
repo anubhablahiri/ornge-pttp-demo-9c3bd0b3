@@ -58,18 +58,18 @@ export default function FormatSelector() {
             <motion.button
               key={f.id}
               onClick={() => handleSelect(f.id)}
-              className="bg-primary rounded-xl shadow-sm p-6 flex flex-col items-center gap-3 transition-all hover:shadow-lg group"
+              className="bg-card rounded-xl border-2 border-primary shadow-md hover:shadow-xl p-6 flex flex-col items-center gap-3 transition-all group"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.35 + i * 0.1 }}
               whileHover={{ scale: 1.02 }}
               whileTap={{ scale: 0.98 }}
             >
-              <div className="w-14 h-14 rounded-2xl bg-primary-foreground/20 flex items-center justify-center group-hover:bg-primary-foreground/30 transition-colors">
-                <f.icon className="h-7 w-7 text-primary-foreground" />
+              <div className="w-14 h-14 rounded-2xl bg-primary/10 flex items-center justify-center group-hover:bg-primary/20 transition-colors">
+                <f.icon className="h-7 w-7 text-primary" />
               </div>
-              <span className="text-base font-display font-bold text-primary-foreground">{t(f.key)}</span>
-              <span className="text-xs text-primary-foreground/80 text-center">{t(f.descKey)}</span>
+              <span className="text-base font-display font-bold text-primary">{t(f.key)}</span>
+              <span className="text-xs text-primary/70 text-center">{t(f.descKey)}</span>
             </motion.button>
           ))}
         </div>
