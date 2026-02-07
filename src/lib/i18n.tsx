@@ -35,6 +35,7 @@ const translations: Record<string, Record<Lang, string>> = {
   'login.error.empty': { en: 'Please enter both fields.', fr: 'Veuillez remplir les deux champs.' },
   'login.error.notFound': { en: 'Transport not found. Please check your details and try again.', fr: 'Transport introuvable. Vérifiez vos informations et réessayez.' },
   'login.privacy': { en: 'Information is limited for privacy. No medical records or diagnosis information is displayed.', fr: 'Les informations sont limitées pour la confidentialité. Aucun dossier médical ni diagnostic n\'est affiché.' },
+  'login.backPlatform': { en: 'Select Platform', fr: 'Choisir la plateforme' },
 
   'dash.headerTitle': { en: 'Patient Transport Tracking', fr: 'Suivi du transport des patients' },
   'dash.liveTracking': { en: 'Live Tracking', fr: 'Suivi en direct' },
