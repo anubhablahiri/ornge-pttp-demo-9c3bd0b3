@@ -98,20 +98,6 @@ export default function Login() {
                 maxLength={30}
               />
             </div>
-            <div className="space-y-1.5">
-              <Label htmlFor="lastName" className="text-sm font-medium">
-                {t('login.lastName')}
-              </Label>
-              <Input
-                id="lastName"
-                placeholder="Last name"
-                value={lastName}
-                onChange={(e) => setLastName(e.target.value)}
-                className="h-12"
-                maxLength={50}
-              />
-            </div>
-
             {error && <p className="text-destructive text-sm">{error}</p>}
 
             <Button type="submit" className="w-full h-12 text-base font-semibold" disabled={loading}>
