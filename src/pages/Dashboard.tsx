@@ -79,14 +79,14 @@ export default function Dashboard() {
           /* Multi-column layout for tablet/desktop */
           isDesktop ? (
             <div className="space-y-4">
-              {/* Top row: Header + ETA */}
-              <div className="grid grid-cols-2 gap-4">
+              {/* Top row: Header + ETA — same column ratio as below */}
+              <div className="grid gap-4" style={{ gridTemplateColumns: '2fr 1fr' }}>
                 <motion.div {...anim(0)}><TransportHeader transport={transport} /></motion.div>
-                <motion.div {...anim(0.05)}><ETADisplay transport={transport} /></motion.div>
+                <motion.div {...anim(0.05)} className="flex"><ETADisplay transport={transport} className="flex-1" /></motion.div>
               </div>
 
-              {/* Main content: 2 columns */}
-              <div className="grid gap-4" style={{ gridTemplateColumns: '1fr 2fr' }}>
+              {/* Main content: narrow left, wide right */}
+              <div className="grid gap-4" style={{ gridTemplateColumns: '2fr 5fr' }}>
                 {/* Left column: Support, Updates, Details, Admin */}
                 <div className="space-y-4">
                   <motion.div {...anim(0.1)}><FamilySupport /></motion.div>
