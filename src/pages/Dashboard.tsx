@@ -77,37 +77,50 @@ export default function Dashboard() {
       <main className={`${maxW} mx-auto px-4 pt-4`}>
         {(isDesktop || isTablet) ? (
           /* Multi-column layout for tablet/desktop */
-          <div className={`grid gap-4 ${isDesktop ? 'grid-cols-3' : 'grid-cols-2'}`}>
-            {/* Left column */}
+          isDesktop ? (
             <div className="space-y-4">
-              <motion.div {...anim(0)}><TransportHeader transport={transport} /></motion.div>
-              <motion.div {...anim(0.1)}><ETADisplay transport={transport} /></motion.div>
-              <motion.div {...anim(0.2)}><StatusTimeline transport={transport} /></motion.div>
-            </div>
-
-            {/* Center / Right column */}
-            <div className="space-y-4">
-              <motion.div {...anim(0.15)}><LiveMap transport={transport} /></motion.div>
-              <motion.div {...anim(0.25)}><NotificationFeed transport={transport} /></motion.div>
-              <motion.div {...anim(0.3)}><TransportDetails transport={transport} /></motion.div>
-            </div>
-
-            {/* Third column (desktop only) */}
-            {isDesktop && (
-              <div className="space-y-4">
-                <motion.div {...anim(0.2)}><FamilySupport /></motion.div>
-                <motion.div {...anim(0.3)}><AdminToggle transport={transport} onUpdate={setTransport} /></motion.div>
+              {/* Top row: Header + ETA */}
+              <div className="grid grid-cols-2 gap-4">
+                <motion.div {...anim(0)}><TransportHeader transport={transport} /></motion.div>
+                <motion.div {...anim(0.05)}><ETADisplay transport={transport} /></motion.div>
               </div>
-            )}
 
-            {/* Extra row for tablet */}
-            {isTablet && (
+              {/* Main content: 2 columns */}
+              <div className="grid grid-cols-2 gap-4">
+                {/* Left column: Support, Updates, Details, Admin */}
+                <div className="space-y-4">
+                  <motion.div {...anim(0.1)}><FamilySupport /></motion.div>
+                  <motion.div {...anim(0.15)}><NotificationFeed transport={transport} /></motion.div>
+                  <motion.div {...anim(0.2)}><TransportDetails transport={transport} /></motion.div>
+                  <motion.div {...anim(0.25)}><AdminToggle transport={transport} onUpdate={setTransport} /></motion.div>
+                </div>
+
+                {/* Right column: Live Tracking + Transport Progress */}
+                <div className="space-y-4">
+                  <motion.div {...anim(0.1)}><LiveMap transport={transport} /></motion.div>
+                  <motion.div {...anim(0.2)}><StatusTimeline transport={transport} horizontal /></motion.div>
+                </div>
+              </div>
+            </div>
+          ) : (
+            /* Tablet layout */
+            <div className="grid grid-cols-2 gap-4">
+              <div className="space-y-4">
+                <motion.div {...anim(0)}><TransportHeader transport={transport} /></motion.div>
+                <motion.div {...anim(0.1)}><ETADisplay transport={transport} /></motion.div>
+                <motion.div {...anim(0.2)}><StatusTimeline transport={transport} /></motion.div>
+              </div>
+              <div className="space-y-4">
+                <motion.div {...anim(0.15)}><LiveMap transport={transport} /></motion.div>
+                <motion.div {...anim(0.25)}><NotificationFeed transport={transport} /></motion.div>
+                <motion.div {...anim(0.3)}><TransportDetails transport={transport} /></motion.div>
+              </div>
               <div className="col-span-2 grid grid-cols-2 gap-4">
                 <motion.div {...anim(0.35)}><FamilySupport /></motion.div>
                 <motion.div {...anim(0.4)}><AdminToggle transport={transport} onUpdate={setTransport} /></motion.div>
               </div>
-            )}
-          </div>
+            </div>
+          )
         ) : (
           /* Mobile layout (original) */
           <div className="space-y-4">
