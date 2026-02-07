@@ -1,7 +1,6 @@
-import { useEffect, useState, useRef } from 'react';
 import { Transport, getCurrentStatusIndex, isTransportComplete } from '@/data/mockTransports';
 import { useApp } from '@/lib/i18n';
-import { Plane, Truck } from 'lucide-react';
+import { Plane, Truck, CheckCircle2 } from 'lucide-react';
 
 interface Props {
   transport: Transport;
