@@ -18,7 +18,7 @@ function getTrackPrefix(format: string) {
 
 export default function Login() {
   const navigate = useNavigate();
-  const { t } = useApp();
+  const { t, deviceFormat } = useApp();
   const [refNumber, setRefNumber] = useState('ORN-2025-4821');
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
