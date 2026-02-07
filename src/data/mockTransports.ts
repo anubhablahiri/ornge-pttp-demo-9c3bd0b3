@@ -145,9 +145,9 @@ export const mockTransports: Transport[] = [
   },
 ];
 
-export function getTransportByRef(refId: string, lastName: string): Transport | undefined {
+export function getTransportByRef(refId: string): Transport | undefined {
   return mockTransports.find(
-    (t) => t.referenceId.toLowerCase() === refId.toLowerCase() && t.lastName.toLowerCase() === lastName.toLowerCase()
+    (t) => t.referenceId.toLowerCase() === refId.toLowerCase()
   );
 }
 

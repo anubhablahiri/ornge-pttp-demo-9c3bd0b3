@@ -14,20 +14,19 @@ export default function Login() {
   const navigate = useNavigate();
   const { t } = useApp();
   const [refNumber, setRefNumber] = useState('ORN-2025-4821');
-  const [lastName, setLastName] = useState('Mitchell');
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     setError('');
-    if (!refNumber.trim() || !lastName.trim()) {
+    if (!refNumber.trim()) {
       setError(t('login.error.empty'));
       return;
     }
     setLoading(true);
     setTimeout(() => {
-      const transport = getTransportByRef(refNumber, lastName);
+      const transport = getTransportByRef(refNumber);
       if (transport) {
         navigate(`/track/${transport.id}`);
       } else {
@@ -99,20 +98,6 @@ export default function Login() {
                 maxLength={30}
               />
             </div>
-            <div className="space-y-1.5">
-              <Label htmlFor="lastName" className="text-sm font-medium">
-                {t('login.lastName')}
-              </Label>
-              <Input
-                id="lastName"
-                placeholder="Last name"
-                value={lastName}
-                onChange={(e) => setLastName(e.target.value)}
-                className="h-12"
-                maxLength={50}
-              />
-            </div>
-
             {error && <p className="text-destructive text-sm">{error}</p>}
 
             <Button type="submit" className="w-full h-12 text-base font-semibold" disabled={loading}>
