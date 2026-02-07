@@ -16,6 +16,16 @@ export default function FormatSelector() {
   const navigate = useNavigate();
   const { t, setDeviceFormat } = useApp();
 
+  // Auto-redirect actual mobile devices straight to login
+  useEffect(() => {
+    const isTouchDevice = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
+    const isSmallScreen = window.innerWidth <= 768;
+    if (isTouchDevice && isSmallScreen) {
+      setDeviceFormat('mobile');
+      navigate('/login', { replace: true });
+    }
+  }, [navigate, setDeviceFormat]);
+
   const handleSelect = (format: DeviceFormat) => {
     setDeviceFormat(format);
     navigate('/login');
