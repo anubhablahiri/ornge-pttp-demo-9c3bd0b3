@@ -72,14 +72,25 @@ export default function LiveMap({ transport }: Props) {
 
                 {/* Icon */}
                 <div className="relative">
-                  <VehicleIcon
-                    className={`h-5 w-5 ${
-                      isCompleted || isActive
-                        ? 'text-primary'
-                        : 'text-muted-foreground/30'
-                    } ${isActive ? 'animate-pulse' : ''}`}
-                    strokeWidth={2.5}
-                  />
+                  {i === 4 ? (
+                    <CheckCircle2
+                      className={`h-5 w-5 ${
+                        isCompleted || isActive
+                          ? 'text-primary'
+                          : 'text-muted-foreground/30'
+                      } ${isActive ? 'animate-pulse' : ''}`}
+                      strokeWidth={2.5}
+                    />
+                  ) : (
+                    <VehicleIcon
+                      className={`h-5 w-5 ${
+                        isCompleted || isActive
+                          ? 'text-primary'
+                          : 'text-muted-foreground/30'
+                      } ${isActive ? 'animate-pulse' : ''}`}
+                      strokeWidth={2.5}
+                    />
+                  )}
                 </div>
               </div>
             );
