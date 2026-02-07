@@ -52,24 +52,24 @@ export default function FormatSelector() {
         </motion.p>
       </div>
 
-      <div className="-mt-8 mx-4 md:mx-auto md:max-w-2xl flex-1">
+      <div className="mx-4 md:mx-auto md:max-w-2xl flex-1">
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
           {formats.map((f, i) => (
             <motion.button
               key={f.id}
               onClick={() => handleSelect(f.id)}
-              className="bg-card rounded-xl border-2 border-border hover:border-primary shadow-sm p-6 flex flex-col items-center gap-3 transition-all hover:shadow-md group"
+              className="bg-primary rounded-xl shadow-sm p-6 flex flex-col items-center gap-3 transition-all hover:shadow-lg group"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.35 + i * 0.1 }}
               whileHover={{ scale: 1.02 }}
               whileTap={{ scale: 0.98 }}
             >
-              <div className="w-14 h-14 rounded-2xl bg-primary/10 flex items-center justify-center group-hover:bg-primary/20 transition-colors">
-                <f.icon className="h-7 w-7 text-primary" />
+              <div className="w-14 h-14 rounded-2xl bg-primary-foreground/20 flex items-center justify-center group-hover:bg-primary-foreground/30 transition-colors">
+                <f.icon className="h-7 w-7 text-primary-foreground" />
               </div>
-              <span className="text-base font-display font-bold text-foreground">{t(f.key)}</span>
-              <span className="text-xs text-muted-foreground text-center">{t(f.descKey)}</span>
+              <span className="text-base font-display font-bold text-primary-foreground">{t(f.key)}</span>
+              <span className="text-xs text-primary-foreground/80 text-center">{t(f.descKey)}</span>
             </motion.button>
           ))}
         </div>
