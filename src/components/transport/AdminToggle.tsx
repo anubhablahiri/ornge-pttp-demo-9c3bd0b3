@@ -38,6 +38,15 @@ export default function AdminToggle({ transport, onUpdate }: Props) {
     onUpdate({ ...transport, notifications: [...transport.notifications, delayNotif] });
   };
 
+  const removeLastDelay = () => {
+    const lastDelayIdx = [...transport.notifications].reverse().findIndex((n) => n.type === 'delay');
+    if (lastDelayIdx === -1) return;
+    const idx = transport.notifications.length - 1 - lastDelayIdx;
+    onUpdate({ ...transport, notifications: transport.notifications.filter((_, i) => i !== idx) });
+  };
+
+  const hasDelays = transport.notifications.some((n) => n.type === 'delay');
+
   return (
     <div className="bg-card rounded-xl border-2 border-dashed border-warning/40 shadow-sm overflow-hidden">
       <button
@@ -67,13 +76,18 @@ export default function AdminToggle({ transport, onUpdate }: Props) {
               </Button>
             ))}
           </div>
-          <div className="flex gap-2 pt-2">
+          <div className="flex flex-wrap gap-2 pt-2">
             <Button variant="outline" size="sm" onClick={toggleMode}>
               Switch to {transport.mode === 'air' ? 'Land' : 'Air'}
             </Button>
             <Button variant="outline" size="sm" onClick={addDelay}>
               Simulate Delay
             </Button>
+            {hasDelays && (
+              <Button variant="outline" size="sm" onClick={removeLastDelay} className="text-destructive border-destructive/30">
+                Undo Delay
+              </Button>
+            )}
           </div>
         </div>
       )}
