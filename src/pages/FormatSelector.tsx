@@ -22,12 +22,12 @@ export default function FormatSelector() {
 
   return (
     <div className="min-h-screen flex flex-col bg-background">
-      <div className="bg-primary px-6 pt-10 pb-14 flex flex-col items-center text-primary-foreground relative">
+      <div className="px-6 pt-10 pb-14 flex flex-col items-center text-foreground relative">
         <div className="absolute top-4 right-4">
-          <LanguageToggle className="bg-primary-foreground/15 text-primary-foreground hover:bg-primary-foreground/25" />
+          <LanguageToggle />
         </div>
         <motion.img
-          src={orngeLogoWhite}
+          src={orngeLogo}
           alt="Ornge"
           className="h-14 mb-5"
           initial={{ opacity: 0, y: -20 }}
@@ -43,9 +43,9 @@ export default function FormatSelector() {
           {t('format.title')}
         </motion.h1>
         <motion.p
-          className="mt-2 text-sm opacity-90 text-center max-w-sm"
+          className="mt-2 text-sm text-muted-foreground text-center max-w-sm"
           initial={{ opacity: 0 }}
-          animate={{ opacity: 0.9 }}
+          animate={{ opacity: 1 }}
           transition={{ delay: 0.3 }}
         >
           {t('format.subtitle')}
