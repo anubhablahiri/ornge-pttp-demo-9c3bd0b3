@@ -20,13 +20,13 @@ export default function Login() {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     setError('');
-    if (!refNumber.trim() || !lastName.trim()) {
+    if (!refNumber.trim()) {
       setError(t('login.error.empty'));
       return;
     }
     setLoading(true);
     setTimeout(() => {
-      const transport = getTransportByRef(refNumber, lastName);
+      const transport = getTransportByRef(refNumber);
       if (transport) {
         navigate(`/track/${transport.id}`);
       } else {
