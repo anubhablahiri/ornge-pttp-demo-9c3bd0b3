@@ -14,10 +14,11 @@ export default function AdminToggle({ transport, onUpdate }: Props) {
   const { t } = useApp();
 
   const jumpToStatus = (targetIdx: number) => {
+    const isLast = targetIdx === TRANSPORT_MILESTONES.length - 1;
     const newStatuses = TRANSPORT_MILESTONES.map((m, i) => ({
       ...m,
-      completedAt: i < targetIdx ? new Date(Date.now() - (targetIdx - i) * 10 * 60000).toISOString() : undefined,
-      isActive: i === targetIdx,
+      completedAt: i <= targetIdx ? new Date(Date.now() - (targetIdx - i) * 10 * 60000).toISOString() : undefined,
+      isActive: isLast ? false : i === targetIdx,
     }));
     onUpdate({ ...transport, statuses: newStatuses });
   };
