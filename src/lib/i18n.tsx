@@ -36,7 +36,7 @@ const translations: Record<string, Record<Lang, string>> = {
   'login.error.notFound': { en: 'Transport not found. Please check your details and try again.', fr: 'Transport introuvable. Vérifiez vos informations et réessayez.' },
   'login.privacy': { en: 'Information is limited for privacy. No medical records or diagnosis information is displayed.', fr: 'Les informations sont limitées pour la confidentialité. Aucun dossier médical ni diagnostic n\'est affiché.' },
 
-  // Dashboard
+  'dash.headerTitle': { en: 'Patient Transport Tracking', fr: 'Suivi du transport des patients' },
   'dash.liveTracking': { en: 'Live Tracking', fr: 'Suivi en direct' },
   'dash.flightProgress': { en: 'Flight Progress', fr: 'Progression du vol' },
   'dash.transportProgress': { en: 'Transport Progress', fr: 'Progression du transport' },

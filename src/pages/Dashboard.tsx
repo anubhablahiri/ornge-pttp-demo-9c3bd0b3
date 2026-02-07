@@ -58,6 +58,9 @@ export default function Dashboard() {
               <ArrowLeft className="h-5 w-5 text-foreground" />
             </Link>
             <img src={orngeLogo} alt="Ornge" className="h-7" />
+            <span className="text-sm md:text-base font-display font-semibold text-foreground hidden sm:inline">
+              {t('dash.headerTitle')}
+            </span>
           </div>
           <div className="flex items-center gap-3">
             <LanguageToggle />
