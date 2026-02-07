@@ -1,12 +1,14 @@
 import { Transport } from '@/data/mockTransports';
 import { Plane, Truck, Heart } from 'lucide-react';
 import { Badge } from '@/components/ui/badge';
+import { useApp } from '@/lib/i18n';
 
 interface Props {
   transport: Transport;
 }
 
 export default function TransportHeader({ transport }: Props) {
+  const { t } = useApp();
   const ModeIcon = transport.mode === 'air' ? Plane : Truck;
 
   return (
@@ -17,12 +19,14 @@ export default function TransportHeader({ transport }: Props) {
             {transport.referenceId}
           </p>
           <h2 className="text-xl font-display font-bold text-foreground mt-0.5">
-            {transport.patientFirstName}'s Transport
+            {transport.patientFirstName}{t('dash.transport')}
           </h2>
         </div>
         <div className="flex items-center gap-1.5 bg-primary/10 text-primary rounded-full px-3 py-1.5">
           <ModeIcon className="h-4 w-4" />
-          <span className="text-xs font-semibold capitalize">{transport.mode}</span>
+          <span className="text-xs font-semibold capitalize">
+            {transport.mode === 'air' ? t('admin.air') : t('admin.land')}
+          </span>
         </div>
       </div>
 
@@ -36,12 +40,12 @@ export default function TransportHeader({ transport }: Props) {
       <div className="grid grid-cols-1 gap-2 text-sm">
         <div className="flex items-center gap-2">
           <div className="w-2 h-2 rounded-full bg-primary shrink-0" />
-          <span className="text-muted-foreground">From:</span>
+          <span className="text-muted-foreground">{t('dash.from')}</span>
           <span className="font-medium text-foreground truncate">{transport.originFacility}</span>
         </div>
         <div className="flex items-center gap-2">
           <div className="w-2 h-2 rounded-full bg-success shrink-0" />
-          <span className="text-muted-foreground">To:</span>
+          <span className="text-muted-foreground">{t('dash.to')}</span>
           <span className="font-medium text-foreground truncate">{transport.destinationFacility}</span>
         </div>
       </div>

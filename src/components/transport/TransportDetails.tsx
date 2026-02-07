@@ -6,12 +6,15 @@ import {
   AccordionTrigger,
 } from '@/components/ui/accordion';
 import { Users, Wrench, FileText } from 'lucide-react';
+import { useApp } from '@/lib/i18n';
 
 interface Props {
   transport: Transport;
 }
 
 export default function TransportDetails({ transport }: Props) {
+  const { t } = useApp();
+
   return (
     <div className="bg-card rounded-xl border border-border shadow-sm overflow-hidden">
       <Accordion type="multiple" className="w-full">
@@ -19,17 +22,17 @@ export default function TransportDetails({ transport }: Props) {
           <AccordionTrigger className="px-5 py-3 text-sm font-semibold hover:no-underline">
             <span className="flex items-center gap-2">
               <Users className="h-4 w-4 text-primary" />
-              Crew Information
+              {t('details.crew')}
             </span>
           </AccordionTrigger>
           <AccordionContent className="px-5 pb-4">
             <div className="space-y-2 text-sm">
               <div className="flex justify-between">
-                <span className="text-muted-foreground">Crew Type</span>
+                <span className="text-muted-foreground">{t('details.crewType')}</span>
                 <span className="font-medium text-foreground">{transport.crew.type}</span>
               </div>
               <div className="flex justify-between">
-                <span className="text-muted-foreground">Vehicle ID</span>
+                <span className="text-muted-foreground">{t('details.vehicleId')}</span>
                 <span className="font-medium text-foreground">{transport.crew.vehicleId}</span>
               </div>
             </div>
@@ -40,7 +43,7 @@ export default function TransportDetails({ transport }: Props) {
           <AccordionTrigger className="px-5 py-3 text-sm font-semibold hover:no-underline">
             <span className="flex items-center gap-2">
               <Wrench className="h-4 w-4 text-primary" />
-              Equipment Onboard
+              {t('details.equipment')}
             </span>
           </AccordionTrigger>
           <AccordionContent className="px-5 pb-4">
@@ -62,7 +65,7 @@ export default function TransportDetails({ transport }: Props) {
             <AccordionTrigger className="px-5 py-3 text-sm font-semibold hover:no-underline">
               <span className="flex items-center gap-2">
                 <FileText className="h-4 w-4 text-primary" />
-                Clinical Summary
+                {t('details.clinical')}
               </span>
             </AccordionTrigger>
             <AccordionContent className="px-5 pb-4">

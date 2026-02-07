@@ -12,10 +12,13 @@ import TransportDetails from '@/components/transport/TransportDetails';
 import NotificationFeed from '@/components/transport/NotificationFeed';
 import FamilySupport from '@/components/transport/FamilySupport';
 import AdminToggle from '@/components/transport/AdminToggle';
+import LanguageToggle from '@/components/LanguageToggle';
+import { useApp } from '@/lib/i18n';
 
 export default function Dashboard() {
   const { id } = useParams<{ id: string }>();
   const navigate = useNavigate();
+  const { t, deviceFormat } = useApp();
   const [transport, setTransport] = useState<Transport | null>(null);
   const [lastRefresh, setLastRefresh] = useState(new Date());
 
@@ -34,98 +37,93 @@ export default function Dashboard() {
 
   if (!transport) return null;
 
+  const isTablet = deviceFormat === 'tablet';
+  const isDesktop = deviceFormat === 'desktop';
+  const maxW = isDesktop ? 'max-w-6xl' : isTablet ? 'max-w-3xl' : 'max-w-lg';
+
+  const anim = (delay: number) => ({
+    initial: { opacity: 0, y: 10 },
+    animate: { opacity: 1, y: 0 },
+    transition: { delay, duration: 0.3 },
+  });
+
   return (
     <div className="min-h-screen bg-background pb-8">
       {/* Sticky header */}
       <header className="sticky top-0 z-50 bg-card/95 backdrop-blur-sm border-b border-border px-4 py-3">
-        <div className="max-w-lg mx-auto flex items-center justify-between">
+        <div className={`${maxW} mx-auto flex items-center justify-between`}>
           <div className="flex items-center gap-3">
             <Link to="/" className="p-1.5 rounded-lg hover:bg-accent transition-colors">
               <ArrowLeft className="h-5 w-5 text-foreground" />
             </Link>
             <img src={orngeLogo} alt="Ornge" className="h-7" />
           </div>
-          <button
-            onClick={handleRefresh}
-            className="flex items-center gap-1.5 text-xs text-muted-foreground hover:text-foreground transition-colors"
-          >
-            <RefreshCw className="h-3.5 w-3.5" />
-            <span className="hidden sm:inline">
-              {lastRefresh.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
-            </span>
-          </button>
+          <div className="flex items-center gap-3">
+            <LanguageToggle />
+            <button
+              onClick={handleRefresh}
+              className="flex items-center gap-1.5 text-xs text-muted-foreground hover:text-foreground transition-colors"
+            >
+              <RefreshCw className="h-3.5 w-3.5" />
+              <span className="hidden sm:inline">
+                {lastRefresh.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
+              </span>
+            </button>
+          </div>
         </div>
       </header>
 
       {/* Main content */}
-      <main className="max-w-lg mx-auto px-4 pt-4 space-y-4">
-        <motion.div
-          initial={{ opacity: 0, y: 10 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.3 }}
-        >
-          <TransportHeader transport={transport} />
-        </motion.div>
+      <main className={`${maxW} mx-auto px-4 pt-4`}>
+        {(isDesktop || isTablet) ? (
+          /* Multi-column layout for tablet/desktop */
+          <div className={`grid gap-4 ${isDesktop ? 'grid-cols-3' : 'grid-cols-2'}`}>
+            {/* Left column */}
+            <div className="space-y-4">
+              <motion.div {...anim(0)}><TransportHeader transport={transport} /></motion.div>
+              <motion.div {...anim(0.1)}><ETADisplay transport={transport} /></motion.div>
+              <motion.div {...anim(0.2)}><StatusTimeline transport={transport} /></motion.div>
+            </div>
 
-        <motion.div
-          initial={{ opacity: 0, y: 10 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.1, duration: 0.3 }}
-        >
-          <ETADisplay transport={transport} />
-        </motion.div>
+            {/* Center / Right column */}
+            <div className="space-y-4">
+              <motion.div {...anim(0.15)}><LiveMap transport={transport} /></motion.div>
+              <motion.div {...anim(0.25)}><NotificationFeed transport={transport} /></motion.div>
+              <motion.div {...anim(0.3)}><TransportDetails transport={transport} /></motion.div>
+            </div>
 
-        <motion.div
-          initial={{ opacity: 0, y: 10 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.15, duration: 0.3 }}
-        >
-          <LiveMap transport={transport} />
-        </motion.div>
+            {/* Third column (desktop only) */}
+            {isDesktop && (
+              <div className="space-y-4">
+                <motion.div {...anim(0.2)}><FamilySupport /></motion.div>
+                <motion.div {...anim(0.3)}><AdminToggle transport={transport} onUpdate={setTransport} /></motion.div>
+              </div>
+            )}
 
-        <motion.div
-          initial={{ opacity: 0, y: 10 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.2, duration: 0.3 }}
-        >
-          <StatusTimeline transport={transport} />
-        </motion.div>
+            {/* Extra row for tablet */}
+            {isTablet && (
+              <div className="col-span-2 grid grid-cols-2 gap-4">
+                <motion.div {...anim(0.35)}><FamilySupport /></motion.div>
+                <motion.div {...anim(0.4)}><AdminToggle transport={transport} onUpdate={setTransport} /></motion.div>
+              </div>
+            )}
+          </div>
+        ) : (
+          /* Mobile layout (original) */
+          <div className="space-y-4">
+            <motion.div {...anim(0)}><TransportHeader transport={transport} /></motion.div>
+            <motion.div {...anim(0.1)}><ETADisplay transport={transport} /></motion.div>
+            <motion.div {...anim(0.15)}><LiveMap transport={transport} /></motion.div>
+            <motion.div {...anim(0.2)}><StatusTimeline transport={transport} /></motion.div>
+            <motion.div {...anim(0.25)}><NotificationFeed transport={transport} /></motion.div>
+            <motion.div {...anim(0.3)}><TransportDetails transport={transport} /></motion.div>
+            <motion.div {...anim(0.35)}><FamilySupport /></motion.div>
+            <motion.div {...anim(0.4)}><AdminToggle transport={transport} onUpdate={setTransport} /></motion.div>
+          </div>
+        )}
 
-        <motion.div
-          initial={{ opacity: 0, y: 10 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.25, duration: 0.3 }}
-        >
-          <NotificationFeed transport={transport} />
-        </motion.div>
-
-        <motion.div
-          initial={{ opacity: 0, y: 10 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.3, duration: 0.3 }}
-        >
-          <TransportDetails transport={transport} />
-        </motion.div>
-
-        <motion.div
-          initial={{ opacity: 0, y: 10 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.35, duration: 0.3 }}
-        >
-          <FamilySupport />
-        </motion.div>
-
-        <motion.div
-          initial={{ opacity: 0, y: 10 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.4, duration: 0.3 }}
-        >
-          <AdminToggle transport={transport} onUpdate={setTransport} />
-        </motion.div>
-
-        {/* Privacy footer */}
-        <p className="text-[11px] text-muted-foreground/60 text-center pt-2 pb-4">
-          Information is limited for privacy. No medical records or diagnosis shown.
+        <p className="text-[11px] text-muted-foreground/60 text-center pt-4 pb-4">
+          {t('dash.privacy')}
         </p>
       </main>
     </div>

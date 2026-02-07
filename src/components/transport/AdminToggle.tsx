@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { Transport, TRANSPORT_MILESTONES } from '@/data/mockTransports';
 import { Settings, ChevronDown, ChevronUp } from 'lucide-react';
 import { Button } from '@/components/ui/button';
+import { useApp } from '@/lib/i18n';
 
 interface Props {
   transport: Transport;
@@ -10,6 +11,7 @@ interface Props {
 
 export default function AdminToggle({ transport, onUpdate }: Props) {
   const [open, setOpen] = useState(false);
+  const { t } = useApp();
 
   const jumpToStatus = (targetIdx: number) => {
     const newStatuses = TRANSPORT_MILESTONES.map((m, i) => ({
@@ -55,14 +57,14 @@ export default function AdminToggle({ transport, onUpdate }: Props) {
       >
         <span className="flex items-center gap-2 font-semibold text-foreground">
           <Settings className="h-4 w-4 text-warning" />
-          Demo Controls
+          {t('admin.title')}
         </span>
         {open ? <ChevronUp className="h-4 w-4 text-muted-foreground" /> : <ChevronDown className="h-4 w-4 text-muted-foreground" />}
       </button>
 
       {open && (
         <div className="px-5 pb-4 space-y-3">
-          <p className="text-xs text-muted-foreground">Jump to a specific status:</p>
+          <p className="text-xs text-muted-foreground">{t('admin.jumpTo')}</p>
           <div className="grid grid-cols-2 gap-1.5">
             {TRANSPORT_MILESTONES.map((m, i) => (
               <Button
@@ -72,20 +74,20 @@ export default function AdminToggle({ transport, onUpdate }: Props) {
                 className="text-[11px] h-7 justify-start"
                 onClick={() => jumpToStatus(i)}
               >
-                {i + 1}. {m.label.slice(0, 20)}…
+                {i + 1}. {t(`milestone.${i}`).slice(0, 20)}…
               </Button>
             ))}
           </div>
           <div className="flex flex-wrap gap-2 pt-2">
             <Button variant="outline" size="sm" onClick={toggleMode}>
-              Switch to {transport.mode === 'air' ? 'Land' : 'Air'}
+              {t('admin.switchTo')} {transport.mode === 'air' ? t('admin.land') : t('admin.air')}
             </Button>
             <Button variant="outline" size="sm" onClick={addDelay}>
-              Simulate Delay
+              {t('admin.simulateDelay')}
             </Button>
             {hasDelays && (
               <Button variant="outline" size="sm" onClick={removeLastDelay} className="text-destructive border-destructive/30">
-                Undo Delay
+                {t('admin.undoDelay')}
               </Button>
             )}
           </div>
