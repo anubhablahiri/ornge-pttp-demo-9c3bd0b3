@@ -18,7 +18,19 @@ import { useApp } from '@/lib/i18n';
 export default function Dashboard() {
   const { id } = useParams<{ id: string }>();
   const navigate = useNavigate();
-  const { t, deviceFormat } = useApp();
+  const location = useLocation();
+  const { t, setDeviceFormat } = useApp();
+
+  // Derive device format from URL prefix
+  const urlFormat = location.pathname.startsWith('/desktop/') ? 'desktop'
+    : location.pathname.startsWith('/tablet/') ? 'tablet'
+    : 'mobile';
+  const deviceFormat = urlFormat;
+
+  // Sync context so child components can use it
+  useEffect(() => {
+    setDeviceFormat(urlFormat);
+  }, [urlFormat, setDeviceFormat]);
   const [transport, setTransport] = useState<Transport | null>(null);
   const [lastRefresh, setLastRefresh] = useState(new Date());
 
