@@ -7,8 +7,9 @@ interface Props {
   transport: Transport;
 }
 
-// Simplified 4-phase mapping from 10 milestones
-function getPhase(idx: number): number {
+// Simplified 5-phase mapping from 10 milestones
+function getPhase(idx: number, isComplete: boolean): number {
+  if (isComplete) return 4; // Completed
   if (idx <= 2) return 0; // Preparing
   if (idx <= 4) return 1; // En route to pickup
   if (idx <= 6) return 2; // With patient
