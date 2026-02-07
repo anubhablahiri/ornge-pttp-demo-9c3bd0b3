@@ -39,7 +39,8 @@ export default function Dashboard() {
 
   const isTablet = deviceFormat === 'tablet';
   const isDesktop = deviceFormat === 'desktop';
-  const maxW = isDesktop ? 'max-w-6xl' : isTablet ? 'max-w-3xl' : 'max-w-lg';
+  const isRealDesktop = isDesktop && window.innerWidth >= 1024;
+  const maxW = isRealDesktop ? 'max-w-[95vw]' : isDesktop ? 'max-w-6xl' : isTablet ? 'max-w-3xl' : 'max-w-lg';
 
   const anim = (delay: number) => ({
     initial: { opacity: 0, y: 10 },
