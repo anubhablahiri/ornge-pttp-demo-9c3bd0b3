@@ -34,22 +34,22 @@ export default function FormatSelector() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
         />
-        <motion.p
-          className="text-sm text-muted-foreground text-center max-w-sm mb-2"
+        <motion.h1
+          className="text-2xl md:text-4xl font-display font-bold text-center text-foreground"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 0.1 }}
         >
           {t('format.welcome')}
-        </motion.p>
-        <motion.h1
-          className="text-2xl md:text-3xl font-display font-bold text-center"
+        </motion.h1>
+        <motion.p
+          className="mt-3 text-lg md:text-xl font-display font-semibold text-primary text-center"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 0.15 }}
         >
           {t('format.title')}
-        </motion.h1>
+        </motion.p>
         <motion.p
           className="mt-2 text-sm text-muted-foreground text-center max-w-sm"
           initial={{ opacity: 0 }}
