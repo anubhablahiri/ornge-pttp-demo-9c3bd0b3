@@ -24,10 +24,11 @@ export default function LiveMap({ transport }: Props) {
   const isAir = transport.mode === 'air';
 
   const phases = [
-    { key: 'phase.preparing', en: 'Preparing for transport', fr: 'Préparation du transport' },
-    { key: 'phase.enroutePickup', en: 'En route to patient pickup', fr: 'En route vers la prise en charge' },
-    { key: 'phase.withPatient', en: 'With patient', fr: 'Avec le patient' },
-    { key: 'phase.enrouteDropoff', en: 'En route to patient dropoff', fr: 'En route vers la destination' },
+    { en: 'Preparing', fr: 'Préparation' },
+    { en: 'En route to pickup', fr: 'En route (prise en charge)' },
+    { en: 'With patient', fr: 'Avec le patient' },
+    { en: 'En route to dropoff', fr: 'En route (destination)' },
+    { en: 'Completed', fr: 'Terminé' },
   ];
 
   const statusMessages: Record<string, { en: string; fr: string }> = {
