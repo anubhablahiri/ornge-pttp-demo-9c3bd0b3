@@ -1,5 +1,6 @@
 import React, { createContext, useContext, useState, useCallback } from 'react';
 
+
 export type Lang = 'en' | 'fr';
 export type DeviceFormat = 'mobile' | 'tablet' | 'desktop';
 
