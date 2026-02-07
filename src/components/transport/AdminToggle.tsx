@@ -76,13 +76,18 @@ export default function AdminToggle({ transport, onUpdate }: Props) {
               </Button>
             ))}
           </div>
-          <div className="flex gap-2 pt-2">
+          <div className="flex flex-wrap gap-2 pt-2">
             <Button variant="outline" size="sm" onClick={toggleMode}>
               Switch to {transport.mode === 'air' ? 'Land' : 'Air'}
             </Button>
             <Button variant="outline" size="sm" onClick={addDelay}>
               Simulate Delay
             </Button>
+            {hasDelays && (
+              <Button variant="outline" size="sm" onClick={removeLastDelay} className="text-destructive border-destructive/30">
+                Undo Delay
+              </Button>
+            )}
           </div>
         </div>
       )}
