@@ -4,9 +4,10 @@ import { useApp } from '@/lib/i18n';
 
 interface Props {
   transport: Transport;
+  className?: string;
 }
 
-export default function ETADisplay({ transport }: Props) {
+export default function ETADisplay({ transport, className }: Props) {
   const { t } = useApp();
   const currentIdx = getCurrentStatusIndex(transport);
   const hideETA = currentIdx === 5 || currentIdx >= 8;
@@ -17,7 +18,7 @@ export default function ETADisplay({ transport }: Props) {
   if (!showPickupETA && !showDestETA) return null;
 
   return (
-    <div className="bg-card rounded-xl border border-border p-4 shadow-sm">
+    <div className={`bg-card rounded-xl border border-border p-4 shadow-sm ${className || ''}`}>
       <div className="flex items-center gap-3">
         <div className="w-10 h-10 rounded-full bg-active/10 flex items-center justify-center">
           <Clock className="h-5 w-5 text-active" />
