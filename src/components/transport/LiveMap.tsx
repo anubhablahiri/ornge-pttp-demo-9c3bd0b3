@@ -19,7 +19,8 @@ function getPhase(idx: number, isComplete: boolean): number {
 export default function LiveMap({ transport }: Props) {
   const { t } = useApp();
   const currentIdx = getCurrentStatusIndex(transport);
-  const phase = getPhase(currentIdx);
+  const complete = isTransportComplete(transport);
+  const phase = getPhase(currentIdx, complete);
   const isAir = transport.mode === 'air';
 
   const phases = [
