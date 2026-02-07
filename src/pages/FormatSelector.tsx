@@ -1,7 +1,7 @@
 import { useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { Smartphone, Tablet, Monitor } from 'lucide-react';
-import orngeLogoWhite from '@/assets/ornge-logo-white.png';
+import orngeLogo from '@/assets/ornge-logo.png';
 import { useApp, DeviceFormat } from '@/lib/i18n';
 import LanguageToggle from '@/components/LanguageToggle';
 
