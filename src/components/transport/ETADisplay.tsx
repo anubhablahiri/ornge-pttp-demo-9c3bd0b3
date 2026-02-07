@@ -1,20 +1,19 @@
 import { Transport, getCurrentStatusIndex } from '@/data/mockTransports';
 import { Clock, AlertCircle } from 'lucide-react';
+import { useApp } from '@/lib/i18n';
 
 interface Props {
   transport: Transport;
 }
 
 export default function ETADisplay({ transport }: Props) {
+  const { t } = useApp();
   const currentIdx = getCurrentStatusIndex(transport);
-  // Hide ETA during on-scene transfer (5) or facility handover (8-9)
   const hideETA = currentIdx === 5 || currentIdx >= 8;
-
   if (hideETA) return null;
 
   const showPickupETA = currentIdx < 4 && transport.etaPickup;
   const showDestETA = currentIdx >= 6 && transport.etaDestination;
-
   if (!showPickupETA && !showDestETA) return null;
 
   return (
@@ -25,7 +24,7 @@ export default function ETADisplay({ transport }: Props) {
         </div>
         <div>
           <p className="text-xs text-muted-foreground font-medium">
-            {showPickupETA ? 'ETA to Pickup' : 'ETA to Destination'}
+            {showPickupETA ? t('dash.etaPickup') : t('dash.etaDest')}
           </p>
           <p className="text-xl font-display font-bold text-foreground">
             {showPickupETA ? transport.etaPickup : transport.etaDestination}
@@ -34,7 +33,7 @@ export default function ETADisplay({ transport }: Props) {
       </div>
       <div className="flex items-start gap-1.5 mt-3 text-[11px] text-muted-foreground/80">
         <AlertCircle className="h-3 w-3 mt-0.5 shrink-0" />
-        <span>Times are estimates and may change due to weather or operational factors.</span>
+        <span>{t('dash.etaDisclaimer')}</span>
       </div>
     </div>
   );

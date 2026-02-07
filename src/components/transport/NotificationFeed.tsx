@@ -1,5 +1,6 @@
 import { Transport } from '@/data/mockTransports';
 import { Bell, ArrowRightLeft, MapPin, AlertTriangle } from 'lucide-react';
+import { useApp } from '@/lib/i18n';
 
 interface Props {
   transport: Transport;
@@ -13,13 +14,14 @@ const iconMap = {
 };
 
 export default function NotificationFeed({ transport }: Props) {
+  const { t } = useApp();
   if (!transport.notifications.length) return null;
 
   return (
     <div className="bg-card rounded-xl border border-border p-5 shadow-sm">
       <div className="flex items-center gap-2 mb-4">
         <Bell className="h-4 w-4 text-primary" />
-        <h3 className="text-sm font-semibold text-foreground">Updates</h3>
+        <h3 className="text-sm font-semibold text-foreground">{t('dash.updates')}</h3>
       </div>
       <div className="space-y-3">
         {[...transport.notifications].reverse().map((n) => {
