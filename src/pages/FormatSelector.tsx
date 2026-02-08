@@ -68,21 +68,21 @@ export default function FormatSelector() {
             <motion.button
               key={f.id}
               onClick={() => handleSelect(f.id)}
-              className="bg-card rounded-xl border-2 border-primary shadow-md hover:shadow-xl p-6 flex flex-col items-center gap-3 transition-all group"
+              className="flex flex-col items-center gap-3 transition-all group"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.35 + i * 0.1 }}
-              whileHover={{ scale: 1.02 }}
-              whileTap={{ scale: 0.98 }}
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.97 }}
             >
               <img
                 src={f.image}
                 alt={t(f.key)}
-                className="h-24 w-auto object-contain"
+                className="h-44 w-auto object-contain drop-shadow-lg group-hover:drop-shadow-2xl transition-all"
                 draggable={false}
               />
-              <span className="text-base font-display font-bold text-primary">{t(f.key)}</span>
-              <span className="text-xs text-primary/70 text-center">{t(f.descKey)}</span>
+              <span className="text-base font-display font-bold text-foreground">{t(f.key)}</span>
+              <span className="text-xs text-muted-foreground text-center">{t(f.descKey)}</span>
             </motion.button>
           ))}
         </div>
