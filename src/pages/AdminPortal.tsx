@@ -15,6 +15,7 @@ import AdminPerformanceMetrics from '@/components/admin/AdminPerformanceMetrics'
 import AdminFleetStatus from '@/components/admin/AdminFleetStatus';
 import AdminMapView from '@/components/admin/AdminMapView';
 import AdminCrewScheduling from '@/components/admin/AdminCrewScheduling';
+import AdminDetailedStats from '@/components/admin/AdminDetailedStats';
 
 export default function AdminPortal() {
   const [period, setPeriod] = useState<'weekly' | 'monthly' | 'yearly'>('monthly');
@@ -101,6 +102,12 @@ export default function AdminPortal() {
               </div>
             </TabsContent>
           </Tabs>
+        </motion.div>
+
+        {/* Detailed Stats */}
+        <motion.div {...anim(0.25)}>
+          <h2 className="font-display font-bold text-xl text-foreground mb-4">Detailed Statistics</h2>
+          <AdminDetailedStats />
         </motion.div>
       </main>
     </div>
