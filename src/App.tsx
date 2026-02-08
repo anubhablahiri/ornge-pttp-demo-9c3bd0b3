@@ -9,6 +9,7 @@ import FormatSelector from "./pages/FormatSelector";
 import Login from "./pages/Login";
 import Dashboard from "./pages/Dashboard";
 import NotFound from "./pages/NotFound";
+import AdminPortal from "./pages/AdminPortal";
 import DeviceFrame from "./components/DeviceFrame";
 
 const queryClient = new QueryClient();
