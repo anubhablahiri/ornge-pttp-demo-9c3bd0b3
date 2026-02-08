@@ -1,22 +1,21 @@
 import { useNavigate, Link } from 'react-router-dom';
-import { } from 'react';
 import { motion } from 'framer-motion';
-import { Smartphone, Tablet, Monitor } from 'lucide-react';
 import orngeLogo from '@/assets/ornge-logo.png';
+import deviceIphone from '@/assets/device-iphone.png';
+import deviceIpad from '@/assets/device-ipad.png';
+import deviceLaptop from '@/assets/device-laptop.png';
 import { useApp, DeviceFormat } from '@/lib/i18n';
 import LanguageToggle from '@/components/LanguageToggle';
 
-const formats: { id: DeviceFormat; icon: typeof Smartphone; key: string; descKey: string }[] = [
-  { id: 'mobile', icon: Smartphone, key: 'format.mobile', descKey: 'format.mobile.desc' },
-  { id: 'tablet', icon: Tablet, key: 'format.tablet', descKey: 'format.tablet.desc' },
-  { id: 'desktop', icon: Monitor, key: 'format.desktop', descKey: 'format.desktop.desc' },
+const formats: { id: DeviceFormat; image: string; key: string; descKey: string }[] = [
+  { id: 'mobile', image: deviceIphone, key: 'format.mobile', descKey: 'format.mobile.desc' },
+  { id: 'tablet', image: deviceIpad, key: 'format.tablet', descKey: 'format.tablet.desc' },
+  { id: 'desktop', image: deviceLaptop, key: 'format.desktop', descKey: 'format.desktop.desc' },
 ];
 
 export default function FormatSelector() {
   const navigate = useNavigate();
   const { t, setDeviceFormat } = useApp();
-
-  // No auto-redirect here; Welcome page handles mobile detection
 
   const handleSelect = (format: DeviceFormat) => {
     setDeviceFormat(format);
@@ -76,9 +75,12 @@ export default function FormatSelector() {
               whileHover={{ scale: 1.02 }}
               whileTap={{ scale: 0.98 }}
             >
-              <div className="w-14 h-14 rounded-2xl bg-primary/10 flex items-center justify-center group-hover:bg-primary/20 transition-colors">
-                <f.icon className="h-7 w-7 text-primary" />
-              </div>
+              <img
+                src={f.image}
+                alt={t(f.key)}
+                className="h-24 w-auto object-contain"
+                draggable={false}
+              />
               <span className="text-base font-display font-bold text-primary">{t(f.key)}</span>
               <span className="text-xs text-primary/70 text-center">{t(f.descKey)}</span>
             </motion.button>
