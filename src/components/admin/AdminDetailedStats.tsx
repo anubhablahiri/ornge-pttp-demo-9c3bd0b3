@@ -111,16 +111,11 @@ export default function AdminDetailedStats() {
         <CardHeader className="pb-2">
           <CardTitle className="text-base font-display">Transports by Vehicle</CardTitle>
         </CardHeader>
-        <CardContent className="space-y-4">
+        <CardContent>
           <div className="grid sm:grid-cols-3 gap-4">
-            <StatTile icon={Plane} value="32" label="Fixed-Wing Transports" iconColor="text-primary" />
-            <StatTile icon={BarChart3} value="9" label="Rotor-Wing Transports" iconColor="text-primary" />
-            <StatTile icon={Truck} value="23" label="Land Ambulance Transports" iconColor="text-primary" />
-          </div>
-          <div className="flex flex-wrap gap-4">
-            <DownloadLink label="Fixed-Wing Transports" />
-            <DownloadLink label="Rotor-Wing Transports" />
-            <DownloadLink label="Land Ambulance Transports" />
+            <StatTile icon={Plane} value="32" label="Fixed-Wing Transports" iconColor="text-primary" onDownload={() => mockDownload('Fixed-Wing Transports')} />
+            <StatTile icon={BarChart3} value="9" label="Rotor-Wing Transports" iconColor="text-primary" onDownload={() => mockDownload('Rotor-Wing Transports')} />
+            <StatTile icon={Truck} value="23" label="Land Ambulance Transports" iconColor="text-primary" onDownload={() => mockDownload('Land Ambulance Transports')} />
           </div>
         </CardContent>
       </Card>
