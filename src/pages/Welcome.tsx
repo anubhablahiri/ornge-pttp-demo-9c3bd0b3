@@ -2,7 +2,8 @@ import { useNavigate } from 'react-router-dom';
 import { useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { Plane, Truck } from 'lucide-react';
-import orngeLogo from '@/assets/ornge-logo-white.png';
+import orngeLogo from '@/assets/ornge-logo.png';
+import orngeLogoWhite from '@/assets/ornge-logo-white.png';
 import heroBanner from '@/assets/hero-banner.png';
 import heroBannerMobile from '@/assets/hero-banner-mobile.png';
 import { useApp } from '@/lib/i18n';
@@ -59,9 +60,14 @@ export default function Welcome() {
         />
         <div className="absolute inset-0 bg-gradient-to-b from-black/30 via-transparent to-[#0a1628]" />
 
-        {/* Header bar */}
-        <div className="relative z-10 flex items-center justify-between px-6 py-5">
-          <img src={orngeLogo} alt="Ornge" className="h-10" />
+        {/* Header bar - mobile: white bg strip with orange logo */}
+        <div className="relative z-10 sm:hidden bg-white px-5 py-3 flex items-center justify-between">
+          <img src={orngeLogo} alt="Ornge" className="h-9" />
+          <LanguageToggle />
+        </div>
+        {/* Header bar - desktop: transparent with white logo */}
+        <div className="relative z-10 hidden sm:flex items-center justify-between px-6 py-5">
+          <img src={orngeLogoWhite} alt="Ornge" className="h-10" />
           <LanguageToggle />
         </div>
       </div>
