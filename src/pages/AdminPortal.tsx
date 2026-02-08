@@ -15,6 +15,7 @@ import AdminPerformanceMetrics from '@/components/admin/AdminPerformanceMetrics'
 import AdminFleetStatus from '@/components/admin/AdminFleetStatus';
 import AdminMapView from '@/components/admin/AdminMapView';
 import AdminCrewScheduling from '@/components/admin/AdminCrewScheduling';
+import AdminDetailedStats from '@/components/admin/AdminDetailedStats';
 
 export default function AdminPortal() {
   const [period, setPeriod] = useState<'weekly' | 'monthly' | 'yearly'>('monthly');
