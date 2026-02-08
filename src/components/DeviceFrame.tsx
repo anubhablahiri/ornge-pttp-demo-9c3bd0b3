@@ -69,13 +69,13 @@ export default function DeviceFrame({ children }: DeviceFrameProps) {
               className="shrink-0 flex items-center justify-between px-6 bg-background relative z-30"
               style={{ height: isMobile ? 54 : 28, paddingTop: isMobile ? 14 : 6 }}
             >
-              <span className="text-[13px] font-semibold text-foreground" style={{ fontFamily: 'system-ui' }}>
+              <span className="text-[13px] font-semibold" style={{ fontFamily: 'system-ui', color: '#000' }}>
                 {timeStr}
               </span>
-              <div className="flex items-center gap-1.5">
-                <Signal className="text-foreground" size={14} strokeWidth={2.2} />
-                <Wifi className="text-foreground" size={14} strokeWidth={2.2} />
-                <Battery className="text-foreground" size={16} strokeWidth={2.2} />
+              <div className="flex items-center gap-1.5" style={{ color: '#000' }}>
+                <Signal size={14} strokeWidth={2.2} />
+                <Wifi size={14} strokeWidth={2.2} />
+                <Battery size={16} strokeWidth={2.2} />
               </div>
             </div>
 
