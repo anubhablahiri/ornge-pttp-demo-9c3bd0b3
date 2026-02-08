@@ -1,5 +1,5 @@
-import { useNavigate } from 'react-router-dom';
-import { useEffect } from 'react';
+import { useNavigate, Link } from 'react-router-dom';
+import { } from 'react';
 import { motion } from 'framer-motion';
 import { Smartphone, Tablet, Monitor } from 'lucide-react';
 import orngeLogo from '@/assets/ornge-logo.png';
