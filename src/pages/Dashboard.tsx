@@ -7,6 +7,7 @@ import orngeLogo from '@/assets/ornge-logo.png';
 import TransportHeader from '@/components/transport/TransportHeader';
 import StatusTimeline from '@/components/transport/StatusTimeline';
 import LiveMap from '@/components/transport/LiveMap';
+import TrackingMap from '@/components/transport/TrackingMap';
 import ETADisplay from '@/components/transport/ETADisplay';
 import TransportDetails from '@/components/transport/TransportDetails';
 import NotificationFeed from '@/components/transport/NotificationFeed';
