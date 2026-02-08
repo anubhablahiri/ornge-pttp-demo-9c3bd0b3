@@ -103,6 +103,12 @@ export default function AdminPortal() {
             </TabsContent>
           </Tabs>
         </motion.div>
+
+        {/* Detailed Stats */}
+        <motion.div {...anim(0.25)}>
+          <h2 className="font-display font-bold text-xl text-foreground mb-4">Detailed Statistics</h2>
+          <AdminDetailedStats />
+        </motion.div>
       </main>
     </div>
   );
