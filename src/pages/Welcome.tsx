@@ -13,8 +13,11 @@ type PortalChoice = null | 'family' | 'operations';
 
 export default function Welcome() {
   const navigate = useNavigate();
+  const location = useLocation();
   const { t, setDeviceFormat } = useApp();
-  const [portal, setPortal] = useState<PortalChoice>(null);
+  const [portal, setPortal] = useState<PortalChoice>(
+    (location.state as any)?.portal === 'family' ? 'family' : null
+  );
 
   useEffect(() => {
     const isTouchDevice = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
