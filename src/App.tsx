@@ -44,6 +44,7 @@ const App = () => (
             <Route path="/track/:id" element={<FramedDashboard />} />
             <Route path="/tablet/track/:id" element={<FramedDashboard />} />
             <Route path="/desktop/track/:id" element={<Dashboard />} />
+            <Route path="/admin" element={<AdminPortal />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
         </BrowserRouter>
