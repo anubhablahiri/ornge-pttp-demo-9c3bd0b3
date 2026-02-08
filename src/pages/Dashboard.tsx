@@ -145,7 +145,8 @@ export default function Dashboard() {
           <div className="space-y-4">
             <motion.div {...anim(0)}><TransportHeader transport={transport} /></motion.div>
             <motion.div {...anim(0.1)}><ETADisplay transport={transport} /></motion.div>
-            <motion.div {...anim(0.15)}><LiveMap transport={transport} /></motion.div>
+            <motion.div {...anim(0.15)}><TrackingMap transport={transport} /></motion.div>
+            <motion.div {...anim(0.18)}><LiveMap transport={transport} /></motion.div>
             <motion.div {...anim(0.2)}><StatusTimeline transport={transport} /></motion.div>
             <motion.div {...anim(0.25)}><NotificationFeed transport={transport} /></motion.div>
             <motion.div {...anim(0.3)}><TransportDetails transport={transport} /></motion.div>
