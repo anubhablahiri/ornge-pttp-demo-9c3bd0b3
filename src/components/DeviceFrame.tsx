@@ -33,8 +33,9 @@ export default function DeviceFrame({ children }: DeviceFrameProps) {
         </span>
 
         <div
-          className="relative bg-foreground shadow-2xl flex flex-col"
+          className="relative shadow-2xl flex flex-col"
           style={{
+            background: '#1a1a1a',
             borderRadius,
             padding: bezelPad,
             maxHeight: '88vh',
