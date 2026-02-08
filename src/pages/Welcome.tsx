@@ -51,13 +51,15 @@ export default function Welcome() {
           className="absolute inset-0 w-full h-full object-cover hidden sm:block"
           draggable={false}
         />
-        {/* Mobile banner - show full image without cropping */}
-        <img
-          src={heroBannerMobile}
-          alt="Ornge helicopter over Toronto"
-          className="w-full sm:hidden"
-          draggable={false}
-        />
+        {/* Mobile banner - crop bottom ~20% */}
+        <div className="sm:hidden w-full overflow-hidden" style={{ maxHeight: '55vw' }}>
+          <img
+            src={heroBannerMobile}
+            alt="Ornge helicopter over Toronto"
+            className="w-full"
+            draggable={false}
+          />
+        </div>
         <div className="absolute inset-0 bg-gradient-to-b from-black/30 via-transparent to-[#0a1628]" />
 
         {/* Header bar - mobile: white bg strip with orange logo, pinned to top */}
