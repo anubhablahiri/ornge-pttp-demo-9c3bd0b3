@@ -5,23 +5,36 @@ import {
   BarChart3, Truck, Route, Clock, Users, MapPin,
 } from 'lucide-react';
 
-function StatTile({ icon: Icon, value, label, iconColor }: {
+function StatTile({ icon: Icon, value, label, iconColor, onDownload }: {
   icon: React.ElementType;
   value: string;
   label: string;
   iconColor?: string;
+  onDownload?: () => void;
 }) {
   return (
-    <div className="flex items-center gap-4 bg-muted/50 rounded-xl p-5 border border-border">
-      <Icon className={`h-10 w-10 shrink-0 ${iconColor || 'text-primary'}`} />
-      <div>
-        <p className="text-3xl font-bold font-display text-foreground">{value}</p>
-        <p className="text-sm text-muted-foreground leading-tight">{label}</p>
+    <div className="flex flex-col bg-muted/50 rounded-xl p-5 border border-border">
+      <div className="flex items-center gap-4">
+        <Icon className={`h-10 w-10 shrink-0 ${iconColor || 'text-primary'}`} />
+        <div>
+          <p className="text-3xl font-bold font-display text-foreground">{value}</p>
+          <p className="text-sm text-muted-foreground leading-tight">{label}</p>
+        </div>
       </div>
+      {onDownload && (
+        <Button
+          variant="ghost"
+          size="sm"
+          className="text-primary hover:text-primary/80 text-xs font-semibold gap-1 mt-3 self-start px-2"
+          onClick={onDownload}
+        >
+          <Download className="h-3.5 w-3.5" />
+          Download Monthly Stats
+        </Button>
+      )}
     </div>
   );
 }
-
 function DownloadLink({ label }: { label: string }) {
   return (
     <Button
