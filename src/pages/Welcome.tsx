@@ -60,13 +60,13 @@ export default function Welcome() {
         />
         <div className="absolute inset-0 bg-gradient-to-b from-black/30 via-transparent to-[#0a1628]" />
 
-        {/* Header bar - mobile: white bg strip with orange logo */}
-        <div className="relative z-10 sm:hidden bg-white px-5 py-3 flex items-center justify-between">
+        {/* Header bar - mobile: white bg strip with orange logo, pinned to top */}
+        <div className="absolute top-0 left-0 right-0 z-10 sm:hidden bg-white px-5 py-3 flex items-center justify-between">
           <img src={orngeLogo} alt="Ornge" className="h-9" />
           <LanguageToggle />
         </div>
         {/* Header bar - desktop: transparent with white logo */}
-        <div className="relative z-10 hidden sm:flex items-center justify-between px-6 py-5">
+        <div className="absolute top-0 left-0 right-0 z-10 hidden sm:flex items-center justify-between px-6 py-5">
           <img src={orngeLogoWhite} alt="Ornge" className="h-10" />
           <LanguageToggle />
         </div>
