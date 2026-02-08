@@ -6,12 +6,12 @@ interface Props {
   transport: Transport;
 }
 
-// Ontario bounding box (approximate) mapped to the image
+// Bounding box matching the generated map image
 const MAP_BOUNDS = {
-  minLat: 41.5,
-  maxLat: 51.0,
-  minLng: -95.0,
-  maxLng: -74.0,
+  minLat: 36.0,
+  maxLat: 55.0,
+  minLng: -110.0,
+  maxLng: -65.0,
 };
 
 function toPercent(lat: number, lng: number) {
