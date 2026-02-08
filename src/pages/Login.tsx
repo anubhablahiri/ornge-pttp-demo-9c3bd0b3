@@ -116,7 +116,7 @@ export default function Login() {
           {t('login.privacy')}
         </p>
 
-        {deviceFormat !== 'mobile' && (
+        {(deviceFormat !== 'mobile' || (typeof window !== 'undefined' && window.innerWidth >= 1024)) && (
           <Link to="/" className="flex items-center justify-center gap-1.5 mt-4 text-sm text-muted-foreground hover:text-foreground transition-colors">
             <ArrowLeft className="h-4 w-4" />
             {t('login.backPlatform')}
