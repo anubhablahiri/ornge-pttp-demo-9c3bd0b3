@@ -4,6 +4,7 @@ import { motion } from 'framer-motion';
 import { Plane, Truck } from 'lucide-react';
 import orngeLogo from '@/assets/ornge-logo-white.png';
 import heroBanner from '@/assets/hero-banner.png';
+import heroBannerMobile from '@/assets/hero-banner-mobile.png';
 import { useApp } from '@/lib/i18n';
 import LanguageToggle from '@/components/LanguageToggle';
 
@@ -42,10 +43,18 @@ export default function Welcome() {
     <div className="min-h-screen flex flex-col bg-[#0a1628]">
       {/* Hero section */}
       <div className="relative w-full overflow-hidden" style={{ minHeight: '40vh' }}>
+        {/* Desktop banner */}
         <img
           src={heroBanner}
           alt="Ornge helicopter over Toronto"
-          className="absolute inset-0 w-full h-full object-cover"
+          className="absolute inset-0 w-full h-full object-cover hidden sm:block"
+          draggable={false}
+        />
+        {/* Mobile banner */}
+        <img
+          src={heroBannerMobile}
+          alt="Ornge helicopter over Toronto"
+          className="absolute inset-0 w-full h-full object-cover sm:hidden"
           draggable={false}
         />
         <div className="absolute inset-0 bg-gradient-to-b from-black/30 via-transparent to-[#0a1628]" />
