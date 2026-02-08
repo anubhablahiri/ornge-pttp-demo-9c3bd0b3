@@ -4,6 +4,7 @@ import { motion } from 'framer-motion';
 import { Plane, Truck } from 'lucide-react';
 import orngeLogo from '@/assets/ornge-logo-white.png';
 import heroBanner from '@/assets/hero-banner.png';
+import heroBannerMobile from '@/assets/hero-banner-mobile.png';
 import { useApp } from '@/lib/i18n';
 import LanguageToggle from '@/components/LanguageToggle';
 
