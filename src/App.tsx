@@ -4,6 +4,7 @@ import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { AppProvider } from "@/lib/i18n";
+import Welcome from "./pages/Welcome";
 import FormatSelector from "./pages/FormatSelector";
 import Login from "./pages/Login";
 import Dashboard from "./pages/Dashboard";
@@ -36,7 +37,8 @@ const App = () => (
         <Sonner />
         <BrowserRouter>
           <Routes>
-            <Route path="/" element={<FormatSelector />} />
+            <Route path="/" element={<Welcome />} />
+            <Route path="/platform" element={<FormatSelector />} />
             <Route path="/login" element={<FramedLogin />} />
             <Route path="/track/:id" element={<FramedDashboard />} />
             <Route path="/tablet/track/:id" element={<FramedDashboard />} />

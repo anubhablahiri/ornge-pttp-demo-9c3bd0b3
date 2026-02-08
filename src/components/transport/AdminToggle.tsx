@@ -23,13 +23,6 @@ export default function AdminToggle({ transport, onUpdate }: Props) {
     onUpdate({ ...transport, statuses: newStatuses });
   };
 
-  const toggleMode = () => {
-    onUpdate({
-      ...transport,
-      mode: transport.mode === 'air' ? 'land' : 'air',
-      altitude: transport.mode === 'land' ? 24000 : undefined,
-    });
-  };
 
   const addDelay = () => {
     const delayNotif = {
@@ -80,9 +73,6 @@ export default function AdminToggle({ transport, onUpdate }: Props) {
             ))}
           </div>
           <div className="flex flex-wrap gap-2 pt-2">
-            <Button variant="outline" size="sm" onClick={toggleMode}>
-              {t('admin.switchTo')} {transport.mode === 'air' ? t('admin.land') : t('admin.air')}
-            </Button>
             <Button variant="outline" size="sm" onClick={addDelay}>
               {t('admin.simulateDelay')}
             </Button>
