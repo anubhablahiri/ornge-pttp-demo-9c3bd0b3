@@ -41,7 +41,7 @@ export default function Welcome() {
   return (
     <div className="min-h-screen flex flex-col bg-[#0a1628]">
       {/* Hero section */}
-      <div className="relative w-full overflow-hidden" style={{ minHeight: '50vh' }}>
+      <div className="relative w-full overflow-hidden" style={{ minHeight: '40vh' }}>
         <img
           src={heroBanner}
           alt="Ornge helicopter over Toronto"
@@ -55,30 +55,23 @@ export default function Welcome() {
           <img src={orngeLogo} alt="Ornge" className="h-10" />
           <LanguageToggle />
         </div>
-
-        {/* Hero text */}
-        <div className="relative z-10 flex flex-col items-center justify-center px-6 pt-8 pb-16 text-center">
-          <motion.h1
-            className="text-3xl md:text-5xl font-display font-bold text-white leading-tight max-w-3xl"
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-          >
-            {t('welcome.heroTitle')}
-          </motion.h1>
-          <motion.p
-            className="mt-4 text-base md:text-lg text-white/80 max-w-xl"
-            initial={{ opacity: 0, y: 10 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.2, duration: 0.5 }}
-          >
-            {t('welcome.heroSubtitle')}
-          </motion.p>
-        </div>
       </div>
 
-      {/* Mode selection */}
-      <div className="flex-1 bg-background rounded-t-3xl -mt-6 relative z-10 px-6 pt-10 pb-12">
+      {/* Title + Mode selection */}
+      <div className="flex-1 bg-background rounded-t-3xl -mt-6 relative z-10 px-6 pt-8 pb-12">
+        <motion.div
+          className="max-w-2xl mx-auto text-center mb-8"
+          initial={{ opacity: 0, y: 15 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5 }}
+        >
+          <h1 className="text-2xl md:text-4xl font-display font-bold text-foreground leading-tight">
+            {t('welcome.heroTitle')}
+          </h1>
+          <p className="mt-3 text-sm md:text-base text-muted-foreground max-w-xl mx-auto">
+            {t('welcome.heroSubtitle')}
+          </p>
+        </motion.div>
         <motion.div
           className="max-w-2xl mx-auto"
           initial={{ opacity: 0, y: 20 }}
