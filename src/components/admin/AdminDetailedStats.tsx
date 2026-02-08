@@ -35,30 +35,16 @@ function StatTile({ icon: Icon, value, label, iconColor, onDownload }: {
     </div>
   );
 }
-function DownloadLink({ label }: { label: string }) {
-  return (
-    <Button
-      variant="ghost"
-      size="sm"
-      className="text-primary hover:text-primary/80 text-xs font-semibold gap-1 px-2"
-      onClick={() => {
-        // Mock download – generate a simple CSV
-        const csv = `Category,Value\n${label},Mock Data\nPeriod,Monthly\n`;
-        const blob = new Blob([csv], { type: 'text/csv' });
-        const url = URL.createObjectURL(blob);
-        const a = document.createElement('a');
-        a.href = url;
-        a.download = `${label.replace(/\s+/g, '_').toLowerCase()}_report.csv`;
-        a.click();
-        URL.revokeObjectURL(url);
-      }}
-    >
-      <Download className="h-3.5 w-3.5" />
-      Download Monthly Stats
-    </Button>
-  );
+function mockDownload(label: string) {
+  const csv = `Category,Value\n${label},Mock Data\nPeriod,Monthly\n`;
+  const blob = new Blob([csv], { type: 'text/csv' });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = `${label.replace(/\s+/g, '_').toLowerCase()}_report.csv`;
+  a.click();
+  URL.revokeObjectURL(url);
 }
-
 function downloadFullReport() {
   const rows = [
     ['Category', 'Metric', 'Value'],
