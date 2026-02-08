@@ -8,8 +8,25 @@ import FormatSelector from "./pages/FormatSelector";
 import Login from "./pages/Login";
 import Dashboard from "./pages/Dashboard";
 import NotFound from "./pages/NotFound";
+import DeviceFrame from "./components/DeviceFrame";
 
 const queryClient = new QueryClient();
+
+function FramedLogin() {
+  return (
+    <DeviceFrame>
+      <Login />
+    </DeviceFrame>
+  );
+}
+
+function FramedDashboard() {
+  return (
+    <DeviceFrame>
+      <Dashboard />
+    </DeviceFrame>
+  );
+}
 
 const App = () => (
   <QueryClientProvider client={queryClient}>
@@ -20,9 +37,9 @@ const App = () => (
         <BrowserRouter>
           <Routes>
             <Route path="/" element={<FormatSelector />} />
-            <Route path="/login" element={<Login />} />
-            <Route path="/track/:id" element={<Dashboard />} />
-            <Route path="/tablet/track/:id" element={<Dashboard />} />
+            <Route path="/login" element={<FramedLogin />} />
+            <Route path="/track/:id" element={<FramedDashboard />} />
+            <Route path="/tablet/track/:id" element={<FramedDashboard />} />
             <Route path="/desktop/track/:id" element={<Dashboard />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
