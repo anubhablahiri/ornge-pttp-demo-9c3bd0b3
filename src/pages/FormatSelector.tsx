@@ -84,6 +84,9 @@ export default function FormatSelector() {
             </motion.button>
           ))}
         </div>
+        <Link to="/" className="flex items-center justify-center gap-1.5 mt-6 text-sm text-muted-foreground hover:text-foreground transition-colors">
+          <span>← {t('welcome.modeTitle')}</span>
+        </Link>
       </div>
     </div>
   );
