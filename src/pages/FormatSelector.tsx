@@ -78,7 +78,7 @@ export default function FormatSelector() {
               <img
                 src={f.image}
                 alt={t(f.key)}
-                className="h-44 w-auto object-contain drop-shadow-lg group-hover:drop-shadow-2xl transition-all"
+                className="h-52 w-auto object-contain drop-shadow-lg group-hover:drop-shadow-2xl transition-all"
                 draggable={false}
               />
               <span className="text-base font-display font-bold text-foreground">{t(f.key)}</span>
