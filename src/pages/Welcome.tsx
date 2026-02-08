@@ -1,7 +1,7 @@
 import { useNavigate } from 'react-router-dom';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
-import { Plane, Truck } from 'lucide-react';
+import { Plane, Truck, Activity, Users, ArrowLeft } from 'lucide-react';
 import orngeLogo from '@/assets/ornge-logo.png';
 import orngeLogoWhite from '@/assets/ornge-logo-white.png';
 import heroBanner from '@/assets/hero-banner.png';
@@ -9,11 +9,13 @@ import heroBannerMobile from '@/assets/hero-banner-mobile.png';
 import { useApp } from '@/lib/i18n';
 import LanguageToggle from '@/components/LanguageToggle';
 
+type PortalChoice = null | 'family' | 'operations';
+
 export default function Welcome() {
   const navigate = useNavigate();
   const { t, setDeviceFormat } = useApp();
+  const [portal, setPortal] = useState<PortalChoice>(null);
 
-  // Auto-redirect actual mobile devices — skip platform selection
   useEffect(() => {
     const isTouchDevice = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
     const isSmallScreen = window.innerWidth <= 768;
@@ -28,15 +30,19 @@ export default function Welcome() {
     window.innerWidth <= 768;
 
   const handleModeSelect = (mode: 'air' | 'land') => {
-    // Store mode in sessionStorage for use in the dashboard
     sessionStorage.setItem('transportMode', mode);
-
     if (isMobileDevice) {
-      // Mobile: skip platform, go straight to login
       navigate('/login');
     } else {
-      // Desktop: go to platform selection
       navigate('/platform');
+    }
+  };
+
+  const handlePortalSelect = (choice: PortalChoice) => {
+    if (choice === 'operations') {
+      navigate('/admin-login');
+    } else {
+      setPortal(choice);
     }
   };
 
@@ -44,14 +50,12 @@ export default function Welcome() {
     <div className="min-h-screen flex flex-col bg-[#0a1628]">
       {/* Hero section */}
       <div className="relative w-full overflow-hidden sm:min-h-[40vh]">
-        {/* Desktop banner */}
         <img
           src={heroBanner}
           alt="Ornge helicopter over Toronto"
           className="absolute inset-0 w-full h-full object-cover hidden sm:block"
           draggable={false}
         />
-        {/* Mobile banner - crop bottom ~20% */}
         <div className="sm:hidden w-full overflow-hidden" style={{ maxHeight: '105vw' }}>
           <img
             src={heroBannerMobile}
@@ -62,19 +66,17 @@ export default function Welcome() {
         </div>
         <div className="absolute inset-0 bg-gradient-to-b from-black/30 via-transparent to-[#0a1628]" />
 
-        {/* Header bar - mobile: white bg strip with orange logo, pinned to top */}
         <div className="absolute top-0 left-0 right-0 z-10 sm:hidden bg-white px-5 py-3 flex items-center justify-between">
           <img src={orngeLogo} alt="Ornge" className="h-9" />
           <LanguageToggle />
         </div>
-        {/* Header bar - desktop: transparent with white logo */}
         <div className="absolute top-0 left-0 right-0 z-10 hidden sm:flex items-center justify-between px-6 py-5">
           <img src={orngeLogoWhite} alt="Ornge" className="h-10" />
           <LanguageToggle />
         </div>
       </div>
 
-      {/* Title + Mode selection */}
+      {/* Content */}
       <div className="flex-1 bg-background rounded-t-3xl -mt-6 relative z-10 px-6 pt-8 pb-12">
         <motion.div
           className="max-w-2xl mx-auto text-center mb-8"
@@ -89,49 +91,103 @@ export default function Welcome() {
             {t('welcome.heroSubtitle')}
           </p>
         </motion.div>
-        <motion.div
-          className="max-w-2xl mx-auto"
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.3, duration: 0.5 }}
-        >
-          <h2 className="text-xl md:text-2xl font-display font-bold text-foreground text-center mb-2">
-            {t('welcome.modeTitle')}
-          </h2>
-          <p className="text-sm text-muted-foreground text-center mb-8">
-            {t('welcome.modeSubtitle')}
-          </p>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-5 max-w-lg mx-auto">
-            {/* Air Transport */}
-            <motion.button
-              onClick={() => handleModeSelect('air')}
-              className="group relative bg-card rounded-2xl border-2 border-border hover:border-secondary shadow-md hover:shadow-xl p-8 flex flex-col items-center gap-4 transition-all"
-              whileHover={{ scale: 1.02 }}
-              whileTap={{ scale: 0.98 }}
-            >
-              <div className="w-16 h-16 rounded-full bg-secondary flex items-center justify-center group-hover:bg-secondary/90 transition-colors">
-                <Plane className="h-8 w-8 text-secondary-foreground" />
-              </div>
-              <span className="text-lg font-display font-bold text-foreground">{t('welcome.air')}</span>
-              <span className="text-xs text-muted-foreground text-center">{t('welcome.airDesc')}</span>
-            </motion.button>
+        {/* Portal selection (step 1) */}
+        {portal === null && (
+          <motion.div
+            className="max-w-2xl mx-auto"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.3, duration: 0.5 }}
+          >
+            <h2 className="text-xl md:text-2xl font-display font-bold text-foreground text-center mb-2">
+              Select Portal
+            </h2>
+            <p className="text-sm text-muted-foreground text-center mb-8">
+              Choose how you'd like to access the system
+            </p>
 
-            {/* Land Transport */}
-            <motion.button
-              onClick={() => handleModeSelect('land')}
-              className="group relative bg-card rounded-2xl border-2 border-border hover:border-secondary shadow-md hover:shadow-xl p-8 flex flex-col items-center gap-4 transition-all"
-              whileHover={{ scale: 1.02 }}
-              whileTap={{ scale: 0.98 }}
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-5 max-w-lg mx-auto">
+              <motion.button
+                onClick={() => handlePortalSelect('family')}
+                className="group relative bg-card rounded-2xl border-2 border-border hover:border-primary shadow-md hover:shadow-xl p-8 flex flex-col items-center gap-4 transition-all"
+                whileHover={{ scale: 1.02 }}
+                whileTap={{ scale: 0.98 }}
+              >
+                <div className="w-16 h-16 rounded-full bg-primary flex items-center justify-center group-hover:bg-primary/90 transition-colors">
+                  <Users className="h-8 w-8 text-primary-foreground" />
+                </div>
+                <span className="text-lg font-display font-bold text-foreground">Family Transport Tracking</span>
+                <span className="text-xs text-muted-foreground text-center">Track your loved one's transport journey in real-time</span>
+              </motion.button>
+
+              <motion.button
+                onClick={() => handlePortalSelect('operations')}
+                className="group relative bg-card rounded-2xl border-2 border-border hover:border-secondary shadow-md hover:shadow-xl p-8 flex flex-col items-center gap-4 transition-all"
+                whileHover={{ scale: 1.02 }}
+                whileTap={{ scale: 0.98 }}
+              >
+                <div className="w-16 h-16 rounded-full bg-secondary flex items-center justify-center group-hover:bg-secondary/90 transition-colors">
+                  <Activity className="h-8 w-8 text-secondary-foreground" />
+                </div>
+                <span className="text-lg font-display font-bold text-foreground">Operations Dashboard</span>
+                <span className="text-xs text-muted-foreground text-center">Admin portal for transport operations management</span>
+              </motion.button>
+            </div>
+          </motion.div>
+        )}
+
+        {/* Transport mode selection (step 2 — family only) */}
+        {portal === 'family' && (
+          <motion.div
+            className="max-w-2xl mx-auto"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.4 }}
+          >
+            <button
+              onClick={() => setPortal(null)}
+              className="flex items-center gap-1.5 text-sm text-muted-foreground hover:text-foreground transition-colors mb-6"
             >
-              <div className="w-16 h-16 rounded-full bg-secondary flex items-center justify-center group-hover:bg-secondary/90 transition-colors">
-                <Truck className="h-8 w-8 text-secondary-foreground" />
-              </div>
-              <span className="text-lg font-display font-bold text-foreground">{t('welcome.land')}</span>
-              <span className="text-xs text-muted-foreground text-center">{t('welcome.landDesc')}</span>
-            </motion.button>
-          </div>
-        </motion.div>
+              <ArrowLeft className="h-4 w-4" /> Back
+            </button>
+
+            <h2 className="text-xl md:text-2xl font-display font-bold text-foreground text-center mb-2">
+              {t('welcome.modeTitle')}
+            </h2>
+            <p className="text-sm text-muted-foreground text-center mb-8">
+              {t('welcome.modeSubtitle')}
+            </p>
+
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-5 max-w-lg mx-auto">
+              <motion.button
+                onClick={() => handleModeSelect('air')}
+                className="group relative bg-card rounded-2xl border-2 border-border hover:border-secondary shadow-md hover:shadow-xl p-8 flex flex-col items-center gap-4 transition-all"
+                whileHover={{ scale: 1.02 }}
+                whileTap={{ scale: 0.98 }}
+              >
+                <div className="w-16 h-16 rounded-full bg-secondary flex items-center justify-center group-hover:bg-secondary/90 transition-colors">
+                  <Plane className="h-8 w-8 text-secondary-foreground" />
+                </div>
+                <span className="text-lg font-display font-bold text-foreground">{t('welcome.air')}</span>
+                <span className="text-xs text-muted-foreground text-center">{t('welcome.airDesc')}</span>
+              </motion.button>
+
+              <motion.button
+                onClick={() => handleModeSelect('land')}
+                className="group relative bg-card rounded-2xl border-2 border-border hover:border-secondary shadow-md hover:shadow-xl p-8 flex flex-col items-center gap-4 transition-all"
+                whileHover={{ scale: 1.02 }}
+                whileTap={{ scale: 0.98 }}
+              >
+                <div className="w-16 h-16 rounded-full bg-secondary flex items-center justify-center group-hover:bg-secondary/90 transition-colors">
+                  <Truck className="h-8 w-8 text-secondary-foreground" />
+                </div>
+                <span className="text-lg font-display font-bold text-foreground">{t('welcome.land')}</span>
+                <span className="text-xs text-muted-foreground text-center">{t('welcome.landDesc')}</span>
+              </motion.button>
+            </div>
+          </motion.div>
+        )}
 
         <p className="text-[11px] text-muted-foreground/50 text-center mt-10">
           © {new Date().getFullYear()} Ornge. {t('welcome.footer')}
