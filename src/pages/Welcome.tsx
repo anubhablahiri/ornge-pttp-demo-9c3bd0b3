@@ -52,7 +52,7 @@ export default function Welcome() {
           draggable={false}
         />
         {/* Mobile banner - crop bottom ~20% */}
-        <div className="sm:hidden w-full overflow-hidden" style={{ maxHeight: '85vw' }}>
+        <div className="sm:hidden w-full overflow-hidden" style={{ maxHeight: '100vw' }}>
           <img
             src={heroBannerMobile}
             alt="Ornge helicopter over Toronto"
