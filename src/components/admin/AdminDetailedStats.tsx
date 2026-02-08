@@ -96,18 +96,12 @@ export default function AdminDetailedStats() {
         <CardHeader className="pb-2">
           <CardTitle className="text-base font-display">Transports by Response Type</CardTitle>
         </CardHeader>
-        <CardContent className="space-y-4">
+        <CardContent>
           <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
-            <StatTile icon={AlertTriangle} value="5" label="Scene Transports" iconColor="text-destructive" />
-            <StatTile icon={MapPin} value="4" label="Modified-Scene Transports" iconColor="text-warning" />
-            <StatTile icon={Building2} value="52" label="Interfacility Transports" iconColor="text-primary" />
-            <StatTile icon={Heart} value="11" label="Life or Limb Transports" iconColor="text-destructive" />
-          </div>
-          <div className="flex flex-wrap gap-4">
-            <DownloadLink label="Scene Transports" />
-            <DownloadLink label="Modified-Scene Transports" />
-            <DownloadLink label="Interfacility Transports" />
-            <DownloadLink label="Life or Limb Transports" />
+            <StatTile icon={AlertTriangle} value="5" label="Scene Transports" iconColor="text-destructive" onDownload={() => mockDownload('Scene Transports')} />
+            <StatTile icon={MapPin} value="4" label="Modified-Scene Transports" iconColor="text-warning" onDownload={() => mockDownload('Modified-Scene Transports')} />
+            <StatTile icon={Building2} value="52" label="Interfacility Transports" iconColor="text-primary" onDownload={() => mockDownload('Interfacility Transports')} />
+            <StatTile icon={Heart} value="11" label="Life or Limb Transports" iconColor="text-destructive" onDownload={() => mockDownload('Life or Limb Transports')} />
           </div>
         </CardContent>
       </Card>
