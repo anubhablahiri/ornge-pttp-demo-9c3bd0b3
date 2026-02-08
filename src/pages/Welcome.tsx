@@ -43,10 +43,18 @@ export default function Welcome() {
     <div className="min-h-screen flex flex-col bg-[#0a1628]">
       {/* Hero section */}
       <div className="relative w-full overflow-hidden" style={{ minHeight: '40vh' }}>
+        {/* Desktop banner */}
         <img
           src={heroBanner}
           alt="Ornge helicopter over Toronto"
-          className="absolute inset-0 w-full h-full object-cover"
+          className="absolute inset-0 w-full h-full object-cover hidden sm:block"
+          draggable={false}
+        />
+        {/* Mobile banner */}
+        <img
+          src={heroBannerMobile}
+          alt="Ornge helicopter over Toronto"
+          className="absolute inset-0 w-full h-full object-cover sm:hidden"
           draggable={false}
         />
         <div className="absolute inset-0 bg-gradient-to-b from-black/30 via-transparent to-[#0a1628]" />
