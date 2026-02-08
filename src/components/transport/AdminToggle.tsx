@@ -73,9 +73,6 @@ export default function AdminToggle({ transport, onUpdate }: Props) {
             ))}
           </div>
           <div className="flex flex-wrap gap-2 pt-2">
-            <Button variant="outline" size="sm" onClick={toggleMode}>
-              {t('admin.switchTo')} {transport.mode === 'air' ? t('admin.land') : t('admin.air')}
-            </Button>
             <Button variant="outline" size="sm" onClick={addDelay}>
               {t('admin.simulateDelay')}
             </Button>
