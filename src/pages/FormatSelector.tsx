@@ -1,4 +1,4 @@
-import { useNavigate, Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import orngeLogo from '@/assets/ornge-logo.png';
 import deviceIphone from '@/assets/device-iphone.png';
@@ -88,9 +88,9 @@ export default function FormatSelector() {
             </motion.button>
           ))}
         </div>
-        <Link to="/" className="flex items-center justify-center gap-1.5 mt-6 text-sm text-muted-foreground hover:text-foreground transition-colors">
+        <button onClick={() => navigate(-1)} className="flex items-center justify-center gap-1.5 mt-6 text-sm text-muted-foreground hover:text-foreground transition-colors">
           <span>← {t('welcome.modeTitle')}</span>
-        </Link>
+        </button>
       </div>
     </div>
   );
