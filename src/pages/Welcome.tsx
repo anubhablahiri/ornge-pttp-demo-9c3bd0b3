@@ -175,7 +175,7 @@ export default function Welcome() {
 
               <motion.button
                 onClick={() => handleModeSelect('land')}
-                className="group relative bg-card rounded-2xl border-2 border-border hover:border-secondary shadow-md hover:shadow-xl p-8 flex flex-col items-center gap-4 transition-all"
+                className="group relative bg-card rounded-2xl border-2 border-border hover:border-secondary shadow-sm hover:shadow-md p-8 flex flex-col items-center gap-4 transition-all"
                 whileHover={{ scale: 1.02 }}
                 whileTap={{ scale: 0.98 }}
               >
