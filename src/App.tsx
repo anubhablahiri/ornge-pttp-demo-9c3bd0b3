@@ -37,7 +37,8 @@ const App = () => (
         <Sonner />
         <BrowserRouter>
           <Routes>
-            <Route path="/" element={<FormatSelector />} />
+            <Route path="/" element={<Welcome />} />
+            <Route path="/platform" element={<FormatSelector />} />
             <Route path="/login" element={<FramedLogin />} />
             <Route path="/track/:id" element={<FramedDashboard />} />
             <Route path="/tablet/track/:id" element={<FramedDashboard />} />
