@@ -64,8 +64,14 @@ export default function AdminPortal() {
           <AdminRecentTransports />
         </motion.div>
 
-        {/* Transport Analytics (below live activities) */}
-        <motion.div {...anim(0.15)}>
+        {/* Crew Scheduling + Fleet Status */}
+        <motion.div {...anim(0.15)} className="grid lg:grid-cols-2 gap-4">
+          <AdminCrewScheduling />
+          <AdminFleetStatus />
+        </motion.div>
+
+        {/* Transport Analytics (below crew & fleet) */}
+        <motion.div {...anim(0.2)}>
           <Tabs value={period} onValueChange={(v) => setPeriod(v as typeof period)}>
             <div className="flex items-center justify-between mb-4">
               <h2 className="font-display font-bold text-xl text-foreground">Transport Analytics</h2>
@@ -95,12 +101,6 @@ export default function AdminPortal() {
               </div>
             </TabsContent>
           </Tabs>
-        </motion.div>
-
-        {/* Crew Scheduling + Fleet Status */}
-        <motion.div {...anim(0.25)} className="grid lg:grid-cols-2 gap-4">
-          <AdminCrewScheduling />
-          <AdminFleetStatus />
         </motion.div>
       </main>
     </div>
