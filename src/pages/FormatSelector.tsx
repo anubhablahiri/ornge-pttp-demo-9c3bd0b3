@@ -79,7 +79,7 @@ export default function FormatSelector() {
                 <img
                   src={f.image}
                   alt={t(f.key)}
-                  className={`${f.id === 'desktop' ? 'h-40' : 'h-52'} w-auto object-contain drop-shadow-lg group-hover:drop-shadow-2xl transition-all`}
+                  className={`${f.id === 'desktop' ? 'h-52' : f.id === 'mobile' ? 'h-40' : 'h-48'} w-auto object-contain drop-shadow-lg group-hover:drop-shadow-2xl transition-all`}
                   draggable={false}
                 />
               </div>
