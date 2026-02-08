@@ -1,8 +1,7 @@
+import React from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { MapContainer, TileLayer, Marker, Popup, Polyline } from 'react-leaflet';
 import L from 'leaflet';
-import { Badge } from '@/components/ui/badge';
-import { cn } from '@/lib/utils';
 import 'leaflet/dist/leaflet.css';
 
 const vehicleIcon = (color: string) =>
@@ -48,7 +47,7 @@ const bases = [
 
 export default function AdminMapView() {
   return (
-    <Card>
+    <Card className="overflow-hidden">
       <CardHeader className="pb-2">
         <div className="flex items-center justify-between">
           <CardTitle className="text-base font-display">Live Transport Map</CardTitle>
@@ -59,12 +58,13 @@ export default function AdminMapView() {
           </div>
         </div>
       </CardHeader>
-      <CardContent className="p-0 overflow-hidden rounded-b-lg">
-        <div className="h-[400px]">
+      <CardContent className="p-0">
+        <div className="h-[400px] relative z-0">
           <MapContainer
             center={[49.5, -84.5]}
             zoom={5}
             className="h-full w-full"
+            style={{ height: '100%', width: '100%', zIndex: 0 }}
             zoomControl={false}
             attributionControl={false}
           >
@@ -77,7 +77,7 @@ export default function AdminMapView() {
             ))}
 
             {liveTransports.map((t) => (
-              <span key={t.id}>
+              <React.Fragment key={t.id}>
                 <Polyline
                   positions={[t.origin, t.position]}
                   pathOptions={{ color: 'hsl(22, 90%, 54%)', weight: 2.5, opacity: 0.8 }}
@@ -98,7 +98,7 @@ export default function AdminMapView() {
                     </div>
                   </Popup>
                 </Marker>
-              </span>
+              </React.Fragment>
             ))}
           </MapContainer>
         </div>
