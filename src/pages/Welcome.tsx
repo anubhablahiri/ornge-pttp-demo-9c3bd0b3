@@ -110,7 +110,7 @@ export default function Welcome() {
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-5 max-w-lg mx-auto">
               <motion.button
                 onClick={() => handlePortalSelect('family')}
-                className="group relative bg-card rounded-2xl border-2 border-border hover:border-primary shadow-md hover:shadow-xl p-8 flex flex-col items-center gap-4 transition-all"
+                className="group relative bg-card rounded-2xl border-2 border-border hover:border-primary shadow-sm hover:shadow-md p-8 flex flex-col items-center gap-4 transition-all"
                 whileHover={{ scale: 1.02 }}
                 whileTap={{ scale: 0.98 }}
               >
@@ -162,7 +162,7 @@ export default function Welcome() {
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-5 max-w-lg mx-auto">
               <motion.button
                 onClick={() => handleModeSelect('air')}
-                className="group relative bg-card rounded-2xl border-2 border-border hover:border-secondary shadow-md hover:shadow-xl p-8 flex flex-col items-center gap-4 transition-all"
+                className="group relative bg-card rounded-2xl border-2 border-border hover:border-secondary shadow-sm hover:shadow-md p-8 flex flex-col items-center gap-4 transition-all"
                 whileHover={{ scale: 1.02 }}
                 whileTap={{ scale: 0.98 }}
               >
@@ -175,7 +175,7 @@ export default function Welcome() {
 
               <motion.button
                 onClick={() => handleModeSelect('land')}
-                className="group relative bg-card rounded-2xl border-2 border-border hover:border-secondary shadow-md hover:shadow-xl p-8 flex flex-col items-center gap-4 transition-all"
+                className="group relative bg-card rounded-2xl border-2 border-border hover:border-secondary shadow-sm hover:shadow-md p-8 flex flex-col items-center gap-4 transition-all"
                 whileHover={{ scale: 1.02 }}
                 whileTap={{ scale: 0.98 }}
               >
