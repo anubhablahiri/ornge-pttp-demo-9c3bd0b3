@@ -23,13 +23,6 @@ export default function AdminToggle({ transport, onUpdate }: Props) {
     onUpdate({ ...transport, statuses: newStatuses });
   };
 
-  const toggleMode = () => {
-    onUpdate({
-      ...transport,
-      mode: transport.mode === 'air' ? 'land' : 'air',
-      altitude: transport.mode === 'land' ? 24000 : undefined,
-    });
-  };
 
   const addDelay = () => {
     const delayNotif = {
