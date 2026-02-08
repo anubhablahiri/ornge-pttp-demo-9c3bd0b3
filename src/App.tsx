@@ -9,6 +9,7 @@ import FormatSelector from "./pages/FormatSelector";
 import Login from "./pages/Login";
 import Dashboard from "./pages/Dashboard";
 import NotFound from "./pages/NotFound";
+import AdminPortal from "./pages/AdminPortal";
 import DeviceFrame from "./components/DeviceFrame";
 
 const queryClient = new QueryClient();
@@ -43,6 +44,7 @@ const App = () => (
             <Route path="/track/:id" element={<FramedDashboard />} />
             <Route path="/tablet/track/:id" element={<FramedDashboard />} />
             <Route path="/desktop/track/:id" element={<Dashboard />} />
+            <Route path="/admin" element={<AdminPortal />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
         </BrowserRouter>
