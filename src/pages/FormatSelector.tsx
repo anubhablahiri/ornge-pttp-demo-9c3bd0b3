@@ -1,4 +1,4 @@
-import { useNavigate, Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import orngeLogo from '@/assets/ornge-logo.png';
 import deviceIphone from '@/assets/device-iphone.png';
