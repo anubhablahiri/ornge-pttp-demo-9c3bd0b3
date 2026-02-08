@@ -106,12 +106,12 @@ export default function Welcome() {
             {/* Air Transport */}
             <motion.button
               onClick={() => handleModeSelect('air')}
-              className="group relative bg-card rounded-2xl border-2 border-border hover:border-primary shadow-md hover:shadow-xl p-8 flex flex-col items-center gap-4 transition-all"
+              className="group relative bg-card rounded-2xl border-2 border-border hover:border-secondary shadow-md hover:shadow-xl p-8 flex flex-col items-center gap-4 transition-all"
               whileHover={{ scale: 1.02 }}
               whileTap={{ scale: 0.98 }}
             >
-              <div className="w-16 h-16 rounded-2xl bg-primary/10 flex items-center justify-center group-hover:bg-primary/20 transition-colors">
-                <Plane className="h-8 w-8 text-primary" />
+              <div className="w-16 h-16 rounded-full bg-secondary flex items-center justify-center group-hover:bg-secondary/90 transition-colors">
+                <Plane className="h-8 w-8 text-secondary-foreground" />
               </div>
               <span className="text-lg font-display font-bold text-foreground">{t('welcome.air')}</span>
               <span className="text-xs text-muted-foreground text-center">{t('welcome.airDesc')}</span>
@@ -120,12 +120,12 @@ export default function Welcome() {
             {/* Land Transport */}
             <motion.button
               onClick={() => handleModeSelect('land')}
-              className="group relative bg-card rounded-2xl border-2 border-border hover:border-primary shadow-md hover:shadow-xl p-8 flex flex-col items-center gap-4 transition-all"
+              className="group relative bg-card rounded-2xl border-2 border-border hover:border-secondary shadow-md hover:shadow-xl p-8 flex flex-col items-center gap-4 transition-all"
               whileHover={{ scale: 1.02 }}
               whileTap={{ scale: 0.98 }}
             >
-              <div className="w-16 h-16 rounded-2xl bg-primary/10 flex items-center justify-center group-hover:bg-primary/20 transition-colors">
-                <Truck className="h-8 w-8 text-primary" />
+              <div className="w-16 h-16 rounded-full bg-secondary flex items-center justify-center group-hover:bg-secondary/90 transition-colors">
+                <Truck className="h-8 w-8 text-secondary-foreground" />
               </div>
               <span className="text-lg font-display font-bold text-foreground">{t('welcome.land')}</span>
               <span className="text-xs text-muted-foreground text-center">{t('welcome.landDesc')}</span>
