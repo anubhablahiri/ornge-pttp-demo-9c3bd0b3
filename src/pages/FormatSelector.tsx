@@ -88,7 +88,7 @@ export default function FormatSelector() {
             </motion.button>
           ))}
         </div>
-        <button onClick={() => navigate(-1)} className="flex items-center justify-center gap-1.5 mt-6 text-sm text-muted-foreground hover:text-foreground transition-colors">
+        <button onClick={() => navigate('/', { state: { portal: 'family' } })} className="flex items-center justify-center gap-1.5 mt-6 text-sm text-muted-foreground hover:text-foreground transition-colors w-full">
           <span>← {t('welcome.modeTitle')}</span>
         </button>
       </div>
