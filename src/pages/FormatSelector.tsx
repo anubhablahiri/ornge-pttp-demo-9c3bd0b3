@@ -62,25 +62,27 @@ export default function FormatSelector() {
         </motion.p>
       </div>
 
-      <div className="mx-4 md:mx-auto md:max-w-2xl flex-1">
-        <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+      <div className="mx-4 md:mx-auto md:max-w-3xl flex-1">
+        <div className="flex flex-col sm:flex-row items-end justify-center gap-6 sm:gap-8">
           {formats.map((f, i) => (
             <motion.button
               key={f.id}
               onClick={() => handleSelect(f.id)}
-              className="flex flex-col items-center gap-3 transition-all group"
+              className={`flex flex-col items-center gap-3 transition-all group ${f.id === 'desktop' ? 'sm:flex-[1.4]' : 'sm:flex-1'}`}
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.35 + i * 0.1 }}
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.97 }}
             >
-              <img
-                src={f.image}
-                alt={t(f.key)}
-                className={`${f.id === 'desktop' ? 'h-[22.5rem]' : 'h-52'} w-auto object-contain drop-shadow-lg group-hover:drop-shadow-2xl transition-all`}
-                draggable={false}
-              />
+              <div className="h-52 flex items-end justify-center">
+                <img
+                  src={f.image}
+                  alt={t(f.key)}
+                  className={`${f.id === 'desktop' ? 'h-40' : 'h-52'} w-auto object-contain drop-shadow-lg group-hover:drop-shadow-2xl transition-all`}
+                  draggable={false}
+                />
+              </div>
               <span className="text-base font-display font-bold text-foreground">{t(f.key)}</span>
               <span className="text-xs text-muted-foreground text-center">{t(f.descKey)}</span>
             </motion.button>
