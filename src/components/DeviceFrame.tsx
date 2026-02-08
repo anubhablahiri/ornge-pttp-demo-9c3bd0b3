@@ -36,7 +36,6 @@ export default function DeviceFrame({ children }: DeviceFrameProps) {
           className="relative shadow-2xl flex flex-col"
           style={{
             background: '#1a1a1a',
-          style={{
             borderRadius,
             padding: bezelPad,
             maxHeight: '88vh',
