@@ -10,6 +10,7 @@ import Login from "./pages/Login";
 import Dashboard from "./pages/Dashboard";
 import NotFound from "./pages/NotFound";
 import AdminPortal from "./pages/AdminPortal";
+import AdminLogin from "./pages/AdminLogin";
 import DeviceFrame from "./components/DeviceFrame";
 
 const queryClient = new QueryClient();
