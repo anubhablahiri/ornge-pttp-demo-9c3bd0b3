@@ -29,7 +29,7 @@ export default function DeviceFrame({ children }: DeviceFrameProps) {
     <div className="min-h-screen bg-muted/50 flex items-center justify-center py-8">
       <div className="flex flex-col items-center gap-4">
         <span className="text-xs font-display font-semibold text-muted-foreground uppercase tracking-widest">
-          {isMobile ? 'iPhone Preview' : 'iPad Preview'}
+          {isMobile ? 'Smartphone Preview' : 'Tablet Preview'}
         </span>
 
         <div
