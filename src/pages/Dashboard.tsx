@@ -67,7 +67,7 @@ export default function Dashboard() {
       <header className="sticky top-0 z-50 bg-card/95 backdrop-blur-sm border-b border-border px-4 py-3">
         <div className={`${maxW} mx-auto flex items-center justify-between`}>
           <div className="flex items-center gap-3">
-            <Link to={deviceFormat === 'mobile' ? '/login' : '/'} className="p-1.5 rounded-lg hover:bg-accent transition-colors">
+            <Link to={deviceFormat === 'mobile' ? '/login' : '/platform'} className="p-1.5 rounded-lg hover:bg-accent transition-colors">
               <ArrowLeft className="h-5 w-5 text-foreground" />
             </Link>
             <img src={orngeLogo} alt="Ornge" className="h-7" />
