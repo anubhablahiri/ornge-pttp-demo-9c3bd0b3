@@ -81,8 +81,8 @@ export default function AdminDetailedStats() {
             <p className="text-4xl font-bold font-display">64</p>
           </div>
           <Button
-            variant="outline"
-            className="border-secondary-foreground/30 text-secondary-foreground hover:bg-secondary-foreground/10 gap-2"
+            variant="secondary"
+            className="bg-secondary-foreground/20 text-secondary-foreground border border-secondary-foreground/30 hover:bg-secondary-foreground/30 gap-2"
             onClick={downloadFullReport}
           >
             <Download className="h-4 w-4" />
