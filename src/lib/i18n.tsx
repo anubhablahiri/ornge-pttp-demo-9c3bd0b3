@@ -13,7 +13,18 @@ interface AppContextType {
 }
 
 const translations: Record<string, Record<Lang, string>> = {
-  // Format selector
+  // Welcome page
+  'welcome.heroTitle': { en: 'Family Transport Tracking Portal', fr: 'Portail de suivi de transport familial' },
+  'welcome.heroSubtitle': { en: 'Stay informed about your loved one\'s critical care transport journey in real time.', fr: 'Restez informé du parcours de transport de soins intensifs de votre proche en temps réel.' },
+  'welcome.modeTitle': { en: 'Select Transport Mode', fr: 'Sélectionner le mode de transport' },
+  'welcome.modeSubtitle': { en: 'Choose the type of transport to track', fr: 'Choisissez le type de transport à suivre' },
+  'welcome.air': { en: 'Air Transport', fr: 'Transport aérien' },
+  'welcome.airDesc': { en: 'Helicopter & fixed-wing aircraft', fr: 'Hélicoptère et avion à voilure fixe' },
+  'welcome.land': { en: 'Land Transport', fr: 'Transport terrestre' },
+  'welcome.landDesc': { en: 'Ground ambulance services', fr: 'Services d\'ambulance terrestre' },
+  'welcome.footer': { en: 'All information is confidential and secure.', fr: 'Toutes les informations sont confidentielles et sécurisées.' },
+
+  // Format selector (platform)
   'format.welcome': { en: 'Welcome to Family Transport Tracking Portal Demo', fr: 'Bienvenue sur la démo du portail de suivi de transport familial' },
   'format.title': { en: 'Choose Platform', fr: 'Choisir la plateforme' },
   'format.subtitle': { en: 'Choose a device view for the demo experience', fr: 'Choisissez une vue appareil pour la démo' },
