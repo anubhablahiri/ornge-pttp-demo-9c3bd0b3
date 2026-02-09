@@ -190,7 +190,7 @@ The core family-facing interface. Displays comprehensive, real-time transport in
 - **Transport Coordination hotline:** Clickable `tel:` link to 1-800-461-1911.
 - **FAQ section:** "What happens during transport?" with a brief reassuring answer.
 
-#### 4i. Demo Controls (`AdminToggle.tsx`)
+#### 5i. Demo Controls (`AdminToggle.tsx`)
 - A collapsible panel (dashed warning-colored border) that provides demo-only controls for testing purposes.
 - **Jump to Status:** A grid of 10 buttons allowing instant navigation to any transport milestone.
 - **Simulate Delay:** Adds a mock delay notification ("A brief delay has been reported due to weather conditions").
