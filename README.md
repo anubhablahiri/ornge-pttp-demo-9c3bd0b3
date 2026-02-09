@@ -174,7 +174,7 @@ The core family-facing interface. Displays comprehensive, real-time transport in
 9. Arrived at Destination
 10. Transport Completed
 
-#### 4f. Notification Feed (`NotificationFeed.tsx`)
+#### 5f. Notification Feed (`NotificationFeed.tsx`)
 - A chronological (newest-first) list of transport updates.
 - Four notification types with distinct icons: `status` (ArrowRightLeft), `departure` (MapPin), `arrival` (MapPin), `delay` (AlertTriangle with warning styling).
 - Each notification shows its message and timestamp (HH:MM format).
