@@ -179,7 +179,7 @@ The core family-facing interface. Displays comprehensive, real-time transport in
 - Four notification types with distinct icons: `status` (ArrowRightLeft), `departure` (MapPin), `arrival` (MapPin), `delay` (AlertTriangle with warning styling).
 - Each notification shows its message and timestamp (HH:MM format).
 
-#### 4g. Transport Details (`TransportDetails.tsx`)
+#### 5g. Transport Details (`TransportDetails.tsx`)
 - An **accordion-based** expandable section with three panels:
   - **Crew Information:** Crew type (e.g., "Critical Care Paramedic + Flight Nurse") and vehicle ID (e.g., "Ornge Pilatus PC-12 (C-GORN)").
   - **Equipment Onboard:** List of medical equipment as pill-shaped badges (e.g., Ventilator, Cardiac Monitor, IV Pumps, Blood Products).
