@@ -147,7 +147,7 @@ The core family-facing interface. Displays comprehensive, real-time transport in
 - For air transports in the "En Route to Destination" phase, an animated flight progress bar is displayed with a gradient fill.
 - Includes altitude display for air transports (e.g., "Alt: 24,000 ft").
 
-#### 4d. Interactive Map (`TrackingMap.tsx`)
+#### 5d. Interactive Map (`TrackingMap.tsx`)
 - **Leaflet/OpenStreetMap** interactive map with CartoDB Light tiles.
 - Three marker types: Green circle (origin), Red circle (destination), Pulsing orange circle (current vehicle position).
 - Route visualization: Dashed gray polyline for the full planned route; solid orange polyline for the completed portion.
