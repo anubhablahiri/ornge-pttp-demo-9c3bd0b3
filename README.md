@@ -140,7 +140,7 @@ The core family-facing interface. Displays comprehensive, real-time transport in
 - **Smart Visibility:** ETA is hidden during patient transfer phases (milestone 5) and after arrival at destination (milestone 8+) to manage family expectations.
 - Includes a disclaimer: "Times are estimates and may change due to weather or operational factors."
 
-#### 4c. Live Tracking Card (`LiveMap.tsx`)
+#### 5c. Live Tracking Card (`LiveMap.tsx`)
 - A **five-phase horizontal progress bar** that condenses the 10 transport milestones into five visual stages: Preparing → En Route to Pickup → With Patient → En Route to Dropoff → Completed.
 - Each phase shows the transport mode icon (Plane or Truck) with the active phase pulsing.
 - Below the progress bar, a contextual status message describes the current phase in plain language.
