@@ -227,7 +227,7 @@ A dedicated login page for operations staff to access the admin dashboard.
 
 ---
 
-### Page 7: Operations Dashboard / Admin Portal (`/admin`)
+### Page 8: Operations Dashboard / Admin Portal (`/admin`)
 
 **File:** `src/pages/AdminPortal.tsx`
 
