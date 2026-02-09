@@ -213,7 +213,7 @@ Not a page itself, but wraps the Login and Dashboard pages in a realistic device
 
 ---
 
-### Page 6: Admin Login (`/admin-login`)
+### Page 7: Admin Login (`/admin-login`)
 
 **File:** `src/pages/AdminLogin.tsx`
 
