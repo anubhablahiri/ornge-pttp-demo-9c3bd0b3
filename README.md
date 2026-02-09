@@ -268,7 +268,7 @@ A comprehensive operations dashboard for Ornge's centralized logistics managemen
   - Status indicators: On Duty (green dot), En Route (blue dot), On Call (amber dot), Off Duty (gray dot).
   - Summary counts: "X On Duty" and "X On Call" in the header.
 
-#### 7f. Fleet Status (`AdminFleetStatus.tsx`)
+#### 8f. Fleet Status (`AdminFleetStatus.tsx`)
 - Vehicle availability broken down by fleet type:
   - **Fixed-Wing (PC-12):** 10 total, 4 active, 1 maintenance.
   - **Rotor-Wing (AW139):** 12 total, 6 active, 2 maintenance.
