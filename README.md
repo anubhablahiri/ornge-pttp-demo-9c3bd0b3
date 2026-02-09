@@ -286,7 +286,7 @@ A comprehensive operations dashboard for Ornge's centralized logistics managemen
   - Average Response Time
   - Breakdown by Care Level: Critical Care (red), Advanced Care (amber), Basic Care (green)
 
-#### 7h. Detailed Statistics (`AdminDetailedStats.tsx`)
+#### 8h. Detailed Statistics (`AdminDetailedStats.tsx`)
 - **Summary Banner:** Total Daily Transports (64) with a "Download Full Report" button.
 - **By Response Type:** Scene (5), Modified-Scene (4), Interfacility (52), Life or Limb (11) — each with individual CSV download.
 - **By Vehicle:** Fixed-Wing (32), Rotor-Wing (9), Land Ambulance (23) — each with individual CSV download.
