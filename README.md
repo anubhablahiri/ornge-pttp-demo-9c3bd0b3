@@ -71,7 +71,24 @@ The entry point to the application. Features a full-width hero banner showing an
 
 ---
 
-### Page 2: Platform Selector (`/platform`)
+### Page 2: Transport Mode Selection (Embedded in `/`)
+
+**File:** `src/pages/Welcome.tsx` (second step within the Welcome component)
+
+After selecting "Family Transport Tracking" on the portal selection screen, users are presented with a transport mode selection step — rendered inline on the same page without a route change.
+
+**Features:**
+- **Two Mode Options:** "Air Transport" (helicopter & fixed-wing aircraft) and "Land Transport" (ground ambulance), each displayed as a large card with a circular icon badge (Plane / Truck), bold label, and descriptive subtitle.
+- **Session Persistence:** The selected mode (`air` or `land`) is written to `sessionStorage` under the key `transportMode`. This value is used downstream to filter mock transport data and display mode-appropriate UI elements (altitude indicators, flight progress bars, etc.).
+- **Back Button:** An "← Back" link at the top left returns the user to the portal selection step (Step 1) without a page navigation, preserving smooth in-page transitions via local state.
+- **Mobile-Aware Routing:** On touch-enabled small screens (≤768px), selecting a transport mode navigates directly to `/login`, bypassing the Platform Selector. On desktop browsers, it navigates to `/platform` for device format selection.
+- **Full i18n Support:** Mode titles and descriptions are bilingual (`welcome.air`, `welcome.land`, `welcome.airDesc`, `welcome.landDesc`).
+- **Framer Motion Animations:** The section fades and slides in with `motion.div`. Each card responds to hover (scale up) and tap (scale down) interactions.
+- **State Restoration:** When navigating back from the Platform Selector page, `location.state.portal === 'family'` ensures users land on this transport mode step rather than resetting to the initial portal choice.
+
+---
+
+### Page 3: Platform Selector (`/platform`)
 
 **File:** `src/pages/FormatSelector.tsx`
 
