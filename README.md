@@ -248,7 +248,7 @@ A comprehensive operations dashboard for Ornge's centralized logistics managemen
   - **Avg Response:** 14 min (warning/amber accent)
   - **Delays:** 2 (destructive/red accent)
 
-#### 7c. Live Transport Map (`AdminMapView.tsx`)
+#### 8c. Live Transport Map (`AdminMapView.tsx`)
 - A **province-wide Leaflet map** centered on Ontario showing:
   - **5 active transports** with route polylines (solid completed, dashed remaining).
   - Color-coded vehicle markers: Orange for air, green for land.
