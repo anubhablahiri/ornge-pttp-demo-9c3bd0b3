@@ -34,7 +34,7 @@ const makeIcon = (color: string, size: number, pulse = false) =>
 const originIcon = makeIcon('#1c4599', 24);
 const destIcon = makeIcon('#16a34a', 24);
 
-const helicopterSvg = `<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3h4l3 9"/><path d="M21 3h-4l-3 9"/><circle cx="12" cy="12" r="1"/><path d="M12 13v4"/><path d="M8 17h8"/><path d="M7 21h2"/><path d="M15 21h2"/></svg>`;
+const helicopterSvg = `<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 640 512" fill="white"><path d="M128 32c0-17.7 14.3-32 32-32H544c17.7 0 32 14.3 32 32s-14.3 32-32 32H384v64h32c88.4 0 160 71.6 160 160v64c0 17.7-14.3 32-32 32H448c-17.7 0-32-14.3-32-32V256c0-17.7-14.3-32-32-32H320v128H192L64 480c-17.7 0-32-14.3-32-32s14.3-32 32-32l128-128V128H160c-17.7 0-32-14.3-32-32zM384 128H320v96h64V128z"/></svg>`;
 
 const vehicleIconAir = new L.DivIcon({
   className: '',
