@@ -119,7 +119,7 @@ A secure-feeling login page where families enter their Transport Reference Numbe
 
 ---
 
-### Page 4: Tracking Dashboard (`/track/:id`)
+### Page 5: Tracking Dashboard (`/track/:id`)
 
 **File:** `src/pages/Dashboard.tsx`
 
