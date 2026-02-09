@@ -113,7 +113,7 @@ export default function TrackingMap({ transport }: Props) {
           {/* Full route (dashed) */}
           <Polyline
             positions={routePath}
-            pathOptions={{ color: '#94a3b8', weight: 2, opacity: 0.5, dashArray: '8 8' }}
+            pathOptions={{ color: '#ea580c', weight: 2, opacity: 0.5, dashArray: '8 8' }}
           />
 
           {/* Completed portion (solid) */}
