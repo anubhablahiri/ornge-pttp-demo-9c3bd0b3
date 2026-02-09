@@ -66,6 +66,7 @@ export default function LiveMap({ transport }: Props) {
                 {/* Label */}
                 <p className={`text-[10px] leading-tight text-center mb-2 font-medium min-h-[28px] flex items-end justify-center px-1 ${
                   isActive ? 'text-primary' : isCompleted ? 'text-foreground' : 'text-muted-foreground/50'
+
                 }`}>
                   {p[lang]}
                 </p>

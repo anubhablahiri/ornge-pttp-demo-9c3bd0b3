@@ -31,9 +31,24 @@ const makeIcon = (color: string, size: number, pulse = false) =>
     iconAnchor: [size / 2, size / 2],
   });
 
-const originIcon = makeIcon('#16a34a', 24);
-const destIcon = makeIcon('#dc2626', 24);
-const vehicleIconAir = makeIcon('#ea580c', 28, true);
+const originIcon = makeIcon('#1c4599', 24);
+const destIcon = makeIcon('#16a34a', 24);
+
+const helicopterSvg = `<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3h4l3 9"/><path d="M21 3h-4l-3 9"/><circle cx="12" cy="12" r="1"/><path d="M12 13v4"/><path d="M8 17h8"/><path d="M7 21h2"/><path d="M15 21h2"/></svg>`;
+
+const vehicleIconAir = new L.DivIcon({
+  className: '',
+  html: `<div style="
+    width:32px;height:32px;
+    background:#ea580c;border:3px solid white;border-radius:50%;
+    box-shadow:0 2px 8px rgba(0,0,0,0.3);
+    display:flex;align-items:center;justify-content:center;
+    animation:tml-pulse 2s infinite;
+  ">${helicopterSvg}</div>
+  <style>@keyframes tml-pulse{0%,100%{transform:scale(1);opacity:1}50%{transform:scale(1.3);opacity:0.7}}</style>`,
+  iconSize: [32, 32],
+  iconAnchor: [16, 16],
+});
 const vehicleIconLand = makeIcon('#ea580c', 28, true);
 
 function FitBounds({ points }: { points: [number, number][] }) {
@@ -98,7 +113,7 @@ export default function TrackingMap({ transport }: Props) {
           {/* Full route (dashed) */}
           <Polyline
             positions={routePath}
-            pathOptions={{ color: '#94a3b8', weight: 2, opacity: 0.5, dashArray: '8 8' }}
+            pathOptions={{ color: '#ea580c', weight: 2, opacity: 0.5, dashArray: '8 8' }}
           />
 
           {/* Completed portion (solid) */}
@@ -120,11 +135,11 @@ export default function TrackingMap({ transport }: Props) {
       {/* Legend */}
       <div className="px-5 py-3 flex flex-wrap items-center gap-4 text-[11px] text-muted-foreground border-t border-border">
         <span className="flex items-center gap-1.5">
-          <span className="w-2.5 h-2.5 rounded-full bg-green-600 inline-block shrink-0" />
+          <span className="w-2.5 h-2.5 rounded-full inline-block shrink-0" style={{ background: '#1c4599' }} />
           {lang === 'en' ? 'Origin' : 'Origine'}
         </span>
         <span className="flex items-center gap-1.5">
-          <span className="w-2.5 h-2.5 rounded-full bg-red-600 inline-block shrink-0" />
+          <span className="w-2.5 h-2.5 rounded-full bg-green-600 inline-block shrink-0" />
           {lang === 'en' ? 'Destination' : 'Destination'}
         </span>
         {current && !complete && (
