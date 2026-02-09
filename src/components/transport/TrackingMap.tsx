@@ -34,20 +34,18 @@ const makeIcon = (color: string, size: number, pulse = false) =>
 const originIcon = makeIcon('#1c4599', 24);
 const destIcon = makeIcon('#16a34a', 24);
 
-const helicopterSvg = `<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 640 512" fill="white"><path d="M128 32c0-17.7 14.3-32 32-32H544c17.7 0 32 14.3 32 32s-14.3 32-32 32H384v64h32c88.4 0 160 71.6 160 160v64c0 17.7-14.3 32-32 32H448c-17.7 0-32-14.3-32-32V256c0-17.7-14.3-32-32-32H320v128H192L64 480c-17.7 0-32-14.3-32-32s14.3-32 32-32l128-128V128H160c-17.7 0-32-14.3-32-32zM384 128H320v96h64V128z"/></svg>`;
-
 const vehicleIconAir = new L.DivIcon({
   className: '',
   html: `<div style="
-    width:32px;height:32px;
+    width:36px;height:36px;
     background:#ea580c;border:3px solid white;border-radius:50%;
     box-shadow:0 2px 8px rgba(0,0,0,0.3);
     display:flex;align-items:center;justify-content:center;
     animation:tml-pulse 2s infinite;
-  ">${helicopterSvg}</div>
+  "><img src="/images/helicopter.svg" style="width:20px;height:20px;filter:brightness(0) invert(1);" /></div>
   <style>@keyframes tml-pulse{0%,100%{transform:scale(1);opacity:1}50%{transform:scale(1.3);opacity:0.7}}</style>`,
-  iconSize: [32, 32],
-  iconAnchor: [16, 16],
+  iconSize: [36, 36],
+  iconAnchor: [18, 18],
 });
 const vehicleIconLand = makeIcon('#ea580c', 28, true);
 
