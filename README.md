@@ -235,7 +235,7 @@ A comprehensive operations dashboard for Ornge's centralized logistics managemen
 
 **Sections (top to bottom):**
 
-#### 7a. Header
+#### 8a. Header
 - Sticky navigation bar with Ornge logo, "Operations Dashboard" title, subtitle "Ornge Transport Medicine," and the current date.
 - Back arrow returns to the root landing page.
 
