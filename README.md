@@ -276,7 +276,7 @@ A comprehensive operations dashboard for Ornge's centralized logistics managemen
 - Each type shows a progress bar (active percentage) and active/available/maintenance counts.
 - Summary row: 42 Total Fleet, 13 Active Now, 23 Available.
 
-#### 7g. Transport Analytics (`AdminTransportChart.tsx` + `AdminPerformanceMetrics.tsx`)
+#### 8g. Transport Analytics (`AdminTransportChart.tsx` + `AdminPerformanceMetrics.tsx`)
 - **Tabbed interface** with Weekly / Monthly / Yearly views.
 - **Bar Chart (Recharts):** Stacked bar chart showing air vs. land transport volume over time. Uses Ornge brand orange for air and navy blue for land.
 - **Performance Metrics Panel:**
