@@ -199,7 +199,7 @@ The core family-facing interface. Displays comprehensive, real-time transport in
 
 ---
 
-### Page 5: Device Frame Wrapper (`DeviceFrame.tsx`)
+### Page 6: Device Frame Wrapper (`DeviceFrame.tsx`)
 
 **File:** `src/components/DeviceFrame.tsx`
 
