@@ -132,7 +132,7 @@ The core family-facing interface. Displays comprehensive, real-time transport in
 
 **Components (in display order):**
 
-#### 4a. Transport Header (`TransportHeader.tsx`)
+#### 5a. Transport Header (`TransportHeader.tsx`)
 - Displays the Transport Reference ID (e.g., `ORN-2025-4821`), patient first name with possessive suffix (e.g., "Sarah's Transport"), transport mode badge (Air/Land with icon), care level badge (Critical Care / Advanced Care / Basic Care), and origin/destination facility names.
 
 #### 4b. ETA Display (`ETADisplay.tsx`)
