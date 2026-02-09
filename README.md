@@ -239,7 +239,7 @@ A comprehensive operations dashboard for Ornge's centralized logistics managemen
 - Sticky navigation bar with Ornge logo, "Operations Dashboard" title, subtitle "Ornge Transport Medicine," and the current date.
 - Back arrow returns to the root landing page.
 
-#### 7b. Operational Stat Cards (`AdminStatCard.tsx`)
+#### 8b. Operational Stat Cards (`AdminStatCard.tsx`)
 - Six summary cards in a responsive grid (6 columns on large screens, 4 on medium, 2 on mobile):
   - **Live Transports:** 7 (primary accent)
   - **Air Active:** 4 (primary accent)
