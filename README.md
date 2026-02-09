@@ -71,7 +71,24 @@ The entry point to the application. Features a full-width hero banner showing an
 
 ---
 
-### Page 2: Platform Selector (`/platform`)
+### Page 2: Transport Mode Selection (Embedded in `/`)
+
+**File:** `src/pages/Welcome.tsx` (second step within the Welcome component)
+
+After selecting "Family Transport Tracking" on the portal selection screen, users are presented with a transport mode selection step — rendered inline on the same page without a route change.
+
+**Features:**
+- **Two Mode Options:** "Air Transport" (helicopter & fixed-wing aircraft) and "Land Transport" (ground ambulance), each displayed as a large card with a circular icon badge (Plane / Truck), bold label, and descriptive subtitle.
+- **Session Persistence:** The selected mode (`air` or `land`) is written to `sessionStorage` under the key `transportMode`. This value is used downstream to filter mock transport data and display mode-appropriate UI elements (altitude indicators, flight progress bars, etc.).
+- **Back Button:** An "← Back" link at the top left returns the user to the portal selection step (Step 1) without a page navigation, preserving smooth in-page transitions via local state.
+- **Mobile-Aware Routing:** On touch-enabled small screens (≤768px), selecting a transport mode navigates directly to `/login`, bypassing the Platform Selector. On desktop browsers, it navigates to `/platform` for device format selection.
+- **Full i18n Support:** Mode titles and descriptions are bilingual (`welcome.air`, `welcome.land`, `welcome.airDesc`, `welcome.landDesc`).
+- **Framer Motion Animations:** The section fades and slides in with `motion.div`. Each card responds to hover (scale up) and tap (scale down) interactions.
+- **State Restoration:** When navigating back from the Platform Selector page, `location.state.portal === 'family'` ensures users land on this transport mode step rather than resetting to the initial portal choice.
+
+---
+
+### Page 3: Platform Selector (`/platform`)
 
 **File:** `src/pages/FormatSelector.tsx`
 
@@ -85,7 +102,7 @@ A device picker page that lets users choose how they want to experience the demo
 
 ---
 
-### Page 3: Family Login (`/login`)
+### Page 4: Family Login (`/login`)
 
 **File:** `src/pages/Login.tsx`
 
@@ -102,7 +119,7 @@ A secure-feeling login page where families enter their Transport Reference Numbe
 
 ---
 
-### Page 4: Tracking Dashboard (`/track/:id`)
+### Page 5: Tracking Dashboard (`/track/:id`)
 
 **File:** `src/pages/Dashboard.tsx`
 
@@ -115,22 +132,22 @@ The core family-facing interface. Displays comprehensive, real-time transport in
 
 **Components (in display order):**
 
-#### 4a. Transport Header (`TransportHeader.tsx`)
+#### 5a. Transport Header (`TransportHeader.tsx`)
 - Displays the Transport Reference ID (e.g., `ORN-2025-4821`), patient first name with possessive suffix (e.g., "Sarah's Transport"), transport mode badge (Air/Land with icon), care level badge (Critical Care / Advanced Care / Basic Care), and origin/destination facility names.
 
-#### 4b. ETA Display (`ETADisplay.tsx`)
+#### 5b. ETA Display (`ETADisplay.tsx`)
 - Shows estimated arrival time for either the pickup location or the destination, depending on the current transport phase.
 - **Smart Visibility:** ETA is hidden during patient transfer phases (milestone 5) and after arrival at destination (milestone 8+) to manage family expectations.
 - Includes a disclaimer: "Times are estimates and may change due to weather or operational factors."
 
-#### 4c. Live Tracking Card (`LiveMap.tsx`)
+#### 5c. Live Tracking Card (`LiveMap.tsx`)
 - A **five-phase horizontal progress bar** that condenses the 10 transport milestones into five visual stages: Preparing → En Route to Pickup → With Patient → En Route to Dropoff → Completed.
 - Each phase shows the transport mode icon (Plane or Truck) with the active phase pulsing.
 - Below the progress bar, a contextual status message describes the current phase in plain language.
 - For air transports in the "En Route to Destination" phase, an animated flight progress bar is displayed with a gradient fill.
 - Includes altitude display for air transports (e.g., "Alt: 24,000 ft").
 
-#### 4d. Interactive Map (`TrackingMap.tsx`)
+#### 5d. Interactive Map (`TrackingMap.tsx`)
 - **Leaflet/OpenStreetMap** interactive map with CartoDB Light tiles.
 - Three marker types: Green circle (origin), Red circle (destination), Pulsing orange circle (current vehicle position).
 - Route visualization: Dashed gray polyline for the full planned route; solid orange polyline for the completed portion.
@@ -138,7 +155,7 @@ The core family-facing interface. Displays comprehensive, real-time transport in
 - Vehicle marker is hidden when transport is complete.
 - For air transports, an altitude badge appears in the card header.
 
-#### 4e. Status Timeline (`StatusTimeline.tsx`)
+#### 5e. Status Timeline (`StatusTimeline.tsx`)
 - A **10-milestone timeline** tracking the full transport journey from "Preparing for Transport" through "Transport Completed."
 - **Responsive orientation:** Vertical layout on mobile/tablet; horizontal layout on desktop.
 - Each milestone shows a numbered circle with three states: completed (green with checkmark), active (blue with pulse animation), or pending (gray).
@@ -157,23 +174,23 @@ The core family-facing interface. Displays comprehensive, real-time transport in
 9. Arrived at Destination
 10. Transport Completed
 
-#### 4f. Notification Feed (`NotificationFeed.tsx`)
+#### 5f. Notification Feed (`NotificationFeed.tsx`)
 - A chronological (newest-first) list of transport updates.
 - Four notification types with distinct icons: `status` (ArrowRightLeft), `departure` (MapPin), `arrival` (MapPin), `delay` (AlertTriangle with warning styling).
 - Each notification shows its message and timestamp (HH:MM format).
 
-#### 4g. Transport Details (`TransportDetails.tsx`)
+#### 5g. Transport Details (`TransportDetails.tsx`)
 - An **accordion-based** expandable section with three panels:
   - **Crew Information:** Crew type (e.g., "Critical Care Paramedic + Flight Nurse") and vehicle ID (e.g., "Ornge Pilatus PC-12 (C-GORN)").
   - **Equipment Onboard:** List of medical equipment as pill-shaped badges (e.g., Ventilator, Cardiac Monitor, IV Pumps, Blood Products).
   - **Clinical Summary:** A brief, non-diagnostic summary of the patient's status (e.g., "Patient is stable and being monitored continuously").
 
-#### 4h. Family Support (`FamilySupport.tsx`)
+#### 5h. Family Support (`FamilySupport.tsx`)
 - A support card with an empathetic message: "We understand this is a stressful time."
 - **Transport Coordination hotline:** Clickable `tel:` link to 1-800-461-1911.
 - **FAQ section:** "What happens during transport?" with a brief reassuring answer.
 
-#### 4i. Demo Controls (`AdminToggle.tsx`)
+#### 5i. Demo Controls (`AdminToggle.tsx`)
 - A collapsible panel (dashed warning-colored border) that provides demo-only controls for testing purposes.
 - **Jump to Status:** A grid of 10 buttons allowing instant navigation to any transport milestone.
 - **Simulate Delay:** Adds a mock delay notification ("A brief delay has been reported due to weather conditions").
@@ -182,7 +199,7 @@ The core family-facing interface. Displays comprehensive, real-time transport in
 
 ---
 
-### Page 5: Device Frame Wrapper (`DeviceFrame.tsx`)
+### Page 6: Device Frame Wrapper (`DeviceFrame.tsx`)
 
 **File:** `src/components/DeviceFrame.tsx`
 
@@ -196,7 +213,7 @@ Not a page itself, but wraps the Login and Dashboard pages in a realistic device
 
 ---
 
-### Page 6: Admin Login (`/admin-login`)
+### Page 7: Admin Login (`/admin-login`)
 
 **File:** `src/pages/AdminLogin.tsx`
 
@@ -210,7 +227,7 @@ A dedicated login page for operations staff to access the admin dashboard.
 
 ---
 
-### Page 7: Operations Dashboard / Admin Portal (`/admin`)
+### Page 8: Operations Dashboard / Admin Portal (`/admin`)
 
 **File:** `src/pages/AdminPortal.tsx`
 
@@ -218,11 +235,11 @@ A comprehensive operations dashboard for Ornge's centralized logistics managemen
 
 **Sections (top to bottom):**
 
-#### 7a. Header
+#### 8a. Header
 - Sticky navigation bar with Ornge logo, "Operations Dashboard" title, subtitle "Ornge Transport Medicine," and the current date.
 - Back arrow returns to the root landing page.
 
-#### 7b. Operational Stat Cards (`AdminStatCard.tsx`)
+#### 8b. Operational Stat Cards (`AdminStatCard.tsx`)
 - Six summary cards in a responsive grid (6 columns on large screens, 4 on medium, 2 on mobile):
   - **Live Transports:** 7 (primary accent)
   - **Air Active:** 4 (primary accent)
@@ -231,7 +248,7 @@ A comprehensive operations dashboard for Ornge's centralized logistics managemen
   - **Avg Response:** 14 min (warning/amber accent)
   - **Delays:** 2 (destructive/red accent)
 
-#### 7c. Live Transport Map (`AdminMapView.tsx`)
+#### 8c. Live Transport Map (`AdminMapView.tsx`)
 - A **province-wide Leaflet map** centered on Ontario showing:
   - **5 active transports** with route polylines (solid completed, dashed remaining).
   - Color-coded vehicle markers: Orange for air, green for land.
@@ -239,19 +256,19 @@ A comprehensive operations dashboard for Ornge's centralized logistics managemen
   - Popup details on click: transport ID, route, mode, and status.
   - Map legend showing Air, Land, and Base marker types.
 
-#### 7d. Recent Transports Table (`AdminRecentTransports.tsx`)
+#### 8d. Recent Transports Table (`AdminRecentTransports.tsx`)
 - A list of the 6 most recent transports with:
   - Transport mode icon (Plane/Truck) with color-coded background.
   - Patient name (abbreviated), reference ID, and route.
   - Status badge: "In Transit" (primary), "Dispatched" (warning), or "Completed" (success).
 
-#### 7e. Crew Scheduling (`AdminCrewScheduling.tsx`)
+#### 8e. Crew Scheduling (`AdminCrewScheduling.tsx`)
 - A roster of 8 crew members with:
   - Name, role (Flight Physician, Flight Paramedic, Pilot, Land Paramedic), assigned vehicle ID, shift hours, and base location.
   - Status indicators: On Duty (green dot), En Route (blue dot), On Call (amber dot), Off Duty (gray dot).
   - Summary counts: "X On Duty" and "X On Call" in the header.
 
-#### 7f. Fleet Status (`AdminFleetStatus.tsx`)
+#### 8f. Fleet Status (`AdminFleetStatus.tsx`)
 - Vehicle availability broken down by fleet type:
   - **Fixed-Wing (PC-12):** 10 total, 4 active, 1 maintenance.
   - **Rotor-Wing (AW139):** 12 total, 6 active, 2 maintenance.
@@ -259,7 +276,7 @@ A comprehensive operations dashboard for Ornge's centralized logistics managemen
 - Each type shows a progress bar (active percentage) and active/available/maintenance counts.
 - Summary row: 42 Total Fleet, 13 Active Now, 23 Available.
 
-#### 7g. Transport Analytics (`AdminTransportChart.tsx` + `AdminPerformanceMetrics.tsx`)
+#### 8g. Transport Analytics (`AdminTransportChart.tsx` + `AdminPerformanceMetrics.tsx`)
 - **Tabbed interface** with Weekly / Monthly / Yearly views.
 - **Bar Chart (Recharts):** Stacked bar chart showing air vs. land transport volume over time. Uses Ornge brand orange for air and navy blue for land.
 - **Performance Metrics Panel:**
@@ -269,7 +286,7 @@ A comprehensive operations dashboard for Ornge's centralized logistics managemen
   - Average Response Time
   - Breakdown by Care Level: Critical Care (red), Advanced Care (amber), Basic Care (green)
 
-#### 7h. Detailed Statistics (`AdminDetailedStats.tsx`)
+#### 8h. Detailed Statistics (`AdminDetailedStats.tsx`)
 - **Summary Banner:** Total Daily Transports (64) with a "Download Full Report" button.
 - **By Response Type:** Scene (5), Modified-Scene (4), Interfacility (52), Life or Limb (11) — each with individual CSV download.
 - **By Vehicle:** Fixed-Wing (32), Rotor-Wing (9), Land Ambulance (23) — each with individual CSV download.
