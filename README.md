@@ -155,7 +155,7 @@ The core family-facing interface. Displays comprehensive, real-time transport in
 - Vehicle marker is hidden when transport is complete.
 - For air transports, an altitude badge appears in the card header.
 
-#### 4e. Status Timeline (`StatusTimeline.tsx`)
+#### 5e. Status Timeline (`StatusTimeline.tsx`)
 - A **10-milestone timeline** tracking the full transport journey from "Preparing for Transport" through "Transport Completed."
 - **Responsive orientation:** Vertical layout on mobile/tablet; horizontal layout on desktop.
 - Each milestone shows a numbered circle with three states: completed (green with checkmark), active (blue with pulse animation), or pending (gray).
