@@ -135,7 +135,7 @@ The core family-facing interface. Displays comprehensive, real-time transport in
 #### 5a. Transport Header (`TransportHeader.tsx`)
 - Displays the Transport Reference ID (e.g., `ORN-2025-4821`), patient first name with possessive suffix (e.g., "Sarah's Transport"), transport mode badge (Air/Land with icon), care level badge (Critical Care / Advanced Care / Basic Care), and origin/destination facility names.
 
-#### 4b. ETA Display (`ETADisplay.tsx`)
+#### 5b. ETA Display (`ETADisplay.tsx`)
 - Shows estimated arrival time for either the pickup location or the destination, depending on the current transport phase.
 - **Smart Visibility:** ETA is hidden during patient transfer phases (milestone 5) and after arrival at destination (milestone 8+) to manage family expectations.
 - Includes a disclaimer: "Times are estimates and may change due to weather or operational factors."
