@@ -256,7 +256,7 @@ A comprehensive operations dashboard for Ornge's centralized logistics managemen
   - Popup details on click: transport ID, route, mode, and status.
   - Map legend showing Air, Land, and Base marker types.
 
-#### 7d. Recent Transports Table (`AdminRecentTransports.tsx`)
+#### 8d. Recent Transports Table (`AdminRecentTransports.tsx`)
 - A list of the 6 most recent transports with:
   - Transport mode icon (Plane/Truck) with color-coded background.
   - Patient name (abbreviated), reference ID, and route.
