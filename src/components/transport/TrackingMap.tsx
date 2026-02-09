@@ -135,11 +135,11 @@ export default function TrackingMap({ transport }: Props) {
       {/* Legend */}
       <div className="px-5 py-3 flex flex-wrap items-center gap-4 text-[11px] text-muted-foreground border-t border-border">
         <span className="flex items-center gap-1.5">
-          <span className="w-2.5 h-2.5 rounded-full bg-green-600 inline-block shrink-0" />
+          <span className="w-2.5 h-2.5 rounded-full inline-block shrink-0" style={{ background: '#1c4599' }} />
           {lang === 'en' ? 'Origin' : 'Origine'}
         </span>
         <span className="flex items-center gap-1.5">
-          <span className="w-2.5 h-2.5 rounded-full bg-red-600 inline-block shrink-0" />
+          <span className="w-2.5 h-2.5 rounded-full bg-green-600 inline-block shrink-0" />
           {lang === 'en' ? 'Destination' : 'Destination'}
         </span>
         {current && !complete && (
