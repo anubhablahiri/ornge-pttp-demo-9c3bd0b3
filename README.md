@@ -102,7 +102,7 @@ A device picker page that lets users choose how they want to experience the demo
 
 ---
 
-### Page 3: Family Login (`/login`)
+### Page 4: Family Login (`/login`)
 
 **File:** `src/pages/Login.tsx`
 
