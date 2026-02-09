@@ -20,7 +20,9 @@ function getTrackPrefix(format: string) {
 export default function Login() {
   const navigate = useNavigate();
   const { t, deviceFormat } = useApp();
-  const [refNumber, setRefNumber] = useState('ORN-2025-4821');
+  const transportMode = sessionStorage.getItem('transportMode') || 'air';
+  const defaultRef = transportMode === 'land' ? 'ORN-2025-4819' : 'ORN-2025-4821';
+  const [refNumber, setRefNumber] = useState(defaultRef);
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
 
