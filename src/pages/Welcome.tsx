@@ -182,8 +182,8 @@ export default function Welcome() {
                 whileHover={{ scale: 1.02 }}
                 whileTap={{ scale: 0.98 }}
               >
-                <div className="w-16 h-16 rounded-full bg-secondary flex items-center justify-center group-hover:bg-secondary/90 transition-colors">
-                  <Truck className="h-8 w-8 text-secondary-foreground" />
+                <div className="w-16 h-16 rounded-full bg-primary flex items-center justify-center group-hover:bg-primary/90 transition-colors">
+                  <Truck className="h-8 w-8 text-primary-foreground" />
                 </div>
                 <span className="text-lg font-display font-bold text-foreground">{t('welcome.land')}</span>
                 <span className="text-xs text-muted-foreground text-center">{t('welcome.landDesc')}</span>
