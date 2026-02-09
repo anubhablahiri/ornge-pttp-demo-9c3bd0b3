@@ -14,7 +14,7 @@ interface AppContextType {
 
 const translations: Record<string, Record<Lang, string>> = {
   // Welcome page
-  'welcome.heroTitle': { en: 'Family Transport Tracking Portal', fr: 'Portail de suivi de transport familial' },
+  'welcome.heroTitle': { en: 'Patient Transport Tracking Portal', fr: 'Portail de suivi de transport des patients' },
   'welcome.heroSubtitle': { en: 'Stay informed about your loved one\'s critical care transport journey in real time.', fr: 'Restez informé du parcours de transport de soins intensifs de votre proche en temps réel.' },
   'welcome.modeTitle': { en: 'Select Transport Mode', fr: 'Sélectionner le mode de transport' },
   'welcome.modeSubtitle': { en: 'Choose the type of transport to track', fr: 'Choisissez le type de transport à suivre' },
@@ -25,7 +25,7 @@ const translations: Record<string, Record<Lang, string>> = {
   'welcome.footer': { en: 'All information is confidential and secure.', fr: 'Toutes les informations sont confidentielles et sécurisées.' },
 
   // Format selector (platform)
-  'format.welcome': { en: 'Welcome to Family Transport Tracking Portal Demo', fr: 'Bienvenue sur la démo du portail de suivi de transport familial' },
+  'format.welcome': { en: 'Welcome to Patient Transport Tracking Portal Demo', fr: 'Bienvenue sur la démo du portail de suivi de transport des patients' },
   'format.title': { en: 'Choose Platform', fr: 'Choisir la plateforme' },
   'format.subtitle': { en: 'Choose a device view for the demo experience', fr: 'Choisissez une vue appareil pour la démo' },
   'format.mobile': { en: 'Mobile', fr: 'Mobile' },
@@ -36,7 +36,7 @@ const translations: Record<string, Record<Lang, string>> = {
   'format.desktop.desc': { en: 'Full dashboard experience', fr: 'Expérience tableau de bord complète' },
 
   // Login
-  'login.title': { en: 'Family Transport Tracker', fr: 'Suivi de transport familial' },
+  'login.title': { en: 'Patient Transport Tracker', fr: 'Suivi de transport des patients' },
   'login.subtitle': { en: 'Stay informed about your loved one\'s transport journey.', fr: 'Restez informé du parcours de transport de votre proche.' },
   'login.secure': { en: 'Secure & Private Access', fr: 'Accès sécurisé et privé' },
   'login.ref': { en: 'Transport Reference Number', fr: 'Numéro de référence du transport' },
