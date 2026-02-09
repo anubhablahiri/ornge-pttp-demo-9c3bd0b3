@@ -185,7 +185,7 @@ The core family-facing interface. Displays comprehensive, real-time transport in
   - **Equipment Onboard:** List of medical equipment as pill-shaped badges (e.g., Ventilator, Cardiac Monitor, IV Pumps, Blood Products).
   - **Clinical Summary:** A brief, non-diagnostic summary of the patient's status (e.g., "Patient is stable and being monitored continuously").
 
-#### 4h. Family Support (`FamilySupport.tsx`)
+#### 5h. Family Support (`FamilySupport.tsx`)
 - A support card with an empathetic message: "We understand this is a stressful time."
 - **Transport Coordination hotline:** Clickable `tel:` link to 1-800-461-1911.
 - **FAQ section:** "What happens during transport?" with a brief reassuring answer.
