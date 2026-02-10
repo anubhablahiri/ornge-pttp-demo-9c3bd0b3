@@ -36,6 +36,7 @@ const DEFAULT_DATA = {
   statusIndex: 1,
   statusLabel: 'En route to patient pickup',
   statusDescription: 'The transport crew is en route to pick up the patient.',
+  specialMessage: undefined as string | undefined,
 };
 
 export default function V1Status() {
