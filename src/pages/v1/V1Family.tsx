@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 export default function V1Family() {
-  const [trackingNumber, setTrackingNumber] = useState('');
+  const [trackingNumber, setTrackingNumber] = useState('5725497746660201');
   const navigate = useNavigate();
 
   const handleSubmit = (e: React.FormEvent) => {
