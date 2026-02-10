@@ -1,4 +1,5 @@
 import { useParams, useNavigate } from 'react-router-dom';
+import { QRCodeSVG } from 'qrcode.react';
 
 const STATUSES = [
   'Preparing for transport',
@@ -104,8 +105,21 @@ export default function V1Status() {
           ))}
         </div>
 
+        {/* QR Code */}
+        <div className="flex flex-col items-center mt-8 mb-6">
+          <div className="bg-white p-3 rounded-lg">
+            <QRCodeSVG
+              value={`${window.location.origin}/v1/status/${id}`}
+              size={120}
+              bgColor="#ffffff"
+              fgColor="#0f1724"
+            />
+          </div>
+          <p className="mt-2 text-xs text-[hsl(215,20%,55%)]">Scan to share this tracking page</p>
+        </div>
+
         {/* Footer note */}
-        <p className="mt-8 text-xs text-[hsl(215,20%,45%)] text-center">
+        <p className="text-xs text-[hsl(215,20%,45%)] text-center">
           Status updates are provided as soon as information becomes available. Timing may change due to care or operational needs.
         </p>
       </div>
