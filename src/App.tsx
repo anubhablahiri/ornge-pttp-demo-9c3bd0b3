@@ -50,6 +50,7 @@ const App = () => (
 
             {/* V1 routes */}
             <Route path="/v1" element={<V1Home />} />
+            <Route path="/v1/family" element={<V1Family />} />
             <Route path="/v1/status/:id" element={<V1Status />} />
             <Route path="/v1/admin" element={<V1Admin />} />
             <Route path="/v1/faq" element={<V1FAQ />} />
