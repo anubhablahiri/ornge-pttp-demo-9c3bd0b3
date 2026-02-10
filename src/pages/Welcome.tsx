@@ -43,7 +43,7 @@ export default function Welcome() {
 
   const handlePortalSelect = (choice: PortalChoice) => {
     if (choice === 'operations') {
-      navigate('/admin-login');
+      navigate('/v3/admin-login');
     } else {
       setPortal(choice);
     }
