@@ -31,7 +31,7 @@ export default function V1Status() {
     <div className="min-h-screen bg-[hsl(220,20%,8%)] text-white p-6">
       <div className="max-w-5xl mx-auto">
         {/* Header */}
-        <div className="flex items-center justify-between mb-6">
+        <div className="flex items-center justify-between mb-4">
           <h1 className="text-2xl font-bold">
             Family Portal<span className="text-[hsl(22,90%,54%)]">.</span>
           </h1>
@@ -41,6 +41,19 @@ export default function V1Status() {
           >
             Change Tracking #
           </button>
+        </div>
+
+        {/* QR Code - centered at top */}
+        <div className="flex flex-col items-center mb-6">
+          <div className="bg-white p-3 rounded-lg">
+            <QRCodeSVG
+              value={`${window.location.origin}/v1/status/${id}`}
+              size={120}
+              bgColor="#ffffff"
+              fgColor="#0f1724"
+            />
+          </div>
+          <p className="mt-2 text-xs text-[hsl(215,20%,55%)]">Scan to share this tracking page</p>
         </div>
 
         {/* Info pills row */}
