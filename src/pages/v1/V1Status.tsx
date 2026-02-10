@@ -1,4 +1,5 @@
 import { useParams, useNavigate } from 'react-router-dom';
+import { QRCodeSVG } from 'qrcode.react';
 
 const STATUSES = [
   'Preparing for transport',
