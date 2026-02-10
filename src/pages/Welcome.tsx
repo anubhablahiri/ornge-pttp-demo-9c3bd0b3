@@ -70,7 +70,12 @@ export default function Welcome() {
         <div className="absolute inset-0 bg-gradient-to-b from-black/30 via-transparent to-[#0a1628]" />
 
         <div className="absolute top-0 left-0 right-0 z-10 sm:hidden bg-white px-5 py-3 flex items-center justify-between">
-          <img src={orngeLogo} alt="Ornge" className="h-9" />
+          <div className="flex items-center gap-3">
+            <button onClick={() => navigate('/')} className="text-[hsl(224,70%,35%)] hover:text-[hsl(22,90%,54%)] transition-colors">
+              <ChevronLeft className="w-5 h-5" />
+            </button>
+            <img src={orngeLogo} alt="Ornge" className="h-9" />
+          </div>
           <LanguageToggle />
         </div>
         <div className="absolute top-0 left-0 right-0 z-10 hidden sm:flex items-center justify-between px-6 py-5">
