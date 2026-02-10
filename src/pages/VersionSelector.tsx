@@ -15,10 +15,9 @@ const versions = [
     id: 'v2',
     title: 'Version 2',
     subtitle: 'Enhanced Portal',
-    description: 'Coming soon — improved design with additional features and refined UX.',
+    description: 'Refined card-based UI with 7-stage timeline, real-time notifications, and QR sharing. Light theme.',
     path: '/v2',
-    status: 'Coming Soon',
-    disabled: true,
+    status: 'Complete',
   },
   {
     id: 'v3',
@@ -58,13 +57,8 @@ export default function VersionSelector() {
           {versions.map((v) => (
             <button
               key={v.id}
-              disabled={v.disabled}
               onClick={() => navigate(v.path)}
-              className={`group relative text-left rounded-2xl border p-6 transition-all duration-200 ${
-                v.disabled
-                  ? 'border-[hsl(220,13%,91%)] opacity-50 cursor-not-allowed'
-                  : 'border-[hsl(220,13%,91%)] hover:border-[hsl(22,90%,54%)] hover:shadow-[0_0_30px_-10px_hsl(22,90%,54%/0.25)] cursor-pointer'
-              } bg-white`}
+              className="group relative text-left rounded-2xl border p-6 transition-all duration-200 border-[hsl(220,13%,91%)] hover:border-[hsl(22,90%,54%)] hover:shadow-[0_0_30px_-10px_hsl(22,90%,54%/0.25)] cursor-pointer bg-white"
             >
               {/* Status badge */}
               <span
@@ -83,11 +77,9 @@ export default function VersionSelector() {
               <p className="text-sm text-[hsl(22,90%,54%)] font-medium mb-3">{v.subtitle}</p>
               <p className="text-sm text-[hsl(215,16%,47%)] leading-relaxed">{v.description}</p>
 
-              {!v.disabled && (
-                <div className="mt-5 text-sm font-semibold text-[hsl(22,90%,54%)] group-hover:translate-x-1 transition-transform">
-                  Explore →
-                </div>
-              )}
+              <div className="mt-5 text-sm font-semibold text-[hsl(22,90%,54%)] group-hover:translate-x-1 transition-transform">
+                Explore →
+              </div>
             </button>
           ))}
         </div>

@@ -18,6 +18,10 @@ import V1Family from "./pages/v1/V1Family";
 import V1Status from "./pages/v1/V1Status";
 import V1Admin from "./pages/v1/V1Admin";
 import V1FAQ from "./pages/v1/V1FAQ";
+import V2Home from "./pages/v2/V2Home";
+import V2Family from "./pages/v2/V2Family";
+import V2Status from "./pages/v2/V2Status";
+import V2Admin from "./pages/v2/V2Admin";
 
 const queryClient = new QueryClient();
 
@@ -54,6 +58,12 @@ const App = () => (
             <Route path="/v1/status/:id" element={<V1Status />} />
             <Route path="/v1/admin" element={<V1Admin />} />
             <Route path="/v1/faq" element={<V1FAQ />} />
+
+            {/* V2 routes */}
+            <Route path="/v2" element={<V2Home />} />
+            <Route path="/v2/family" element={<V2Family />} />
+            <Route path="/v2/status/:id" element={<V2Status />} />
+            <Route path="/v2/admin" element={<V2Admin />} />
 
             {/* V3 routes (current full platform) */}
             <Route path="/v3" element={<Welcome />} />
