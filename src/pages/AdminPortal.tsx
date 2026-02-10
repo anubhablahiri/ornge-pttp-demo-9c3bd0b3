@@ -32,7 +32,7 @@ export default function AdminPortal() {
       <header className="sticky top-0 z-50 bg-secondary text-secondary-foreground border-b border-border">
         <div className="max-w-[95vw] mx-auto px-6 py-3 flex items-center justify-between">
           <div className="flex items-center gap-4">
-            <Link to="/" className="p-1.5 rounded-lg hover:bg-secondary/80 transition-colors">
+            <Link to="/v3" className="p-1.5 rounded-lg hover:bg-secondary/80 transition-colors">
               <ArrowLeft className="h-5 w-5" />
             </Link>
             <img src={orngeLogo} alt="Ornge" className="h-8 brightness-0 invert" />

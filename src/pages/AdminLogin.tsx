@@ -17,7 +17,7 @@ export default function AdminLogin() {
     e.preventDefault();
     setLoading(true);
     setTimeout(() => {
-      navigate('/admin');
+      navigate('/v3/admin');
     }, 800);
   };
 
@@ -106,7 +106,7 @@ export default function AdminLogin() {
         </div>
 
         <Link
-          to="/"
+          to="/v3"
           className="flex items-center justify-center gap-1.5 mt-5 text-sm text-muted-foreground hover:text-foreground transition-colors"
         >
           <ArrowLeft className="h-4 w-4" />

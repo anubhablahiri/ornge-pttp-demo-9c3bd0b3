@@ -12,9 +12,9 @@ import { useApp } from '@/lib/i18n';
 import LanguageToggle from '@/components/LanguageToggle';
 
 function getTrackPrefix(format: string) {
-  if (format === 'desktop') return '/desktop';
-  if (format === 'tablet') return '/tablet';
-  return '';
+  if (format === 'desktop') return '/v3/desktop';
+  if (format === 'tablet') return '/v3/tablet';
+  return '/v3';
 }
 
 export default function Login() {
@@ -119,7 +119,7 @@ export default function Login() {
         </p>
 
         {(deviceFormat !== 'mobile' || (typeof window !== 'undefined' && window.innerWidth >= 1024)) && (
-          <Link to="/platform" className="flex items-center justify-center gap-1.5 mt-4 text-sm text-muted-foreground hover:text-foreground transition-colors">
+          <Link to="/v3/platform" className="flex items-center justify-center gap-1.5 mt-4 text-sm text-muted-foreground hover:text-foreground transition-colors">
             <ArrowLeft className="h-4 w-4" />
             {t('login.backPlatform')}
           </Link>

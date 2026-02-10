@@ -12,6 +12,11 @@ import NotFound from "./pages/NotFound";
 import AdminPortal from "./pages/AdminPortal";
 import AdminLogin from "./pages/AdminLogin";
 import DeviceFrame from "./components/DeviceFrame";
+import VersionSelector from "./pages/VersionSelector";
+import V1Home from "./pages/v1/V1Home";
+import V1Status from "./pages/v1/V1Status";
+import V1Admin from "./pages/v1/V1Admin";
+import V1FAQ from "./pages/v1/V1FAQ";
 
 const queryClient = new QueryClient();
 
@@ -39,14 +44,25 @@ const App = () => (
         <Sonner />
         <BrowserRouter>
           <Routes>
-            <Route path="/" element={<Welcome />} />
-            <Route path="/platform" element={<FormatSelector />} />
-            <Route path="/login" element={<FramedLogin />} />
-            <Route path="/track/:id" element={<FramedDashboard />} />
-            <Route path="/tablet/track/:id" element={<FramedDashboard />} />
-            <Route path="/desktop/track/:id" element={<Dashboard />} />
-            <Route path="/admin-login" element={<AdminLogin />} />
-            <Route path="/admin" element={<AdminPortal />} />
+            {/* Version selector */}
+            <Route path="/" element={<VersionSelector />} />
+
+            {/* V1 routes */}
+            <Route path="/v1" element={<V1Home />} />
+            <Route path="/v1/status/:id" element={<V1Status />} />
+            <Route path="/v1/admin" element={<V1Admin />} />
+            <Route path="/v1/faq" element={<V1FAQ />} />
+
+            {/* V3 routes (current full platform) */}
+            <Route path="/v3" element={<Welcome />} />
+            <Route path="/v3/platform" element={<FormatSelector />} />
+            <Route path="/v3/login" element={<FramedLogin />} />
+            <Route path="/v3/track/:id" element={<FramedDashboard />} />
+            <Route path="/v3/tablet/track/:id" element={<FramedDashboard />} />
+            <Route path="/v3/desktop/track/:id" element={<Dashboard />} />
+            <Route path="/v3/admin-login" element={<AdminLogin />} />
+            <Route path="/v3/admin" element={<AdminPortal />} />
+
             <Route path="*" element={<NotFound />} />
           </Routes>
         </BrowserRouter>
