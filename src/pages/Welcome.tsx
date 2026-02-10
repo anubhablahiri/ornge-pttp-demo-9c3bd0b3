@@ -79,7 +79,12 @@ export default function Welcome() {
           <LanguageToggle />
         </div>
         <div className="absolute top-0 left-0 right-0 z-10 hidden sm:flex items-center justify-between px-6 py-5">
-          <img src={orngeLogoWhite} alt="Ornge" className="h-10" />
+          <div className="flex items-center gap-3">
+            <button onClick={() => navigate('/')} className="text-white/70 hover:text-white transition-colors">
+              <ChevronLeft className="w-5 h-5" />
+            </button>
+            <img src={orngeLogoWhite} alt="Ornge" className="h-10" />
+          </div>
           <LanguageToggle />
         </div>
       </div>
