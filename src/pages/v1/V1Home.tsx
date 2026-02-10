@@ -25,6 +25,13 @@ export default function V1Home() {
             Admin Portal
           </button>
         </div>
+
+          <button
+            onClick={() => navigate('/')}
+            className="mt-8 text-sm text-[hsl(215,20%,55%)] hover:text-white transition-colors"
+          >
+            ← Back to Version Selection
+          </button>
       </div>
     </div>
   );
