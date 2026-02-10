@@ -1,7 +1,7 @@
 import { useNavigate, useLocation } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
-import { Plane, Truck, Activity, Users, ArrowLeft } from 'lucide-react';
+import { Plane, Truck, Activity, Users, ArrowLeft, ChevronLeft } from 'lucide-react';
 import orngeLogo from '@/assets/ornge-logo.png';
 import orngeLogoWhite from '@/assets/ornge-logo-white.png';
 import heroBanner from '@/assets/hero-banner.png';
