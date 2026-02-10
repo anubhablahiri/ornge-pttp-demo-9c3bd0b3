@@ -81,7 +81,6 @@ export default function VersionSelector() {
                 Explore →
               </div>
             </button>
-            </button>
           ))}
         </div>
       </main>
