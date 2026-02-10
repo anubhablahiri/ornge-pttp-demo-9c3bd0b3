@@ -14,6 +14,7 @@ import AdminLogin from "./pages/AdminLogin";
 import DeviceFrame from "./components/DeviceFrame";
 import VersionSelector from "./pages/VersionSelector";
 import V1Home from "./pages/v1/V1Home";
+import V1Family from "./pages/v1/V1Family";
 import V1Status from "./pages/v1/V1Status";
 import V1Admin from "./pages/v1/V1Admin";
 import V1FAQ from "./pages/v1/V1FAQ";
@@ -49,6 +50,7 @@ const App = () => (
 
             {/* V1 routes */}
             <Route path="/v1" element={<V1Home />} />
+            <Route path="/v1/family" element={<V1Family />} />
             <Route path="/v1/status/:id" element={<V1Status />} />
             <Route path="/v1/admin" element={<V1Admin />} />
             <Route path="/v1/faq" element={<V1FAQ />} />
