@@ -19,7 +19,7 @@ export default function FormatSelector() {
 
   const handleSelect = (format: DeviceFormat) => {
     setDeviceFormat(format);
-    navigate('/login');
+    navigate('/v3/login');
   };
 
   return (
