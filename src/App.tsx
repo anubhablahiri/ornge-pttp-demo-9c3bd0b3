@@ -59,6 +59,12 @@ const App = () => (
             <Route path="/v1/admin" element={<V1Admin />} />
             <Route path="/v1/faq" element={<V1FAQ />} />
 
+            {/* V2 routes */}
+            <Route path="/v2" element={<V2Home />} />
+            <Route path="/v2/family" element={<V2Family />} />
+            <Route path="/v2/status/:id" element={<V2Status />} />
+            <Route path="/v2/admin" element={<V2Admin />} />
+
             {/* V3 routes (current full platform) */}
             <Route path="/v3" element={<Welcome />} />
             <Route path="/v3/platform" element={<FormatSelector />} />

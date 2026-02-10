@@ -15,10 +15,9 @@ const versions = [
     id: 'v2',
     title: 'Version 2',
     subtitle: 'Enhanced Portal',
-    description: 'Coming soon — improved design with additional features and refined UX.',
+    description: 'Refined card-based UI with 7-stage timeline, real-time notifications, and QR sharing. Light theme.',
     path: '/v2',
-    status: 'Coming Soon',
-    disabled: true,
+    status: 'Complete',
   },
   {
     id: 'v3',
