@@ -35,15 +35,15 @@ export default function Welcome() {
   const handleModeSelect = (mode: 'air' | 'land') => {
     sessionStorage.setItem('transportMode', mode);
     if (isMobileDevice) {
-      navigate('/login');
+      navigate('/v3/login');
     } else {
-      navigate('/platform');
+      navigate('/v3/platform');
     }
   };
 
   const handlePortalSelect = (choice: PortalChoice) => {
     if (choice === 'operations') {
-      navigate('/admin-login');
+      navigate('/v3/admin-login');
     } else {
       setPortal(choice);
     }
