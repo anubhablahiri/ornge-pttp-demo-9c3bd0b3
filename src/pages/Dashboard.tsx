@@ -40,7 +40,7 @@ export default function Dashboard() {
     if (found) {
       setTransport({ ...found });
     } else {
-      navigate('/');
+      navigate('/v3');
     }
   }, [id, navigate]);
 
