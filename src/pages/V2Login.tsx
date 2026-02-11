@@ -95,11 +95,11 @@ export default function V2Login() {
         </div>
 
         <Link
-          to="/versions"
+          to="/v2"
           className="flex items-center justify-center gap-1.5 mt-6 text-sm text-muted-foreground hover:text-foreground transition-colors"
         >
           <ArrowLeft className="h-4 w-4" />
-          Back to Version Selection
+          Back to Portal Selection
         </Link>
       </motion.div>
     </div>

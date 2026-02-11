@@ -92,11 +92,11 @@ export default function V1Login() {
         </div>
 
         <Link
-          to="/versions"
+          to="/v1"
           className="flex items-center justify-center gap-1.5 mt-6 text-sm text-[hsl(215,20%,65%)] hover:text-[hsl(210,40%,96%)] transition-colors"
         >
           <ArrowLeft className="h-4 w-4" />
-          Back to Version Selection
+          Back to Portal Selection
         </Link>
       </motion.div>
     </div>
