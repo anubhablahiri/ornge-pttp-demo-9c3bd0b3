@@ -17,7 +17,7 @@ export default function AdminLogin() {
     e.preventDefault();
     setLoading(true);
     setTimeout(() => {
-      navigate('/admin');
+      navigate('/v3/admin');
     }, 800);
   };
 
