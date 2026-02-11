@@ -12,9 +12,9 @@ import { useApp } from '@/lib/i18n';
 import LanguageToggle from '@/components/LanguageToggle';
 
 function getTrackPrefix(format: string) {
-  if (format === 'desktop') return '/desktop';
-  if (format === 'tablet') return '/tablet';
-  return '';
+  if (format === 'desktop') return '/v3/desktop';
+  if (format === 'tablet') return '/v3/tablet';
+  return '/v3';
 }
 
 export default function Login() {
