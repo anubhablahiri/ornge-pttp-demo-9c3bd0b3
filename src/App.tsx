@@ -4,6 +4,8 @@ import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { AppProvider } from "@/lib/i18n";
+import GateLogin from "./pages/GateLogin";
+import VersionSelector from "./pages/VersionSelector";
 import Welcome from "./pages/Welcome";
 import FormatSelector from "./pages/FormatSelector";
 import Login from "./pages/Login";
@@ -39,7 +41,22 @@ const App = () => (
         <Sonner />
         <BrowserRouter>
           <Routes>
-            <Route path="/" element={<Welcome />} />
+            {/* Gate login */}
+            <Route path="/" element={<GateLogin />} />
+            {/* Version selector */}
+            <Route path="/versions" element={<VersionSelector />} />
+
+            {/* V3 routes (current full platform) */}
+            <Route path="/v3" element={<Welcome />} />
+            <Route path="/v3/platform" element={<FormatSelector />} />
+            <Route path="/v3/login" element={<FramedLogin />} />
+            <Route path="/v3/track/:id" element={<FramedDashboard />} />
+            <Route path="/v3/tablet/track/:id" element={<FramedDashboard />} />
+            <Route path="/v3/desktop/track/:id" element={<Dashboard />} />
+            <Route path="/v3/admin-login" element={<AdminLogin />} />
+            <Route path="/v3/admin" element={<AdminPortal />} />
+
+            {/* Legacy routes kept for compatibility */}
             <Route path="/platform" element={<FormatSelector />} />
             <Route path="/login" element={<FramedLogin />} />
             <Route path="/track/:id" element={<FramedDashboard />} />
@@ -47,6 +64,7 @@ const App = () => (
             <Route path="/desktop/track/:id" element={<Dashboard />} />
             <Route path="/admin-login" element={<AdminLogin />} />
             <Route path="/admin" element={<AdminPortal />} />
+
             <Route path="*" element={<NotFound />} />
           </Routes>
         </BrowserRouter>
