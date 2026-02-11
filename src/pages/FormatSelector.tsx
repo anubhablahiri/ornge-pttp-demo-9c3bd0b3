@@ -88,8 +88,8 @@ export default function FormatSelector() {
             </motion.button>
           ))}
         </div>
-        <button onClick={() => navigate('/v3', { state: { portal: 'family' } })} className="flex items-center justify-center gap-1.5 mt-6 text-sm text-muted-foreground hover:text-foreground transition-colors w-full">
-          <span>← Back to Transport Mode</span>
+        <button onClick={() => navigate('/v3')} className="flex items-center justify-center gap-1.5 mt-6 text-sm text-muted-foreground hover:text-foreground transition-colors w-full">
+          <span>← Back to Portal Selection</span>
         </button>
       </div>
     </div>
