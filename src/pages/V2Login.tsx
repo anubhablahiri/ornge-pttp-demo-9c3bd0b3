@@ -1,25 +1,15 @@
 import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import { Shield, ArrowRight, ArrowLeft } from 'lucide-react';
-import { Link } from 'react-router-dom';
+import { ArrowRight, ArrowLeft, Shield } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
+import { getTransportByRef } from '@/data/mockTransports';
 import orngeLogo from '@/assets/ornge-logo.png';
-import { getTransportByRef, mockTransports } from '@/data/mockTransports';
-import { useApp } from '@/lib/i18n';
-import LanguageToggle from '@/components/LanguageToggle';
 
-function getTrackPrefix(format: string) {
-  if (format === 'desktop') return '/v3/desktop';
-  if (format === 'tablet') return '/v3/tablet';
-  return '/v3';
-}
-
-export default function Login() {
+export default function V2Login() {
   const navigate = useNavigate();
-  const { t, deviceFormat } = useApp();
   const [refNumber, setRefNumber] = useState('ORN-2025-4821');
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
@@ -28,16 +18,16 @@ export default function Login() {
     e.preventDefault();
     setError('');
     if (!refNumber.trim()) {
-      setError(t('login.error.empty'));
+      setError('Please enter a Transport Reference ID.');
       return;
     }
     setLoading(true);
     setTimeout(() => {
       const transport = getTransportByRef(refNumber);
       if (transport) {
-        navigate(`${getTrackPrefix(deviceFormat)}/track/${transport.id}`);
+        navigate(`/v2/track/${transport.id}`);
       } else {
-        setError(t('login.error.notFound'));
+        setError('Transport not found. Please check your reference number.');
       }
       setLoading(false);
     }, 800);
@@ -45,17 +35,12 @@ export default function Login() {
 
   return (
     <div className="min-h-screen flex flex-col items-center justify-center bg-background px-4">
-      <div className="absolute top-4 right-4">
-        <LanguageToggle />
-      </div>
-
       <motion.div
-        className="w-full max-w-md"
+        className="w-full max-w-sm"
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5 }}
       >
-        {/* Logo & Title */}
         <div className="flex flex-col items-center mb-8">
           <motion.img
             src={orngeLogo}
@@ -63,30 +48,28 @@ export default function Login() {
             className="h-14 mb-4"
             initial={{ opacity: 0, scale: 0.9 }}
             animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.5 }}
           />
-          <h1 className="text-2xl md:text-3xl font-display font-bold text-center text-foreground">
-            {t('login.title')}
+          <h1 className="text-2xl font-bold text-center text-foreground">
+            Family Transport Tracking
           </h1>
-          <p className="mt-2 text-sm text-muted-foreground text-center max-w-xs">
-            {t('login.subtitle')}
+          <p className="mt-2 text-sm text-muted-foreground text-center">
+            Version 2 — Card-Based Light Theme
           </p>
         </div>
 
-        {/* Login card */}
         <div className="bg-card rounded-2xl shadow-lg p-6 border border-border">
           <div className="flex items-center gap-2 mb-5">
             <Shield className="h-4 w-4 text-primary" />
-            <span className="text-xs text-muted-foreground">{t('login.secure')}</span>
+            <span className="text-xs text-muted-foreground">Secure & Encrypted</span>
           </div>
 
           <form onSubmit={handleSubmit} className="space-y-4">
             <div className="space-y-1.5">
-              <Label htmlFor="ref" className="text-sm font-medium">
-                {t('login.ref')}
+              <Label htmlFor="v2-ref" className="text-sm font-medium">
+                Transport Reference ID
               </Label>
               <Input
-                id="ref"
+                id="v2-ref"
                 placeholder="e.g. ORN-2025-4821"
                 value={refNumber}
                 onChange={(e) => setRefNumber(e.target.value)}
@@ -100,28 +83,24 @@ export default function Login() {
               {loading ? (
                 <span className="flex items-center gap-2">
                   <span className="h-4 w-4 border-2 border-primary-foreground/30 border-t-primary-foreground rounded-full animate-spin" />
-                  {t('login.verifying')}
+                  Verifying...
                 </span>
               ) : (
                 <span className="flex items-center gap-2">
-                  {t('login.track')} <ArrowRight className="h-4 w-4" />
+                  Track Transport <ArrowRight className="h-4 w-4" />
                 </span>
               )}
             </Button>
           </form>
-
         </div>
 
-        <p className="text-xs text-muted-foreground text-center mt-5 px-4">
-          {t('login.privacy')}
-        </p>
-
-        {(deviceFormat !== 'mobile' || (typeof window !== 'undefined' && window.innerWidth >= 1024)) && (
-          <Link to="/v3/platform" className="flex items-center justify-center gap-1.5 mt-4 text-sm text-muted-foreground hover:text-foreground transition-colors">
-            <ArrowLeft className="h-4 w-4" />
-            {t('login.backPlatform')}
-          </Link>
-        )}
+        <Link
+          to="/v2"
+          className="flex items-center justify-center gap-1.5 mt-6 text-sm text-muted-foreground hover:text-foreground transition-colors"
+        >
+          <ArrowLeft className="h-4 w-4" />
+          Back to Portal Selection
+        </Link>
       </motion.div>
     </div>
   );

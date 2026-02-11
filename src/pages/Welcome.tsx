@@ -1,7 +1,7 @@
-import { useNavigate, useLocation } from 'react-router-dom';
+import { useNavigate, useLocation, Link } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
-import { Plane, Truck, Activity, Users, ArrowLeft, ChevronLeft } from 'lucide-react';
+import { Plane, Truck, Activity, Users, ArrowLeft } from 'lucide-react';
 import orngeLogo from '@/assets/ornge-logo.png';
 import orngeLogoWhite from '@/assets/ornge-logo-white.png';
 import heroBanner from '@/assets/hero-banner.png';
@@ -70,21 +70,11 @@ export default function Welcome() {
         <div className="absolute inset-0 bg-gradient-to-b from-black/30 via-transparent to-[#0a1628]" />
 
         <div className="absolute top-0 left-0 right-0 z-10 sm:hidden bg-white px-5 py-3 flex items-center justify-between">
-          <div className="flex items-center gap-3">
-            <button onClick={() => navigate('/')} className="text-[hsl(224,70%,35%)] hover:text-[hsl(22,90%,54%)] transition-colors">
-              <ChevronLeft className="w-5 h-5" />
-            </button>
-            <img src={orngeLogo} alt="Ornge" className="h-9" />
-          </div>
+          <img src={orngeLogo} alt="Ornge" className="h-9" />
           <LanguageToggle />
         </div>
         <div className="absolute top-0 left-0 right-0 z-10 hidden sm:flex items-center justify-between px-6 py-5">
-          <div className="flex items-center gap-3">
-            <button onClick={() => navigate('/')} className="text-white/70 hover:text-white transition-colors">
-              <ChevronLeft className="w-5 h-5" />
-            </button>
-            <img src={orngeLogoWhite} alt="Ornge" className="h-10" />
-          </div>
+          <img src={orngeLogoWhite} alt="Ornge" className="h-10" />
           <LanguageToggle />
         </div>
       </div>
@@ -130,7 +120,7 @@ export default function Welcome() {
                 <div className="w-16 h-16 rounded-full bg-primary flex items-center justify-center group-hover:bg-primary/90 transition-colors">
                   <Users className="h-8 w-8 text-primary-foreground" />
                 </div>
-                <span className="text-lg font-display font-bold text-foreground">Patient Transport Tracking</span>
+                <span className="text-lg font-display font-bold text-foreground">Family Transport Tracking</span>
                 <span className="text-xs text-muted-foreground text-center">Track your loved one's transport journey in real-time</span>
               </motion.button>
 
@@ -179,8 +169,8 @@ export default function Welcome() {
                 whileHover={{ scale: 1.02 }}
                 whileTap={{ scale: 0.98 }}
               >
-                <div className="w-16 h-16 rounded-full bg-primary flex items-center justify-center group-hover:bg-primary/90 transition-colors">
-                  <Plane className="h-8 w-8 text-primary-foreground" />
+                <div className="w-16 h-16 rounded-full bg-secondary flex items-center justify-center group-hover:bg-secondary/90 transition-colors">
+                  <Plane className="h-8 w-8 text-secondary-foreground" />
                 </div>
                 <span className="text-lg font-display font-bold text-foreground">{t('welcome.air')}</span>
                 <span className="text-xs text-muted-foreground text-center">{t('welcome.airDesc')}</span>
@@ -192,8 +182,8 @@ export default function Welcome() {
                 whileHover={{ scale: 1.02 }}
                 whileTap={{ scale: 0.98 }}
               >
-                <div className="w-16 h-16 rounded-full bg-primary flex items-center justify-center group-hover:bg-primary/90 transition-colors">
-                  <Truck className="h-8 w-8 text-primary-foreground" />
+                <div className="w-16 h-16 rounded-full bg-secondary flex items-center justify-center group-hover:bg-secondary/90 transition-colors">
+                  <Truck className="h-8 w-8 text-secondary-foreground" />
                 </div>
                 <span className="text-lg font-display font-bold text-foreground">{t('welcome.land')}</span>
                 <span className="text-xs text-muted-foreground text-center">{t('welcome.landDesc')}</span>
@@ -202,7 +192,15 @@ export default function Welcome() {
           </motion.div>
         )}
 
-        <p className="text-[11px] text-muted-foreground/50 text-center mt-10">
+        <Link
+          to="/versions"
+          className="flex items-center justify-center gap-1.5 mt-8 text-sm text-muted-foreground hover:text-foreground transition-colors"
+        >
+          <ArrowLeft className="h-4 w-4" />
+          Back to Version Selection
+        </Link>
+
+        <p className="text-[11px] text-muted-foreground/50 text-center mt-4">
           © {new Date().getFullYear()} Ornge. {t('welcome.footer')}
         </p>
       </div>

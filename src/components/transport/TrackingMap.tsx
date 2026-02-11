@@ -31,22 +31,9 @@ const makeIcon = (color: string, size: number, pulse = false) =>
     iconAnchor: [size / 2, size / 2],
   });
 
-const originIcon = makeIcon('#1c4599', 24);
-const destIcon = makeIcon('#16a34a', 24);
-
-const vehicleIconAir = new L.DivIcon({
-  className: '',
-  html: `<div style="
-    width:36px;height:36px;
-    background:#ea580c;border:3px solid white;border-radius:50%;
-    box-shadow:0 2px 8px rgba(0,0,0,0.3);
-    display:flex;align-items:center;justify-content:center;
-    animation:tml-pulse 2s infinite;
-  "><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="white" stroke="none"><path d="M21 16v-2l-8-5V3.5a1.5 1.5 0 0 0-3 0V9l-8 5v2l8-2.5V19l-2 1.5V22l3.5-1 3.5 1v-1.5L13 19v-5.5l8 2.5z"/></svg></div>
-  <style>@keyframes tml-pulse{0%,100%{transform:scale(1);opacity:1}50%{transform:scale(1.3);opacity:0.7}}</style>`,
-  iconSize: [36, 36],
-  iconAnchor: [18, 18],
-});
+const originIcon = makeIcon('#16a34a', 24);
+const destIcon = makeIcon('#dc2626', 24);
+const vehicleIconAir = makeIcon('#ea580c', 28, true);
 const vehicleIconLand = makeIcon('#ea580c', 28, true);
 
 function FitBounds({ points }: { points: [number, number][] }) {
@@ -111,7 +98,7 @@ export default function TrackingMap({ transport }: Props) {
           {/* Full route (dashed) */}
           <Polyline
             positions={routePath}
-            pathOptions={{ color: '#ea580c', weight: 2, opacity: 0.5, dashArray: '8 8' }}
+            pathOptions={{ color: '#94a3b8', weight: 2, opacity: 0.5, dashArray: '8 8' }}
           />
 
           {/* Completed portion (solid) */}
@@ -133,11 +120,11 @@ export default function TrackingMap({ transport }: Props) {
       {/* Legend */}
       <div className="px-5 py-3 flex flex-wrap items-center gap-4 text-[11px] text-muted-foreground border-t border-border">
         <span className="flex items-center gap-1.5">
-          <span className="w-2.5 h-2.5 rounded-full inline-block shrink-0" style={{ background: '#1c4599' }} />
+          <span className="w-2.5 h-2.5 rounded-full bg-green-600 inline-block shrink-0" />
           {lang === 'en' ? 'Origin' : 'Origine'}
         </span>
         <span className="flex items-center gap-1.5">
-          <span className="w-2.5 h-2.5 rounded-full bg-green-600 inline-block shrink-0" />
+          <span className="w-2.5 h-2.5 rounded-full bg-red-600 inline-block shrink-0" />
           {lang === 'en' ? 'Destination' : 'Destination'}
         </span>
         {current && !complete && (
