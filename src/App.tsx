@@ -6,6 +6,10 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { AppProvider } from "@/lib/i18n";
 import GateLogin from "./pages/GateLogin";
 import VersionSelector from "./pages/VersionSelector";
+import V1Login from "./pages/V1Login";
+import V1Dashboard from "./pages/V1Dashboard";
+import V2Login from "./pages/V2Login";
+import V2Dashboard from "./pages/V2Dashboard";
 import Welcome from "./pages/Welcome";
 import FormatSelector from "./pages/FormatSelector";
 import Login from "./pages/Login";
@@ -45,6 +49,14 @@ const App = () => (
             <Route path="/" element={<GateLogin />} />
             {/* Version selector */}
             <Route path="/versions" element={<VersionSelector />} />
+
+            {/* V1 routes */}
+            <Route path="/v1" element={<V1Login />} />
+            <Route path="/v1/track/:id" element={<V1Dashboard />} />
+
+            {/* V2 routes */}
+            <Route path="/v2" element={<V2Login />} />
+            <Route path="/v2/track/:id" element={<V2Dashboard />} />
 
             {/* V3 routes (current full platform) */}
             <Route path="/v3" element={<Welcome />} />
