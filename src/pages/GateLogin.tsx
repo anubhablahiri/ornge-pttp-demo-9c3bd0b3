@@ -6,8 +6,8 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 
-const VALID_USERNAME = 'ornge';
-const VALID_PASSWORD = 'demo2025';
+const VALID_USERNAME = 'adminacount';
+const VALID_PASSWORD = 'alvar@1234!';
 
 export default function GateLogin() {
   const navigate = useNavigate();
