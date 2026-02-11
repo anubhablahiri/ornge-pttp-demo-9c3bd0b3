@@ -192,7 +192,15 @@ export default function Welcome() {
           </motion.div>
         )}
 
-        <p className="text-[11px] text-muted-foreground/50 text-center mt-10">
+        <Link
+          to="/versions"
+          className="flex items-center justify-center gap-1.5 mt-8 text-sm text-muted-foreground hover:text-foreground transition-colors"
+        >
+          <ArrowLeft className="h-4 w-4" />
+          Back to Version Selection
+        </Link>
+
+        <p className="text-[11px] text-muted-foreground/50 text-center mt-4">
           © {new Date().getFullYear()} Ornge. {t('welcome.footer')}
         </p>
       </div>
