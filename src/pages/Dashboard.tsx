@@ -23,8 +23,8 @@ export default function Dashboard() {
   const { t, setDeviceFormat } = useApp();
 
   // Derive device format from URL prefix
-  const urlFormat = location.pathname.startsWith('/desktop/') ? 'desktop'
-    : location.pathname.startsWith('/tablet/') ? 'tablet'
+  const urlFormat = location.pathname.includes('/desktop/') ? 'desktop'
+    : location.pathname.includes('/tablet/') ? 'tablet'
     : 'mobile';
   const deviceFormat = urlFormat;
 
