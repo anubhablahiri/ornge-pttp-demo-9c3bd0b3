@@ -16,7 +16,7 @@ export default function VersionSelector() {
     {
       id: 'v1',
       label: 'Version 1',
-      subtitle: 'Basic Dark Theme',
+      subtitle: 'Basic Tracker',
       description: 'Minimal dark UI with horizontal timeline, special message box, and QR sharing.',
       icon: Smartphone,
       path: '/v1',
