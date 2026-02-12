@@ -14,7 +14,7 @@ const VALID_CREDENTIALS: Record<string, string> = {
 };
 
 const MAX_ATTEMPTS = 3;
-const COOLDOWN_SECONDS = 30;
+const COOLDOWN_SECONDS = 300;
 
 export default function GateLogin() {
   const navigate = useNavigate();
