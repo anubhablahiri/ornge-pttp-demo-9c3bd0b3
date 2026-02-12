@@ -5,11 +5,13 @@ import { useApp } from '@/lib/i18n';
 
 interface Props {
   transport: Transport;
+  nickname?: string;
 }
 
-export default function TransportHeader({ transport }: Props) {
+export default function TransportHeader({ transport, nickname }: Props) {
   const { t } = useApp();
   const ModeIcon = transport.mode === 'air' ? Plane : Truck;
+  const displayName = nickname || transport.patientFirstName;
 
   return (
     <div className="bg-card rounded-xl border border-border p-5 shadow-sm">
@@ -19,7 +21,7 @@ export default function TransportHeader({ transport }: Props) {
             {transport.referenceId}
           </p>
           <h2 className="text-xl font-display font-bold text-foreground mt-0.5">
-            {transport.patientFirstName}{t('dash.transport')}
+            {displayName}{t('dash.transport')}
           </h2>
         </div>
         <div className="flex items-center gap-1.5 bg-primary/10 text-primary rounded-full px-3 py-1.5">

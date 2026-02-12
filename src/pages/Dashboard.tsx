@@ -22,6 +22,7 @@ export default function Dashboard() {
   const navigate = useNavigate();
   const location = useLocation();
   const { t, setDeviceFormat } = useApp();
+  const nickname = (location.state as any)?.nickname as string | undefined;
 
   // Derive device format from URL prefix
   const urlFormat = location.pathname.includes('/desktop/') ? 'desktop'
@@ -99,7 +100,7 @@ export default function Dashboard() {
             <div className="space-y-4">
               {/* Top row: Header + ETA — same column ratio as below */}
               <div className="grid gap-4" style={{ gridTemplateColumns: '2fr 1fr' }}>
-                <motion.div {...anim(0)}><TransportHeader transport={transport} /></motion.div>
+                <motion.div {...anim(0)}><TransportHeader transport={transport} nickname={nickname} /></motion.div>
                 <motion.div {...anim(0.05)} className="flex"><ETADisplay transport={transport} className="flex-1" /></motion.div>
               </div>
 
@@ -127,7 +128,7 @@ export default function Dashboard() {
             /* Tablet layout */
             <div className="grid grid-cols-2 gap-4">
               <div className="col-span-2">
-                <motion.div {...anim(0)}><TransportHeader transport={transport} /></motion.div>
+                <motion.div {...anim(0)}><TransportHeader transport={transport} nickname={nickname} /></motion.div>
               </div>
               <div className="col-span-2">
                 <motion.div {...anim(0.05)}><ShareTracking transportId={transport.id} /></motion.div>
@@ -151,7 +152,7 @@ export default function Dashboard() {
         ) : (
           /* Mobile layout (original) */
           <div className="space-y-4">
-            <motion.div {...anim(0)}><TransportHeader transport={transport} /></motion.div>
+            <motion.div {...anim(0)}><TransportHeader transport={transport} nickname={nickname} /></motion.div>
             <motion.div {...anim(0.05)}><ShareTracking transportId={transport.id} /></motion.div>
             <motion.div {...anim(0.1)}><ETADisplay transport={transport} /></motion.div>
             <motion.div {...anim(0.15)}><TrackingMap transport={transport} /></motion.div>
