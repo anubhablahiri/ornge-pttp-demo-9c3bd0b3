@@ -21,6 +21,7 @@ export default function Login() {
   const navigate = useNavigate();
   const { t, deviceFormat } = useApp();
   const [refNumber, setRefNumber] = useState('ORN-2025-4821');
+  const [nickname, setNickname] = useState('Mom');
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
 
@@ -35,7 +36,7 @@ export default function Login() {
     setTimeout(() => {
       const transport = getTransportByRef(refNumber);
       if (transport) {
-        navigate(`${getTrackPrefix(deviceFormat)}/track/${transport.id}`);
+        navigate(`${getTrackPrefix(deviceFormat)}/track/${transport.id}`, { state: { nickname: nickname.trim() || undefined } });
       } else {
         setError(t('login.error.notFound'));
       }
@@ -90,6 +91,19 @@ export default function Login() {
                 placeholder="e.g. ORN-2025-4821"
                 value={refNumber}
                 onChange={(e) => setRefNumber(e.target.value)}
+                className="h-12 rounded-lg"
+                maxLength={30}
+              />
+            </div>
+            <div className="space-y-1.5">
+              <Label htmlFor="nickname" className="text-sm font-medium">
+                {t('login.nickname')}
+              </Label>
+              <Input
+                id="nickname"
+                placeholder={t('login.nicknamePlaceholder')}
+                value={nickname}
+                onChange={(e) => setNickname(e.target.value)}
                 className="h-12 rounded-lg"
                 maxLength={30}
               />
