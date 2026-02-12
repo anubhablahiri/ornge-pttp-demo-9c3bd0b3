@@ -64,7 +64,7 @@ export default function VersionSelector() {
       subtitle: 'Coming Soon',
       description: 'To be determined.',
       features: [
-        'Details pending',
+        'TBD',
       ],
       icon: Rocket,
       path: '',
