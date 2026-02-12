@@ -1,6 +1,7 @@
 import { useState } from 'react';
-import { QrCode, Copy, Share2, Check } from 'lucide-react';
+import { Copy, Share2, Check } from 'lucide-react';
 import { useApp } from '@/lib/i18n';
+import { QRCodeSVG } from 'qrcode.react';
 
 interface ShareTrackingProps {
   transportId: string;
@@ -43,9 +44,9 @@ export default function ShareTracking({ transportId }: ShareTrackingProps) {
       <h3 className="text-sm font-semibold text-foreground mb-4">{t('share.title')}</h3>
 
       <div className="flex items-start gap-4">
-        {/* QR Code placeholder */}
+        {/* QR Code */}
         <div className="bg-white p-3 rounded-xl border border-border shrink-0">
-          <QrCode className="h-16 w-16 text-foreground" />
+          <QRCodeSVG value={trackingUrl} size={64} level="M" includeMargin={false} />
         </div>
 
         <div className="flex-1 min-w-0 space-y-3">
@@ -62,7 +63,7 @@ export default function ShareTracking({ transportId }: ShareTrackingProps) {
               aria-label="Copy link"
             >
               {copied ? (
-                <Check className="h-4 w-4 text-green-600" />
+                <Check className="h-4 w-4 text-success" />
               ) : (
                 <Copy className="h-4 w-4 text-muted-foreground" />
               )}
