@@ -38,7 +38,7 @@ export default function V1FormatSelector() {
           animate={{ opacity: 1 }}
           transition={{ delay: 0.1 }}
         >
-          Version 1 — Basic Tracker
+          Version 1 — Manual data posting of transport data from OCC. No real-time data.
         </motion.h1>
         <motion.p
           className="mt-3 text-lg md:text-xl font-display font-semibold text-primary text-center"

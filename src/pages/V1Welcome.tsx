@@ -24,7 +24,7 @@ export default function V1Welcome() {
         <h1 className="text-2xl font-bold text-foreground mb-1">
           Patient Transport Tracker
         </h1>
-        <p className="text-sm text-muted-foreground mb-2">Version 1 — Basic Tracker</p>
+        <p className="text-sm text-muted-foreground mb-2">Version 1 — Manual data posting of transport data from OCC. No real-time data.</p>
         <p className="text-sm text-muted-foreground mb-10">
           Choose how you'd like to access the system
         </p>
