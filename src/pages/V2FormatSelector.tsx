@@ -38,7 +38,7 @@ export default function V2FormatSelector() {
           animate={{ opacity: 1 }}
           transition={{ delay: 0.1 }}
         >
-          Version 2 — Card-Based Tracker
+          Version 2 — Manual data posting of transport data from OCC with minimum real-time data from Flight Vector.
         </motion.h1>
         <motion.p
           className="mt-3 text-lg md:text-xl font-display font-semibold text-primary text-center"
