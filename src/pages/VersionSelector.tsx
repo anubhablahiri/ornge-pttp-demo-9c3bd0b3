@@ -16,8 +16,14 @@ export default function VersionSelector() {
     {
       id: 'v1',
       label: 'Version 1',
-      subtitle: 'Basic Tracker',
-      description: 'Minimal dark UI with horizontal timeline, special message box, and QR sharing.',
+      subtitle: 'Manual Static Tracker',
+      description: 'Manual data posting of transport data from OCC. No real-time data.',
+      features: [
+        'Horizontal status timeline',
+        'OCC-posted transport updates',
+        'QR code sharing',
+        'Special message box',
+      ],
       icon: Smartphone,
       path: '/v1',
       accent: 'hsl(224, 70%, 35%)',
@@ -25,8 +31,14 @@ export default function VersionSelector() {
     {
       id: 'v2',
       label: 'Version 2',
-      subtitle: 'Card-Based Light',
-      description: 'Clean light theme with vertical timeline, notification feed, and monitoring dashboard.',
+      subtitle: 'Semi-Live Tracker',
+      description: 'Manual data posting of transport data from OCC with minimum real-time data from Flight Vector.',
+      features: [
+        'Vertical status timeline',
+        'Partial Flight Vector integration',
+        'Notification feed',
+        'Monitoring dashboard',
+      ],
       icon: Tablet,
       path: '/v2',
       accent: 'hsl(22, 90%, 54%)',
@@ -34,8 +46,14 @@ export default function VersionSelector() {
     {
       id: 'v3',
       label: 'Version 3',
-      subtitle: 'Full Interactive Platform',
-      description: 'Complete experience with live maps, device frames, and multi-portal selection.',
+      subtitle: 'Real-Time Platform',
+      description: 'Automated real-time data from OCC and Flight Vector.',
+      features: [
+        'Live map tracking',
+        'Full OCC & Flight Vector integration',
+        'Multi-portal selection',
+        'Device-framed previews',
+      ],
       icon: Monitor,
       path: '/v3',
       accent: 'hsl(224, 70%, 35%)',
@@ -44,7 +62,10 @@ export default function VersionSelector() {
       id: 'v4',
       label: 'Version 4',
       subtitle: 'Coming Soon',
-      description: 'Next-generation experience with enhanced analytics, AI-powered insights, and real-time collaboration.',
+      description: 'To be determined.',
+      features: [
+        'Details pending',
+      ],
       icon: Rocket,
       path: '',
       accent: 'hsl(0, 0%, 60%)',
@@ -98,6 +119,14 @@ export default function VersionSelector() {
             <p className="text-xs text-muted-foreground text-center leading-relaxed">
               {v.description}
             </p>
+            <ul className="w-full space-y-1 mt-1">
+              {v.features.map((f, fi) => (
+                <li key={fi} className="flex items-start gap-2 text-xs text-muted-foreground">
+                  <span className="mt-1 h-1 w-1 rounded-full bg-primary/60 shrink-0" />
+                  {f}
+                </li>
+              ))}
+            </ul>
             {v.disabled ? (
               <span className="text-xs font-medium text-muted-foreground">Coming Soon</span>
             ) : (
