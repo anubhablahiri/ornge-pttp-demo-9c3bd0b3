@@ -1,7 +1,7 @@
 import { useNavigate } from 'react-router-dom';
 import { useEffect } from 'react';
 import { motion } from 'framer-motion';
-import { Smartphone, Tablet, Monitor, ArrowRight } from 'lucide-react';
+import { Smartphone, Tablet, Monitor, Rocket, ArrowRight } from 'lucide-react';
 
 export default function VersionSelector() {
   const navigate = useNavigate();
@@ -40,6 +40,16 @@ export default function VersionSelector() {
       path: '/v3',
       accent: 'hsl(224, 70%, 35%)',
     },
+    {
+      id: 'v4',
+      label: 'Version 4',
+      subtitle: 'Coming Soon',
+      description: 'Next-generation experience with enhanced analytics, AI-powered insights, and real-time collaboration.',
+      icon: Rocket,
+      path: '',
+      accent: 'hsl(0, 0%, 60%)',
+      disabled: true,
+    },
   ];
 
   return (
@@ -58,17 +68,22 @@ export default function VersionSelector() {
         </p>
       </motion.div>
 
-      <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 max-w-4xl w-full">
+       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 max-w-5xl w-full">
         {versions.map((v, i) => (
           <motion.button
             key={v.id}
-            onClick={() => navigate(v.path)}
-            className="group bg-card rounded-2xl border-2 border-border hover:border-primary shadow-sm hover:shadow-lg p-8 flex flex-col items-center gap-4 transition-all text-left"
+            onClick={() => !v.disabled && navigate(v.path)}
+            disabled={v.disabled}
+            className={`group bg-card rounded-2xl border-2 shadow-sm p-8 flex flex-col items-center gap-4 transition-all text-left ${
+              v.disabled
+                ? 'border-border opacity-60 cursor-not-allowed'
+                : 'border-border hover:border-primary hover:shadow-lg'
+            }`}
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.15 * i, duration: 0.4 }}
-            whileHover={{ scale: 1.03 }}
-            whileTap={{ scale: 0.98 }}
+            whileHover={v.disabled ? {} : { scale: 1.03 }}
+            whileTap={v.disabled ? {} : { scale: 0.98 }}
           >
             <div
               className="w-14 h-14 rounded-xl flex items-center justify-center transition-colors"
@@ -78,14 +93,18 @@ export default function VersionSelector() {
             </div>
             <div className="text-center">
               <span className="text-lg font-bold text-foreground block">{v.label}</span>
-              <span className="text-xs font-medium text-primary">{v.subtitle}</span>
+              <span className={`text-xs font-medium ${v.disabled ? 'text-muted-foreground' : 'text-primary'}`}>{v.subtitle}</span>
             </div>
             <p className="text-xs text-muted-foreground text-center leading-relaxed">
               {v.description}
             </p>
-            <div className="flex items-center gap-1 text-sm font-medium text-primary opacity-0 group-hover:opacity-100 transition-opacity">
-              Explore <ArrowRight className="h-4 w-4" />
-            </div>
+            {v.disabled ? (
+              <span className="text-xs font-medium text-muted-foreground">Coming Soon</span>
+            ) : (
+              <div className="flex items-center gap-1 text-sm font-medium text-primary opacity-0 group-hover:opacity-100 transition-opacity">
+                Explore <ArrowRight className="h-4 w-4" />
+              </div>
+            )}
           </motion.button>
         ))}
       </div>
