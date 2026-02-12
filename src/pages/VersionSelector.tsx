@@ -1,7 +1,7 @@
 import { useNavigate } from 'react-router-dom';
 import { useEffect } from 'react';
 import { motion } from 'framer-motion';
-import { Smartphone, Tablet, Monitor, Rocket, ArrowRight } from 'lucide-react';
+import { Layers, LayoutGrid, Globe, Rocket, ArrowRight } from 'lucide-react';
 
 export default function VersionSelector() {
   const navigate = useNavigate();
@@ -24,7 +24,7 @@ export default function VersionSelector() {
         'QR code sharing',
         'Special message box',
       ],
-      icon: Smartphone,
+      icon: Layers,
       path: '/v1',
       accent: 'hsl(224, 70%, 35%)',
     },
@@ -39,7 +39,7 @@ export default function VersionSelector() {
         'Notification feed',
         'Monitoring dashboard',
       ],
-      icon: Tablet,
+      icon: LayoutGrid,
       path: '/v2',
       accent: 'hsl(22, 90%, 54%)',
     },
@@ -54,7 +54,7 @@ export default function VersionSelector() {
         'Multi-portal selection',
         'Device-framed previews',
       ],
-      icon: Monitor,
+      icon: Globe,
       path: '/v3',
       accent: 'hsl(224, 70%, 35%)',
     },
