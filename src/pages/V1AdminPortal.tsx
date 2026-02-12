@@ -112,9 +112,10 @@ export default function V1AdminPortal() {
     : entries;
 
   const inputClass =
-    'bg-card border border-border rounded-md px-4 py-2.5 text-sm text-foreground placeholder:text-muted-foreground focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-colors';
+    'w-full bg-card border border-border rounded-md px-3 py-2 text-sm text-foreground placeholder:text-muted-foreground focus:outline-none focus:border-primary focus:ring-2 focus:ring-primary/20 transition-all';
   const selectClass =
-    'bg-card border border-border rounded-md px-4 py-2.5 text-sm text-foreground focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-colors appearance-none cursor-pointer';
+    'w-full bg-card border border-border rounded-md px-3 py-2 text-sm text-foreground focus:outline-none focus:border-primary focus:ring-2 focus:ring-primary/20 transition-all appearance-none cursor-pointer';
+  const labelClass = 'block text-xs font-semibold text-muted-foreground uppercase tracking-wider mb-1.5';
 
   return (
     <div className="min-h-screen bg-background text-foreground">
@@ -144,97 +145,122 @@ export default function V1AdminPortal() {
           initial={{ opacity: 0, y: 12 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.35 }}
-          className="bg-card rounded-2xl border border-border shadow-sm p-6 space-y-4"
+          className="bg-card rounded-2xl border border-border shadow-sm p-6 space-y-6"
         >
-          {/* Row 1: Tracking #, Generate, Mission #, Status */}
-          <div className="flex flex-wrap gap-3 items-center">
-            <input
-              className={`${inputClass} w-64`}
-              placeholder="Tracking number"
-              value={trackingNumber}
-              onChange={(e) => setTrackingNumber(e.target.value)}
-            />
-            <button
-              onClick={handleGenerate}
-              className="bg-primary hover:bg-primary/90 text-primary-foreground font-semibold px-5 py-2.5 rounded-lg text-sm transition-colors"
-            >
-              Generate
-            </button>
-            <input
-              className={`${inputClass} w-40`}
-              placeholder="Mission #"
-              value={missionNumber}
-              onChange={(e) => setMissionNumber(e.target.value)}
-            />
-            <select
-              className={`${selectClass} w-64`}
-              value={status}
-              onChange={(e) => setStatus(e.target.value)}
-            >
-              {STATUS_OPTIONS.map((s) => (
-                <option key={s} value={s}>{s}</option>
-              ))}
-            </select>
+          {/* Row 1: Core fields */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+            <div>
+              <label className={labelClass}>Tracking Number</label>
+              <div className="flex gap-2">
+                <input
+                  className={`${inputClass} flex-1`}
+                  placeholder="Enter or generate"
+                  value={trackingNumber}
+                  onChange={(e) => setTrackingNumber(e.target.value)}
+                />
+                <button
+                  onClick={handleGenerate}
+                  className="shrink-0 bg-primary hover:bg-primary/90 text-primary-foreground font-semibold px-3 py-2 rounded-md text-xs transition-colors"
+                >
+                  Generate
+                </button>
+              </div>
+            </div>
+            <div>
+              <label className={labelClass}>Mission #</label>
+              <input
+                className={inputClass}
+                placeholder="e.g. 1000"
+                value={missionNumber}
+                onChange={(e) => setMissionNumber(e.target.value)}
+              />
+            </div>
+            <div>
+              <label className={labelClass}>Status</label>
+              <select
+                className={selectClass}
+                value={status}
+                onChange={(e) => setStatus(e.target.value)}
+              >
+                {STATUS_OPTIONS.map((s) => (
+                  <option key={s} value={s}>{s}</option>
+                ))}
+              </select>
+            </div>
+            <div>
+              <label className={labelClass}>ETA</label>
+              <input
+                type="datetime-local"
+                className={inputClass}
+                value={eta}
+                onChange={(e) => setEta(e.target.value)}
+              />
+            </div>
           </div>
 
-          {/* Row 2: ETA, Save/Update, Share QR */}
-          <div className="flex flex-wrap gap-3 items-center">
-            <span className="text-sm text-muted-foreground">ETA</span>
-            <input
-              type="datetime-local"
-              className={`${inputClass} w-64`}
-              value={eta}
-              onChange={(e) => setEta(e.target.value)}
-            />
+          {/* Row 2: Hospital + Filter */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <div>
+              <label className={labelClass}>Hospital</label>
+              <select
+                className={selectClass}
+                value={hospital}
+                onChange={(e) => setHospital(e.target.value)}
+              >
+                {HOSPITALS.map((h) => (
+                  <option key={h} value={h}>{h}</option>
+                ))}
+              </select>
+            </div>
+            <div>
+              <label className={labelClass}>Filter</label>
+              <input
+                className={inputClass}
+                placeholder="Search by tracking #, mission, or status"
+                value={filterText}
+                onChange={(e) => setFilterText(e.target.value)}
+              />
+            </div>
+          </div>
+
+          {/* Row 3: Special message */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <div>
+              <label className={labelClass}>Special Message</label>
+              <select
+                className={selectClass}
+                value={specialMessage}
+                onChange={(e) => setSpecialMessage(e.target.value)}
+              >
+                <option value="">None (optional)</option>
+                {SPECIAL_MESSAGES.map((m) => (
+                  <option key={m} value={m}>{m}</option>
+                ))}
+              </select>
+            </div>
+            <div>
+              <label className={labelClass}>Additional Notes</label>
+              <textarea
+                className={`${inputClass} h-20 resize-none`}
+                placeholder="Enter any notes…"
+                value={specialMessage}
+                onChange={(e) => setSpecialMessage(e.target.value)}
+              />
+            </div>
+          </div>
+
+          {/* Action buttons */}
+          <div className="flex gap-3 pt-2 border-t border-border">
             <button
               onClick={handleSave}
-              className="bg-primary hover:bg-primary/90 text-primary-foreground font-semibold px-5 py-2.5 rounded-lg text-sm transition-colors"
+              className="bg-primary hover:bg-primary/90 text-primary-foreground font-semibold px-6 py-2.5 rounded-md text-sm transition-colors"
             >
-              Save / Update
+              {editingId ? 'Update Entry' : 'Save Entry'}
             </button>
-            <button className="bg-accent hover:bg-accent/80 border border-border text-accent-foreground font-medium px-5 py-2.5 rounded-lg text-sm transition-colors">
+            <button className="bg-accent hover:bg-accent/80 border border-border text-accent-foreground font-medium px-5 py-2.5 rounded-md text-sm transition-colors flex items-center gap-2">
+              <QrCode className="h-4 w-4" />
               Share QR
             </button>
-          </div>
-
-          {/* Row 3: Filter + Hospital */}
-          <div className="flex flex-wrap gap-3 items-center">
-            <span className="text-sm text-muted-foreground">Filter:</span>
-            <input
-              className={`${inputClass} w-64`}
-              placeholder="Type to filter hospitals"
-              value={filterText}
-              onChange={(e) => setFilterText(e.target.value)}
-            />
-            <select
-              className={`${selectClass} flex-1 min-w-[280px]`}
-              value={hospital}
-              onChange={(e) => setHospital(e.target.value)}
-            >
-              {HOSPITALS.map((h) => (
-                <option key={h} value={h}>{h}</option>
-              ))}
-            </select>
-          </div>
-
-          {/* Row 4: Special message + textarea */}
-          <div className="space-y-3">
-            <select
-              className={`${selectClass} w-full max-w-2xl`}
-              value={specialMessage}
-              onChange={(e) => setSpecialMessage(e.target.value)}
-            >
-              <option value="">Special message… (optional)</option>
-              {SPECIAL_MESSAGES.map((m) => (
-                <option key={m} value={m}>{m}</option>
-              ))}
-            </select>
-            <textarea
-              className={`${inputClass} w-full max-w-3xl h-24 resize`}
-              placeholder="Additional notes…"
-              value={specialMessage}
-              onChange={(e) => setSpecialMessage(e.target.value)}
-            />
           </div>
         </motion.div>
 
