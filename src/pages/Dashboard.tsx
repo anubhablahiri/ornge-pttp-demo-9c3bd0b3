@@ -12,6 +12,7 @@ import ETADisplay from '@/components/transport/ETADisplay';
 import TransportDetails from '@/components/transport/TransportDetails';
 import NotificationFeed from '@/components/transport/NotificationFeed';
 import FamilySupport from '@/components/transport/FamilySupport';
+import ShareTracking from '@/components/transport/ShareTracking';
 import AdminToggle from '@/components/transport/AdminToggle';
 import LanguageToggle from '@/components/LanguageToggle';
 import { useApp } from '@/lib/i18n';
@@ -107,6 +108,7 @@ export default function Dashboard() {
                 {/* Left column: Support, Updates, Details, Admin */}
                 <div className="space-y-4">
                   <motion.div {...anim(0.1)}><FamilySupport /></motion.div>
+                  <motion.div {...anim(0.13)}><ShareTracking transportId={transport.id} /></motion.div>
                   <motion.div {...anim(0.15)}><NotificationFeed transport={transport} /></motion.div>
                   <motion.div {...anim(0.2)}><TransportDetails transport={transport} /></motion.div>
                   <motion.div {...anim(0.25)}><AdminToggle transport={transport} onUpdate={setTransport} /></motion.div>
@@ -134,8 +136,9 @@ export default function Dashboard() {
                 <motion.div {...anim(0.25)}><NotificationFeed transport={transport} /></motion.div>
                 <motion.div {...anim(0.3)}><TransportDetails transport={transport} /></motion.div>
               </div>
-              <div className="col-span-2 grid grid-cols-2 gap-4">
+              <div className="col-span-2 grid grid-cols-3 gap-4">
                 <motion.div {...anim(0.35)}><FamilySupport /></motion.div>
+                <motion.div {...anim(0.38)}><ShareTracking transportId={transport.id} /></motion.div>
                 <motion.div {...anim(0.4)}><AdminToggle transport={transport} onUpdate={setTransport} /></motion.div>
               </div>
             </div>
@@ -150,6 +153,7 @@ export default function Dashboard() {
             <motion.div {...anim(0.2)}><StatusTimeline transport={transport} /></motion.div>
             <motion.div {...anim(0.25)}><NotificationFeed transport={transport} /></motion.div>
             <motion.div {...anim(0.3)}><TransportDetails transport={transport} /></motion.div>
+            <motion.div {...anim(0.33)}><ShareTracking transportId={transport.id} /></motion.div>
             <motion.div {...anim(0.35)}><FamilySupport /></motion.div>
             <motion.div {...anim(0.4)}><AdminToggle transport={transport} onUpdate={setTransport} /></motion.div>
           </div>

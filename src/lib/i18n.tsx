@@ -89,6 +89,12 @@ const translations: Record<string, Record<Lang, string>> = {
   'admin.simulateDelay': { en: 'Simulate Delay', fr: 'Simuler un retard' },
   'admin.undoDelay': { en: 'Undo Delay', fr: 'Annuler le retard' },
 
+  // Share tracking
+  'share.title': { en: 'Share Tracking', fr: 'Partager le suivi' },
+  'share.description': { en: 'Share this link so others can follow the transport journey.', fr: 'Partagez ce lien pour que d\'autres puissent suivre le trajet.' },
+  'share.button': { en: 'Share with others', fr: 'Partager avec d\'autres' },
+  'share.text': { en: 'Follow this patient transport in real time.', fr: 'Suivez ce transport de patient en temps réel.' },
+
   // Milestones
   'milestone.0': { en: 'Preparing for Transport', fr: 'Préparation du transport' },
   'milestone.1': { en: 'Transport Team Assigned', fr: 'Équipe de transport assignée' },
