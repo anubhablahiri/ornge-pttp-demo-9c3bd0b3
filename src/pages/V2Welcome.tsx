@@ -31,7 +31,7 @@ export default function V2Welcome() {
 
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-5 max-w-sm mx-auto">
           <motion.button
-            onClick={() => navigate('/v2/login')}
+            onClick={() => navigate('/v2/platform')}
             className="group bg-card rounded-2xl border-2 border-border hover:border-primary shadow-sm hover:shadow-md p-8 flex flex-col items-center gap-4 transition-all"
             whileHover={{ scale: 1.02 }}
             whileTap={{ scale: 0.98 }}
