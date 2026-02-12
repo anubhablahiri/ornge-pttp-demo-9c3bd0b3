@@ -1,7 +1,7 @@
 import { useNavigate } from 'react-router-dom';
 import { useEffect } from 'react';
 import { motion } from 'framer-motion';
-import { Layers, LayoutGrid, Globe, Rocket, ArrowRight } from 'lucide-react';
+import { Layers, LayoutGrid, Globe, Rocket, ArrowRight, LogOut } from 'lucide-react';
 
 export default function VersionSelector() {
   const navigate = useNavigate();
@@ -74,7 +74,17 @@ export default function VersionSelector() {
   ];
 
   return (
-    <div className="min-h-screen bg-background flex flex-col items-center justify-center px-4 py-12">
+    <div className="min-h-screen bg-background flex flex-col items-center justify-center px-4 py-12 relative">
+      <button
+        onClick={() => {
+          sessionStorage.removeItem('gate_authenticated');
+          navigate('/', { replace: true });
+        }}
+        className="absolute top-4 right-4 flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground transition-colors"
+      >
+        <LogOut className="h-4 w-4" />
+        Logout
+      </button>
       <motion.div
         className="text-center mb-10"
         initial={{ opacity: 0, y: -10 }}
