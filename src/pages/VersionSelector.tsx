@@ -89,13 +89,13 @@ export default function VersionSelector() {
         </p>
       </motion.div>
 
-       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 max-w-5xl w-full">
+       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 max-w-5xl w-full items-stretch">
         {versions.map((v, i) => (
           <motion.button
             key={v.id}
             onClick={() => !v.disabled && navigate(v.path)}
             disabled={v.disabled}
-            className={`group bg-card rounded-2xl border-2 shadow-sm p-8 flex flex-col items-center gap-4 transition-all text-left ${
+            className={`group bg-card rounded-2xl border-2 shadow-sm p-8 flex flex-col items-center gap-4 transition-all text-left h-full ${
               v.disabled
                 ? 'border-border opacity-60 cursor-not-allowed'
                 : 'border-border hover:border-primary hover:shadow-lg'
@@ -119,18 +119,16 @@ export default function VersionSelector() {
             <p className="text-xs text-muted-foreground text-center leading-relaxed">
               {v.description}
             </p>
-            <ul className="w-full space-y-1 mt-1">
+            <ul className="w-full space-y-1.5 mt-1 flex-1">
               {v.features.map((f, fi) => (
-                <li key={fi} className="flex items-start gap-2 text-xs text-muted-foreground">
-                  <span className="mt-1 h-1 w-1 rounded-full bg-primary/60 shrink-0" />
+                <li key={fi} className="flex items-start gap-2 text-xs text-muted-foreground text-left">
+                  <span className="mt-1 h-1.5 w-1.5 rounded-full bg-primary/60 shrink-0" />
                   {f}
                 </li>
               ))}
             </ul>
-            {v.disabled ? (
-              <span className="text-xs font-medium text-muted-foreground">Coming Soon</span>
-            ) : (
-              <div className="flex items-center gap-1 text-sm font-medium text-primary opacity-0 group-hover:opacity-100 transition-opacity">
+            {!v.disabled && (
+              <div className="flex items-center gap-1 text-sm font-medium text-primary opacity-0 group-hover:opacity-100 transition-opacity mt-auto">
                 Explore <ArrowRight className="h-4 w-4" />
               </div>
             )}
