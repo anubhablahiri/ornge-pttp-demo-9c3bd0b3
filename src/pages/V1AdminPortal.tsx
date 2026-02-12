@@ -1,7 +1,8 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import { QrCode, Trash2, Pencil } from 'lucide-react';
+import { QrCode, ArrowLeft, Calendar } from 'lucide-react';
+import orngeLogo from '@/assets/ornge-logo.png';
 
 const STATUS_OPTIONS = [
   'Preparing for transport',
@@ -111,21 +112,29 @@ export default function V1AdminPortal() {
     : entries;
 
   const inputClass =
-    'bg-[hsl(220,25%,14%)] border border-[hsl(220,14%,25%)] rounded-lg px-4 py-2.5 text-sm text-[hsl(210,40%,96%)] placeholder:text-[hsl(215,20%,45%)] focus:outline-none focus:border-[hsl(22,90%,54%)] transition-colors';
+    'bg-background border border-border rounded-lg px-4 py-2.5 text-sm text-foreground placeholder:text-muted-foreground focus:outline-none focus:border-primary transition-colors';
   const selectClass =
-    'bg-[hsl(220,25%,14%)] border border-[hsl(220,14%,25%)] rounded-lg px-4 py-2.5 text-sm text-[hsl(210,40%,96%)] focus:outline-none focus:border-[hsl(22,90%,54%)] transition-colors appearance-none cursor-pointer';
+    'bg-background border border-border rounded-lg px-4 py-2.5 text-sm text-foreground focus:outline-none focus:border-primary transition-colors appearance-none cursor-pointer';
 
   return (
-    <div className="min-h-screen bg-[hsl(220,20%,8%)] text-[hsl(210,40%,96%)]">
+    <div className="min-h-screen bg-background text-foreground">
       {/* Header */}
-      <header className="sticky top-0 z-50 bg-[hsl(220,20%,11%)]/95 backdrop-blur-sm border-b border-[hsl(220,14%,20%)] px-6 py-4">
+      <header className="sticky top-0 z-50 bg-card/95 backdrop-blur-sm border-b border-border px-6 py-4">
         <div className="max-w-6xl mx-auto flex items-center justify-between">
-          <span className="font-bold text-lg tracking-tight">
-            Family Portal Admin<span className="text-[hsl(22,90%,54%)]">.</span>
-          </span>
-          <Link to="/v1" className="text-[hsl(22,90%,54%)] hover:underline text-sm font-medium">
-            Home
-          </Link>
+          <div className="flex items-center gap-4">
+            <Link to="/v1" className="p-1.5 rounded-lg hover:bg-accent transition-colors">
+              <ArrowLeft className="h-5 w-5 text-foreground" />
+            </Link>
+            <img src={orngeLogo} alt="Ornge" className="h-8" />
+            <div>
+              <h1 className="font-bold text-lg text-foreground leading-tight">Family Portal Admin</h1>
+              <p className="text-xs text-muted-foreground">Version 1</p>
+            </div>
+          </div>
+          <div className="flex items-center gap-2 text-sm text-muted-foreground">
+            <Calendar className="h-4 w-4" />
+            <span>{new Date().toLocaleDateString('en-CA', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' })}</span>
+          </div>
         </div>
       </header>
 
@@ -135,7 +144,7 @@ export default function V1AdminPortal() {
           initial={{ opacity: 0, y: 12 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.35 }}
-          className="space-y-4"
+          className="bg-card rounded-2xl border border-border shadow-sm p-6 space-y-4"
         >
           {/* Row 1: Tracking #, Generate, Mission #, Status */}
           <div className="flex flex-wrap gap-3 items-center">
@@ -147,7 +156,7 @@ export default function V1AdminPortal() {
             />
             <button
               onClick={handleGenerate}
-              className="bg-[hsl(22,90%,54%)] hover:bg-[hsl(22,90%,48%)] text-white font-semibold px-5 py-2.5 rounded-lg text-sm transition-colors"
+              className="bg-primary hover:bg-primary/90 text-primary-foreground font-semibold px-5 py-2.5 rounded-lg text-sm transition-colors"
             >
               Generate
             </button>
@@ -170,7 +179,7 @@ export default function V1AdminPortal() {
 
           {/* Row 2: ETA, Save/Update, Share QR */}
           <div className="flex flex-wrap gap-3 items-center">
-            <span className="text-sm text-[hsl(215,20%,65%)]">ETA</span>
+            <span className="text-sm text-muted-foreground">ETA</span>
             <input
               type="datetime-local"
               className={`${inputClass} w-64`}
@@ -179,18 +188,18 @@ export default function V1AdminPortal() {
             />
             <button
               onClick={handleSave}
-              className="bg-[hsl(22,90%,54%)] hover:bg-[hsl(22,90%,48%)] text-white font-semibold px-5 py-2.5 rounded-lg text-sm transition-colors"
+              className="bg-primary hover:bg-primary/90 text-primary-foreground font-semibold px-5 py-2.5 rounded-lg text-sm transition-colors"
             >
               Save / Update
             </button>
-            <button className="bg-[hsl(220,20%,18%)] hover:bg-[hsl(220,20%,22%)] border border-[hsl(220,14%,25%)] text-[hsl(210,40%,96%)] font-medium px-5 py-2.5 rounded-lg text-sm transition-colors">
+            <button className="bg-accent hover:bg-accent/80 border border-border text-accent-foreground font-medium px-5 py-2.5 rounded-lg text-sm transition-colors">
               Share QR
             </button>
           </div>
 
           {/* Row 3: Filter + Hospital */}
           <div className="flex flex-wrap gap-3 items-center">
-            <span className="text-sm text-[hsl(215,20%,65%)]">Filter:</span>
+            <span className="text-sm text-muted-foreground">Filter:</span>
             <input
               className={`${inputClass} w-64`}
               placeholder="Type to filter hospitals"
@@ -235,11 +244,11 @@ export default function V1AdminPortal() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.1, duration: 0.35 }}
         >
-          <h2 className="text-xl font-bold mb-4">Tracking Table</h2>
-          <div className="overflow-x-auto rounded-xl border border-[hsl(220,14%,20%)]">
+          <h2 className="text-xl font-bold text-foreground mb-4">Tracking Table</h2>
+          <div className="overflow-x-auto rounded-2xl border border-border shadow-sm">
             <table className="w-full text-sm">
               <thead>
-                <tr className="bg-[hsl(220,20%,11%)] border-b border-[hsl(220,14%,20%)] text-[hsl(210,40%,96%)] font-semibold">
+                <tr className="bg-card border-b border-border text-foreground font-semibold">
                   <th className="text-left px-5 py-3">Tracking #</th>
                   <th className="text-left px-5 py-3">Mission #</th>
                   <th className="text-left px-5 py-3">Status</th>
@@ -252,27 +261,27 @@ export default function V1AdminPortal() {
                 {filteredEntries.map((entry) => (
                   <tr
                     key={entry.id}
-                    className="border-b border-[hsl(220,14%,20%)]/50 hover:bg-[hsl(220,20%,14%)] transition-colors"
+                    className="border-b border-border hover:bg-accent/30 transition-colors"
                   >
                     <td className="px-5 py-4 font-mono text-sm">{entry.trackingNumber}</td>
                     <td className="px-5 py-4">{entry.missionNumber}</td>
                     <td className="px-5 py-4">{entry.status}</td>
-                    <td className="px-5 py-4 text-[hsl(215,20%,65%)]">{entry.lastUpdated}</td>
-                    <td className="px-5 py-4 text-[hsl(215,20%,65%)]">{entry.eta}</td>
+                    <td className="px-5 py-4 text-muted-foreground">{entry.lastUpdated}</td>
+                    <td className="px-5 py-4 text-muted-foreground">{entry.eta}</td>
                     <td className="px-5 py-4">
                       <div className="flex items-center gap-2">
-                        <button className="p-2 bg-[hsl(220,20%,18%)] border border-[hsl(220,14%,25%)] rounded">
-                          <QrCode className="h-4 w-4 text-[hsl(215,20%,65%)]" />
+                        <button className="p-2 bg-accent border border-border rounded">
+                          <QrCode className="h-4 w-4 text-muted-foreground" />
                         </button>
                         <button
                           onClick={() => handleEdit(entry)}
-                          className="bg-[hsl(220,20%,22%)] hover:bg-[hsl(220,20%,28%)] border border-[hsl(220,14%,25%)] text-[hsl(210,40%,96%)] font-medium px-3 py-1.5 rounded text-xs transition-colors"
+                          className="bg-accent hover:bg-accent/80 border border-border text-foreground font-medium px-3 py-1.5 rounded text-xs transition-colors"
                         >
                           Edit
                         </button>
                         <button
                           onClick={() => handleDelete(entry.id)}
-                          className="bg-[hsl(22,90%,54%)] hover:bg-[hsl(22,90%,48%)] text-white font-semibold px-3 py-1.5 rounded text-xs transition-colors"
+                          className="bg-destructive hover:bg-destructive/90 text-destructive-foreground font-semibold px-3 py-1.5 rounded text-xs transition-colors"
                         >
                           Delete
                         </button>
@@ -283,7 +292,7 @@ export default function V1AdminPortal() {
               </tbody>
             </table>
           </div>
-          <p className="text-xs text-[hsl(215,20%,45%)] mt-3">
+          <p className="text-xs text-muted-foreground mt-3">
             Tip: Share the tracking number with family or staff. No PHI is stored. Old entries auto-delete after ~48 hours.
           </p>
         </motion.div>

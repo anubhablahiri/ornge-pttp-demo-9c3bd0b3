@@ -6,6 +6,7 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { getTransportByRef } from '@/data/mockTransports';
+import orngeLogo from '@/assets/ornge-logo.png';
 
 export default function V1Login() {
   const navigate = useNavigate();
@@ -34,31 +35,38 @@ export default function V1Login() {
   };
 
   return (
-    <div className="min-h-screen flex flex-col items-center justify-center bg-[hsl(220,20%,8%)] px-4">
+    <div className="min-h-screen flex flex-col items-center justify-center bg-background px-4">
       <motion.div
         className="w-full max-w-sm"
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5 }}
       >
-        <div className="text-center mb-8">
-          <h1 className="text-2xl font-bold text-[hsl(210,40%,96%)]">
+        <div className="flex flex-col items-center mb-8">
+          <motion.img
+            src={orngeLogo}
+            alt="Ornge"
+            className="h-14 mb-4"
+            initial={{ opacity: 0, scale: 0.9 }}
+            animate={{ opacity: 1, scale: 1 }}
+          />
+          <h1 className="text-2xl font-bold text-center text-foreground">
             Patient Transport Tracker
           </h1>
-          <p className="mt-2 text-sm text-[hsl(215,20%,65%)]">
-            Version 1 — Basic Dark Theme
+          <p className="mt-2 text-sm text-muted-foreground text-center">
+            Version 1 — Basic Tracker
           </p>
         </div>
 
-        <div className="bg-[hsl(220,20%,11%)] rounded-xl p-6 border border-[hsl(220,14%,20%)]">
+        <div className="bg-card rounded-2xl shadow-lg p-6 border border-border">
           <div className="flex items-center gap-2 mb-5">
-            <Shield className="h-4 w-4 text-[hsl(22,90%,54%)]" />
-            <span className="text-xs text-[hsl(215,20%,65%)]">Secure & Encrypted</span>
+            <Shield className="h-4 w-4 text-primary" />
+            <span className="text-xs text-muted-foreground">Secure & Encrypted</span>
           </div>
 
           <form onSubmit={handleSubmit} className="space-y-4">
             <div className="space-y-1.5">
-              <Label htmlFor="v1-ref" className="text-sm font-medium text-[hsl(210,40%,96%)]">
+              <Label htmlFor="v1-ref" className="text-sm font-medium">
                 Transport Reference ID
               </Label>
               <Input
@@ -66,20 +74,16 @@ export default function V1Login() {
                 placeholder="e.g. 5725497746660201"
                 value={refNumber}
                 onChange={(e) => setRefNumber(e.target.value)}
-                className="h-12 rounded-lg bg-[hsl(220,20%,14%)] border-[hsl(220,14%,20%)] text-[hsl(210,40%,96%)] placeholder:text-[hsl(215,20%,45%)]"
+                className="h-12 rounded-lg"
                 maxLength={30}
               />
             </div>
-            {error && <p className="text-[hsl(0,72%,51%)] text-sm">{error}</p>}
+            {error && <p className="text-destructive text-sm">{error}</p>}
 
-            <Button
-              type="submit"
-              className="w-full h-12 text-base font-semibold rounded-lg bg-[hsl(22,90%,54%)] hover:bg-[hsl(22,90%,48%)] text-white"
-              disabled={loading}
-            >
+            <Button type="submit" className="w-full h-12 text-base font-semibold rounded-lg" disabled={loading}>
               {loading ? (
                 <span className="flex items-center gap-2">
-                  <span className="h-4 w-4 border-2 border-white/30 border-t-white rounded-full animate-spin" />
+                  <span className="h-4 w-4 border-2 border-primary-foreground/30 border-t-primary-foreground rounded-full animate-spin" />
                   Verifying...
                 </span>
               ) : (
@@ -93,7 +97,7 @@ export default function V1Login() {
 
         <Link
           to="/v1"
-          className="flex items-center justify-center gap-1.5 mt-6 text-sm text-[hsl(215,20%,65%)] hover:text-[hsl(210,40%,96%)] transition-colors"
+          className="flex items-center justify-center gap-1.5 mt-6 text-sm text-muted-foreground hover:text-foreground transition-colors"
         >
           <ArrowLeft className="h-4 w-4" />
           Back to Portal Selection
