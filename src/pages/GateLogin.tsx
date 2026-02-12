@@ -1,7 +1,7 @@
-import { useState } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import { ArrowRight, Lock, AlertCircle } from 'lucide-react';
+import { ArrowRight, Lock, AlertCircle, Timer } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
@@ -13,15 +13,38 @@ const VALID_CREDENTIALS: Record<string, string> = {
   'zdojcinovic@ornge.ca': 'Km9@nFrA3#pV6xUq',
 };
 
+const MAX_ATTEMPTS = 3;
+const COOLDOWN_SECONDS = 30;
+
 export default function GateLogin() {
   const navigate = useNavigate();
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
+  const [failedAttempts, setFailedAttempts] = useState(0);
+  const [cooldownRemaining, setCooldownRemaining] = useState(0);
+
+  const locked = cooldownRemaining > 0;
+
+  useEffect(() => {
+    if (cooldownRemaining <= 0) return;
+    const timer = setInterval(() => {
+      setCooldownRemaining((prev) => {
+        if (prev <= 1) {
+          setFailedAttempts(0);
+          setError('');
+          return 0;
+        }
+        return prev - 1;
+      });
+    }, 1000);
+    return () => clearInterval(timer);
+  }, [cooldownRemaining]);
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
+    if (locked) return;
     setError('');
     if (!username.trim() || !password.trim()) {
       setError('Please enter both username and password.');
@@ -31,9 +54,17 @@ export default function GateLogin() {
     setTimeout(() => {
       if (VALID_CREDENTIALS[username] && VALID_CREDENTIALS[username] === password) {
         sessionStorage.setItem('gate_authenticated', 'true');
+        setFailedAttempts(0);
         navigate('/versions');
       } else {
-        setError('Invalid credentials. Please try again.');
+        const newAttempts = failedAttempts + 1;
+        setFailedAttempts(newAttempts);
+        if (newAttempts >= MAX_ATTEMPTS) {
+          setCooldownRemaining(COOLDOWN_SECONDS);
+          setError(`Too many failed attempts. Please wait ${COOLDOWN_SECONDS} seconds.`);
+        } else {
+          setError(`Invalid credentials. ${MAX_ATTEMPTS - newAttempts} attempt(s) remaining.`);
+        }
       }
       setLoading(false);
     }, 600);
@@ -90,11 +121,22 @@ export default function GateLogin() {
               </div>
             )}
 
-            <Button type="submit" className="w-full h-12 text-base font-semibold rounded-lg" disabled={loading}>
+            {locked && (
+              <div className="flex items-center gap-2 text-sm text-muted-foreground bg-muted/50 rounded-lg p-3 border border-border">
+                <Timer className="h-4 w-4 shrink-0 text-destructive" />
+                <span>Locked out. Try again in <span className="font-semibold text-foreground">{cooldownRemaining}s</span></span>
+              </div>
+            )}
+
+            <Button type="submit" className="w-full h-12 text-base font-semibold rounded-lg" disabled={loading || locked}>
               {loading ? (
                 <span className="flex items-center gap-2">
                   <span className="h-4 w-4 border-2 border-primary-foreground/30 border-t-primary-foreground rounded-full animate-spin" />
                   Verifying...
+                </span>
+              ) : locked ? (
+                <span className="flex items-center gap-2">
+                  <Timer className="h-4 w-4" /> Locked ({cooldownRemaining}s)
                 </span>
               ) : (
                 <span className="flex items-center gap-2">
