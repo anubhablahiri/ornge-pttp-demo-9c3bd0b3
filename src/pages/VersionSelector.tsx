@@ -116,7 +116,7 @@ export default function VersionSelector() {
               <span className="text-lg font-bold text-foreground block">{v.label}</span>
               <span className={`text-xs font-medium ${v.disabled ? 'text-muted-foreground' : 'text-primary'}`}>{v.subtitle}</span>
             </div>
-            <p className="text-xs text-muted-foreground text-center leading-relaxed">
+            <p className="text-xs text-muted-foreground text-center leading-relaxed min-h-[3.5rem]">
               {v.description}
             </p>
             <ul className="w-full space-y-1.5 mt-1 flex-1">
