@@ -6,8 +6,12 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 
-const VALID_USERNAME = 'adminaccount';
-const VALID_PASSWORD = 'alvar@1234!';
+const VALID_CREDENTIALS: Record<string, string> = {
+  'adminaccount': 'alvar@1234!',
+  'matthew.blacklock@calian.com': 'Xp7#mQvL9$kR2wNd',
+  'rola.darwish@calian.com': 'Tz4&bYcE8!hJ5gWs',
+  'zdojcinovic@ornge.ca': 'Km9@nFrA3#pV6xUq',
+};
 
 export default function GateLogin() {
   const navigate = useNavigate();
@@ -25,7 +29,7 @@ export default function GateLogin() {
     }
     setLoading(true);
     setTimeout(() => {
-      if (username === VALID_USERNAME && password === VALID_PASSWORD) {
+      if (VALID_CREDENTIALS[username] && VALID_CREDENTIALS[username] === password) {
         sessionStorage.setItem('gate_authenticated', 'true');
         navigate('/versions');
       } else {
