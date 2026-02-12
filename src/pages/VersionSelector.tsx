@@ -75,16 +75,6 @@ export default function VersionSelector() {
 
   return (
     <div className="min-h-screen bg-background flex flex-col items-center justify-center px-4 py-12 relative">
-      <button
-        onClick={() => {
-          sessionStorage.removeItem('gate_authenticated');
-          navigate('/', { replace: true });
-        }}
-        className="absolute top-4 right-4 flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground transition-colors"
-      >
-        <LogOut className="h-4 w-4" />
-        Logout
-      </button>
       <motion.div
         className="text-center mb-10"
         initial={{ opacity: 0, y: -10 }}
@@ -145,6 +135,16 @@ export default function VersionSelector() {
           </motion.button>
         ))}
       </div>
+      <button
+        onClick={() => {
+          sessionStorage.removeItem('gate_authenticated');
+          navigate('/', { replace: true });
+        }}
+        className="mt-10 flex items-center gap-2 px-6 py-3 rounded-xl border-2 border-border hover:border-destructive text-muted-foreground hover:text-destructive font-medium transition-all"
+      >
+        <LogOut className="h-5 w-5" />
+        Logout
+      </button>
     </div>
   );
 }
