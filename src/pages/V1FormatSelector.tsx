@@ -38,7 +38,7 @@ export default function V1FormatSelector() {
           animate={{ opacity: 1 }}
           transition={{ delay: 0.1 }}
         >
-          Version 1 — Manual data posting of transport data from OCC. No real-time data.
+          Patient Transport Tracking (V1)
         </motion.h1>
         <motion.p
           className="mt-3 text-lg md:text-xl font-display font-semibold text-primary text-center"
@@ -47,6 +47,14 @@ export default function V1FormatSelector() {
           transition={{ delay: 0.15 }}
         >
           Choose Platform
+        </motion.p>
+        <motion.p
+          className="mt-2 text-sm text-primary text-center max-w-md"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 0.2 }}
+        >
+          Manual data posting of transport data from OCC. No real-time data.
         </motion.p>
         <motion.p
           className="mt-2 text-sm text-muted-foreground text-center max-w-sm"

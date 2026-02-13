@@ -25,7 +25,8 @@ const translations: Record<string, Record<Lang, string>> = {
   'welcome.footer': { en: 'All information is confidential and secure.', fr: 'Toutes les informations sont confidentielles et sécurisées.' },
 
   // Format selector (platform)
-  'format.welcome': { en: 'Version 3 — Automated real-time data from OCC and Flight Vector.', fr: 'Version 3 — Données en temps réel automatisées d\'OCC et Flight Vector.' },
+  'format.welcome': { en: 'Patient Transport Tracking (V3)', fr: 'Suivi de transport des patients (V3)' },
+  'format.description': { en: 'Automated real-time data from OCC and Flight Vector.', fr: 'Données en temps réel automatisées d\'OCC et Flight Vector.' },
   'format.title': { en: 'Choose Platform', fr: 'Choisir la plateforme' },
   'format.subtitle': { en: 'Choose a device view for the demo experience', fr: 'Choisissez une vue appareil pour la démo' },
   'format.mobile': { en: 'Mobile', fr: 'Mobile' },
