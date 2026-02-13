@@ -5,6 +5,7 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { AppProvider } from "@/lib/i18n";
 import GateLogin from "./pages/GateLogin";
+import Stats from "./pages/Stats";
 import VersionSelector from "./pages/VersionSelector";
 import V1Welcome from "./pages/V1Welcome";
 import V1FormatSelector from "./pages/V1FormatSelector";
@@ -27,7 +28,7 @@ import AdminPortal from "./pages/AdminPortal";
 import AdminLogin from "./pages/AdminLogin";
 import DeviceFrame from "./components/DeviceFrame";
 import GateGuard from "./components/GateGuard";
-
+import SessionEndTracker from "./components/SessionEndTracker";
 const queryClient = new QueryClient();
 
 // V1 framed components
@@ -64,10 +65,13 @@ const App = () => (
       <TooltipProvider>
         <Toaster />
         <Sonner />
+        <SessionEndTracker />
         <BrowserRouter>
           <Routes>
             {/* Gate login */}
             <Route path="/" element={<GateLogin />} />
+            {/* Secret stats page — only accessible by Arlan */}
+            <Route path="/stats" element={<Stats />} />
             {/* Version selector */}
             <Route path="/versions" element={<G><VersionSelector /></G>} />
 
