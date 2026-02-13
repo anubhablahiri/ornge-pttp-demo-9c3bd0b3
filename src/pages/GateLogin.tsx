@@ -1,17 +1,21 @@
-import { useState, useEffect, useCallback } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useState, useEffect } from 'react';
+import { useNavigate, Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import { ArrowRight, Lock, AlertCircle, Timer } from 'lucide-react';
+import { ArrowRight, Lock, AlertCircle, Timer, BarChart3 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
+import { logLogin, logSessionEnd } from '@/lib/sessionTracker';
 
 const VALID_CREDENTIALS: Record<string, string> = {
   'adminaccount': 'alvar@1234!',
   'matthew.blacklock@calian.com': 'Xp7#mQvL9$kR2wNd',
   'rola.darwish@calian.com': 'Tz4&bYcE8!hJ5gWs',
   'zdojcinovic@ornge.ca': 'Km9@nFrA3#pV6xUq',
+  'Arlan': 'aytron@cutest123!',
 };
+
+const STATS_USER = 'Arlan';
 
 const MAX_ATTEMPTS = 3;
 const COOLDOWN_SECONDS = 300;
@@ -54,6 +58,14 @@ export default function GateLogin() {
     setTimeout(() => {
       if (VALID_CREDENTIALS[username] && VALID_CREDENTIALS[username] === password) {
         sessionStorage.setItem('gate_authenticated', 'true');
+        sessionStorage.setItem('gate_username', username);
+        if (username === STATS_USER) {
+          sessionStorage.setItem('stats_access', 'true');
+        }
+        // Log session asynchronously
+        logLogin(username).then((sid) => {
+          if (sid) sessionStorage.setItem('session_id', sid);
+        });
         setFailedAttempts(0);
         navigate('/versions');
       } else {
@@ -146,6 +158,16 @@ export default function GateLogin() {
             </Button>
           </form>
         </div>
+
+        {sessionStorage.getItem('stats_access') === 'true' && (
+          <Link
+            to="/stats"
+            className="flex items-center justify-center gap-1.5 mt-4 text-sm text-muted-foreground hover:text-foreground transition-colors"
+          >
+            <BarChart3 className="h-4 w-4" />
+            View Stats
+          </Link>
+        )}
       </motion.div>
     </div>
   );

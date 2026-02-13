@@ -14,7 +14,45 @@ export type Database = {
   }
   public: {
     Tables: {
-      [_ in never]: never
+      session_logs: {
+        Row: {
+          browser: string | null
+          device: string | null
+          id: string
+          ip_address: string | null
+          location: string | null
+          login_time: string
+          os: string | null
+          session_duration_seconds: number | null
+          session_end_time: string | null
+          username: string
+        }
+        Insert: {
+          browser?: string | null
+          device?: string | null
+          id?: string
+          ip_address?: string | null
+          location?: string | null
+          login_time?: string
+          os?: string | null
+          session_duration_seconds?: number | null
+          session_end_time?: string | null
+          username: string
+        }
+        Update: {
+          browser?: string | null
+          device?: string | null
+          id?: string
+          ip_address?: string | null
+          location?: string | null
+          login_time?: string
+          os?: string | null
+          session_duration_seconds?: number | null
+          session_end_time?: string | null
+          username?: string
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
