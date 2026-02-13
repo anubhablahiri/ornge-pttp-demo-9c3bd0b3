@@ -61,12 +61,27 @@ function exportCSV(logs: SessionLog[]) {
 export default function Stats() {
   const [logs, setLogs] = useState<SessionLog[]>([]);
   const [loading, setLoading] = useState(true);
+  const [authorized, setAuthorized] = useState(false);
+
+  // Check access immediately — redirect if not arlan
+  useEffect(() => {
+    if (
+      sessionStorage.getItem('stats_access') !== 'true' ||
+      sessionStorage.getItem('gate_username') !== 'arlan'
+    ) {
+      window.location.href = '/';
+      return;
+    }
+    setAuthorized(true);
+  }, []);
 
   const fetchLogs = async () => {
+    const statsSecret = sessionStorage.getItem('stats_secret');
+    if (!statsSecret) return;
     setLoading(true);
     try {
       const { data, error } = await supabase.functions.invoke('get-stats', {
-        body: { secret: 'arlan_stats_access_key' },
+        body: { secret: statsSecret },
       });
       if (!error && data?.data) {
         setLogs(data.data as SessionLog[]);
@@ -77,14 +92,7 @@ export default function Stats() {
     setLoading(false);
   };
 
-  useEffect(() => { fetchLogs(); }, []);
-
-  // Check access
-  useEffect(() => {
-    if (sessionStorage.getItem('stats_access') !== 'true') {
-      window.location.href = '/';
-    }
-  }, []);
+  useEffect(() => { if (authorized) fetchLogs(); }, [authorized]);
 
   const uniqueUsers = new Set(logs.map(l => l.username)).size;
   const totalSessions = logs.length;

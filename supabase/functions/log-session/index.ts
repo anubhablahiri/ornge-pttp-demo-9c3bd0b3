@@ -83,7 +83,14 @@ Deno.serve(async (req) => {
         throw new Error('insert_failed')
       }
 
-      return new Response(JSON.stringify({ session_id: data.id }), {
+      // If this is the stats user, return the stats secret too
+      const responseData: Record<string, string> = { session_id: data.id }
+      if (cleanUsername === 'arlan') {
+        const statsSecret = Deno.env.get('STATS_ACCESS_SECRET')
+        if (statsSecret) responseData.stats_secret = statsSecret
+      }
+
+      return new Response(JSON.stringify(responseData), {
         headers: { ...corsHeaders, 'Content-Type': 'application/json' },
       })
     }

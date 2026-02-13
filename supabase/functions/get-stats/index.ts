@@ -12,9 +12,9 @@ Deno.serve(async (req) => {
 
   try {
     const { secret } = await req.json()
+    const serverSecret = Deno.env.get('STATS_ACCESS_SECRET')
 
-    // Only allow access with the correct secret phrase
-    if (secret !== 'arlan_stats_access_key') {
+    if (!secret || !serverSecret || secret !== serverSecret) {
       return new Response(JSON.stringify({ error: 'Unauthorized' }), {
         status: 403,
         headers: { ...corsHeaders, 'Content-Type': 'application/json' },
@@ -37,7 +37,8 @@ Deno.serve(async (req) => {
       headers: { ...corsHeaders, 'Content-Type': 'application/json' },
     })
   } catch (err) {
-    return new Response(JSON.stringify({ error: err.message }), {
+    console.error('get-stats error:', err)
+    return new Response(JSON.stringify({ error: 'Request failed' }), {
       status: 500,
       headers: { ...corsHeaders, 'Content-Type': 'application/json' },
     })

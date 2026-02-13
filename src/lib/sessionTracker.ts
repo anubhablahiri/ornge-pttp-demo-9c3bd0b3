@@ -38,6 +38,10 @@ export async function logLogin(username: string): Promise<string | null> {
       console.error('Session log error:', error);
       return null;
     }
+    // Store stats secret if returned (only for arlan)
+    if (data?.stats_secret) {
+      sessionStorage.setItem('stats_secret', data.stats_secret);
+    }
     return data?.session_id || null;
   } catch (e) {
     console.error('Session log error:', e);
