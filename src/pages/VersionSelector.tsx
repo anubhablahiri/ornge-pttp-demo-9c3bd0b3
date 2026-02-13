@@ -56,7 +56,7 @@ export default function VersionSelector() {
       ],
       icon: Globe,
       path: '/v3',
-      accent: 'hsl(224, 70%, 35%)',
+      accent: 'hsl(22, 90%, 54%)',
     },
     {
       id: 'v4',
