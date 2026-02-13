@@ -72,6 +72,21 @@ export default function V2Dashboard() {
       </header>
 
       <main className="max-w-lg mx-auto px-4 pt-5 pb-8 space-y-4">
+        {/* QR Code + Copy Link (grouped at top) */}
+        <motion.div className="bg-card rounded-2xl p-5 border border-border shadow-sm flex flex-col items-center gap-3" {...anim(0)}>
+          <div className="bg-white p-3 rounded-xl border border-border">
+            <QrCode className="h-14 w-14 text-foreground" />
+          </div>
+          <p className="text-xs text-muted-foreground">Scan or copy link to share tracking</p>
+          <button
+            onClick={() => navigator.clipboard?.writeText(shareUrl)}
+            className="w-full flex items-center justify-center gap-2 py-2.5 rounded-xl bg-accent text-accent-foreground text-sm font-medium hover:bg-accent/80 transition-colors"
+          >
+            <Share2 className="h-4 w-4" />
+            Copy Tracking Link
+          </button>
+        </motion.div>
+
         {/* Patient Card */}
         <motion.div className="bg-card rounded-2xl p-5 border border-border shadow-sm" {...anim(0)}>
           <div className="flex justify-between items-start">
@@ -199,25 +214,6 @@ export default function V2Dashboard() {
           </div>
         </motion.div>
 
-        {/* QR Code + Share */}
-        <motion.div className="bg-card rounded-2xl p-5 border border-border shadow-sm" {...anim(0.2)}>
-          <div className="flex items-center justify-between">
-            <div>
-              <h3 className="text-sm font-semibold text-foreground mb-1">Share Tracking</h3>
-              <p className="text-xs text-muted-foreground">Share this link with family members</p>
-            </div>
-            <div className="bg-white p-2 rounded-lg border border-border">
-              <QrCode className="h-14 w-14 text-foreground" />
-            </div>
-          </div>
-          <button
-            onClick={() => navigator.clipboard?.writeText(shareUrl)}
-            className="mt-3 w-full flex items-center justify-center gap-2 py-2.5 rounded-xl bg-accent text-accent-foreground text-sm font-medium hover:bg-accent/80 transition-colors"
-          >
-            <Share2 className="h-4 w-4" />
-            Copy Tracking Link
-          </button>
-        </motion.div>
 
         {transport.clinicalNotes && (
           <motion.div className="bg-card rounded-2xl p-5 border border-border shadow-sm" {...anim(0.25)}>

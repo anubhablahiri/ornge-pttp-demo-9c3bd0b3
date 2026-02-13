@@ -63,16 +63,23 @@ export default function V1Dashboard() {
       </header>
 
       <main className="max-w-lg mx-auto px-4 pt-6 pb-8 space-y-6">
-        {/* QR Code (top-centered) */}
+        {/* QR Code + Copy Link (grouped at top) */}
         <motion.div
-          className="flex flex-col items-center"
+          className="bg-card rounded-2xl p-4 border border-border shadow-sm flex flex-col items-center gap-3"
           initial={{ opacity: 0, y: -10 }}
           animate={{ opacity: 1, y: 0 }}
         >
           <div className="bg-white p-3 rounded-xl border border-border">
             <QrCode className="h-20 w-20 text-foreground" />
           </div>
-          <p className="text-xs text-muted-foreground mt-2">Scan to share tracking</p>
+          <p className="text-xs text-muted-foreground">Scan to share tracking</p>
+          <button
+            onClick={() => navigator.clipboard?.writeText(shareUrl)}
+            className="w-full flex items-center justify-center gap-2 py-3 rounded-xl bg-accent text-accent-foreground text-sm font-medium hover:bg-accent/80 transition-colors"
+          >
+            <Share2 className="h-4 w-4" />
+            Copy Tracking Link
+          </button>
         </motion.div>
 
         {/* Patient & Route Info */}
@@ -171,17 +178,6 @@ export default function V1Dashboard() {
           )}
         </motion.div>
 
-        {/* Share button */}
-        <motion.button
-          onClick={() => navigator.clipboard?.writeText(shareUrl)}
-          className="w-full flex items-center justify-center gap-2 py-3 rounded-xl bg-accent text-accent-foreground text-sm font-medium hover:bg-accent/80 transition-colors"
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 0.2 }}
-        >
-          <Share2 className="h-4 w-4" />
-          Copy Tracking Link
-        </motion.button>
 
         {/* Crew Info */}
         <motion.div
