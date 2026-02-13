@@ -22,7 +22,7 @@ export default function StatusTimeline({ transport, horizontal = false }: Props)
           {/* Connecting line */}
           <div className="absolute top-3.5 left-0 right-0 h-0.5 bg-border mx-6" />
           <div
-            className="absolute top-3.5 left-0 h-0.5 bg-success mx-6 transition-all duration-500"
+            className="absolute top-3.5 left-0 h-0.5 bg-primary mx-6 transition-all duration-500"
             style={{
               width: `${Math.max(0, (currentIdx / (transport.statuses.length - 1)) * 100)}%`,
             }}
@@ -45,7 +45,7 @@ export default function StatusTimeline({ transport, horizontal = false }: Props)
                 >
                   {/* Circle */}
                   <div className={`w-7 h-7 rounded-full flex items-center justify-center shrink-0 text-[9px] font-bold z-10
-                    ${isCompleted ? 'bg-success text-success-foreground' : ''}
+                    ${isCompleted ? 'bg-primary text-primary-foreground' : ''}
                     ${isActive ? 'bg-active text-active-foreground animate-pulse-active' : ''}
                     ${isPending ? 'bg-muted text-muted-foreground border-2 border-border' : ''}
                   `}>
@@ -101,14 +101,14 @@ export default function StatusTimeline({ transport, horizontal = false }: Props)
             >
               <div className="flex flex-col items-center">
                 <div className={`w-7 h-7 rounded-full flex items-center justify-center shrink-0 text-xs font-bold
-                  ${isCompleted ? 'bg-success text-success-foreground' : ''}
+                  ${isCompleted ? 'bg-primary text-primary-foreground' : ''}
                   ${isActive ? 'bg-active text-active-foreground animate-pulse-active' : ''}
                   ${isPending ? 'bg-muted text-muted-foreground border-2 border-border' : ''}
                 `}>
                   {isCompleted ? <Check className="h-3.5 w-3.5" /> : (i + 1)}
                 </div>
                 {i < transport.statuses.length - 1 && (
-                  <div className={`w-0.5 flex-1 min-h-[20px] ${isCompleted ? 'bg-success/40' : 'bg-border'}`} />
+                  <div className={`w-0.5 flex-1 min-h-[20px] ${isCompleted ? 'bg-primary/40' : 'bg-border'}`} />
                 )}
               </div>
               <div className="pt-0.5 pb-1 min-w-0">

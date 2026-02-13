@@ -129,7 +129,7 @@ export default function V1Dashboard() {
             {/* Connecting line */}
             <div className="absolute top-3 left-4 right-4 h-0.5 bg-border" />
             <div
-              className="absolute top-3 left-4 h-0.5 bg-success transition-all duration-500"
+              className="absolute top-3 left-4 h-0.5 bg-primary transition-all duration-500"
               style={{ width: `${(v1Stage / (V1_STAGES.length - 1)) * (100 - 8)}%` }}
             />
             {V1_STAGES.map((stage, i) => (
@@ -137,7 +137,7 @@ export default function V1Dashboard() {
                 <div
                   className={`w-7 h-7 rounded-full flex items-center justify-center text-xs font-bold transition-all ${
                     i < v1Stage
-                      ? 'bg-success text-success-foreground'
+                      ? 'bg-primary text-primary-foreground'
                       : i === v1Stage
                       ? 'bg-active text-active-foreground animate-pulse-active'
                       : 'bg-muted text-muted-foreground border-2 border-border'

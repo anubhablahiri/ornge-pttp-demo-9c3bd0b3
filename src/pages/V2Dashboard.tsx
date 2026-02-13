@@ -134,7 +134,7 @@ export default function V2Dashboard() {
                     <div
                       className={`w-7 h-7 rounded-full flex items-center justify-center shrink-0 ${
                         isDone
-                          ? 'bg-success text-success-foreground'
+                          ? 'bg-primary text-primary-foreground'
                           : isActive
                           ? 'bg-active text-active-foreground animate-pulse-active'
                           : 'bg-muted text-muted-foreground border-2 border-border'
@@ -149,7 +149,7 @@ export default function V2Dashboard() {
                     {i < V2_STAGES.length - 1 && (
                       <div
                         className={`w-0.5 h-8 ${
-                          isDone ? 'bg-success/40' : 'bg-border'
+                          isDone ? 'bg-primary/40' : 'bg-border'
                         }`}
                       />
                     )}
