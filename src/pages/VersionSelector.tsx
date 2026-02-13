@@ -16,7 +16,7 @@ export default function VersionSelector() {
     {
       id: 'v1',
       label: 'Version 1',
-      subtitle: 'Manual Static Tracker',
+      subtitle: 'Manual Data Tracker',
       description: 'Manual data posting of transport data from PTAC and OCC. No real-time data.',
       features: [
         'Horizontal status timeline',
@@ -31,7 +31,7 @@ export default function VersionSelector() {
     {
       id: 'v2',
       label: 'Version 2',
-      subtitle: 'Semi-Live Tracker',
+      subtitle: 'Manual Data Tracker with Partial Automation',
       description: 'Manual data posting of transport data from PTAC and OCC with minimum real-time data from Flight Vector.',
       features: [
         'Vertical status timeline',
