@@ -1,8 +1,9 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import { QrCode, ArrowLeft, Calendar } from 'lucide-react';
+import { QrCode, ArrowLeft, Calendar, Copy, Check, X } from 'lucide-react';
 import orngeLogo from '@/assets/ornge-logo.png';
+import { QRCodeSVG } from 'qrcode.react';
 
 const STATUS_OPTIONS = [
   'Preparing for transport',
@@ -58,6 +59,20 @@ export default function V1AdminPortal() {
   const [filterText, setFilterText] = useState('');
   const [hospital, setHospital] = useState(HOSPITALS[0]);
   const [editingId, setEditingId] = useState<string | null>(null);
+  const [showQR, setShowQR] = useState(false);
+  const [copiedLink, setCopiedLink] = useState(false);
+  const [tableQR, setTableQR] = useState<string | null>(null);
+
+  const getTrackingUrl = (trackNum: string) =>
+    `${window.location.origin}/v1/track/T-1?ref=${trackNum}`;
+
+  const handleCopyLink = async (url: string) => {
+    try {
+      await navigator.clipboard.writeText(url);
+      setCopiedLink(true);
+      setTimeout(() => setCopiedLink(false), 2000);
+    } catch {}
+  };
 
   const handleGenerate = () => {
     setTrackingNumber(generateTrackingNumber());
@@ -128,7 +143,7 @@ export default function V1AdminPortal() {
             </Link>
             <img src={orngeLogo} alt="Ornge" className="h-8" />
             <div>
-              <h1 className="font-bold text-lg text-foreground leading-tight">Operations Dashboard (V1)</h1>
+              <h1 className="font-bold text-lg text-foreground leading-tight">Operations Dashboard (v1)</h1>
               <p className="text-xs text-muted-foreground">Ornge Transport Medicine</p>
             </div>
           </div>
@@ -269,16 +284,45 @@ export default function V1AdminPortal() {
           className="bg-card rounded-2xl border border-border shadow-sm p-6 space-y-4"
         >
           <h2 className="text-xl font-bold text-foreground">Share Tracking Link</h2>
-          <p className="text-sm text-muted-foreground">Generate and share a QR code or direct link for the current tracking number so families can follow transport progress.</p>
+          <p className="text-sm text-muted-foreground">Generate and share a QR code or direct link for a tracking number so families can follow transport progress.</p>
           <div className="flex items-center gap-4">
-            <button className="bg-primary hover:bg-primary/90 text-primary-foreground font-semibold px-5 py-2.5 rounded-md text-sm transition-colors flex items-center gap-2">
+            <button
+              onClick={() => {
+                if (trackingNumber) setShowQR(true);
+              }}
+              className="bg-primary hover:bg-primary/90 text-primary-foreground font-semibold px-5 py-2.5 rounded-md text-sm transition-colors flex items-center gap-2"
+            >
               <QrCode className="h-4 w-4" />
               Generate QR Code
             </button>
-            {trackingNumber && (
-              <span className="text-sm text-muted-foreground font-mono">Tracking #: {trackingNumber}</span>
+            {!trackingNumber && (
+              <span className="text-xs text-muted-foreground">Enter a tracking number above first</span>
             )}
           </div>
+          {showQR && trackingNumber && (
+            <div className="flex items-start gap-4 p-4 bg-accent/20 rounded-xl border border-border animate-in slide-in-from-top-1 duration-200">
+              <div className="bg-white p-3 rounded-xl border border-border shadow-sm shrink-0">
+                <QRCodeSVG value={getTrackingUrl(trackingNumber)} size={100} level="M" includeMargin={false} />
+              </div>
+              <div className="flex-1 min-w-0 space-y-2">
+                <p className="text-sm font-medium text-foreground">Tracking #{trackingNumber}</p>
+                <div className="flex items-center gap-2">
+                  <div className="flex-1 min-w-0 bg-background border border-border rounded-md px-2.5 py-1.5 text-[11px] text-muted-foreground truncate font-mono">
+                    {getTrackingUrl(trackingNumber)}
+                  </div>
+                  <button
+                    onClick={() => handleCopyLink(getTrackingUrl(trackingNumber))}
+                    className="shrink-0 p-1.5 rounded-md bg-background hover:bg-accent border border-border transition-colors"
+                  >
+                    {copiedLink ? <Check className="h-3.5 w-3.5 text-primary" /> : <Copy className="h-3.5 w-3.5 text-muted-foreground" />}
+                  </button>
+                </div>
+              </div>
+              <button onClick={() => setShowQR(false)} className="p-1 rounded-md hover:bg-accent text-muted-foreground">
+                <X className="h-4 w-4" />
+              </button>
+            </div>
+          )}
         </motion.div>
 
         {/* Tracking Table */}
@@ -286,12 +330,13 @@ export default function V1AdminPortal() {
           initial={{ opacity: 0, y: 12 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.1, duration: 0.35 }}
+          className="bg-card rounded-2xl border border-border shadow-sm p-6 space-y-4"
         >
-          <h2 className="text-xl font-bold text-foreground mb-4">Tracking Table</h2>
-          <div className="overflow-x-auto rounded-2xl border border-border shadow-sm">
+          <h2 className="text-xl font-bold text-foreground">Tracking Table</h2>
+          <div className="overflow-x-auto rounded-xl border border-border">
             <table className="w-full text-sm">
               <thead>
-                <tr className="bg-card border-b border-border text-foreground font-semibold">
+                <tr className="bg-muted/50 border-b border-border text-foreground font-semibold">
                   <th className="text-left px-5 py-3">Tracking #</th>
                   <th className="text-left px-5 py-3">Mission #</th>
                   <th className="text-left px-5 py-3">Status</th>
@@ -313,8 +358,11 @@ export default function V1AdminPortal() {
                     <td className="px-5 py-4 text-muted-foreground">{entry.eta}</td>
                     <td className="px-5 py-4">
                       <div className="flex items-center gap-2">
-                        <button className="p-2 bg-accent border border-border rounded">
-                          <QrCode className="h-4 w-4 text-muted-foreground" />
+                        <button
+                          onClick={() => setTableQR(tableQR === entry.trackingNumber ? null : entry.trackingNumber)}
+                          className={`p-2 rounded border transition-colors ${tableQR === entry.trackingNumber ? 'bg-primary/10 border-primary/30 text-primary' : 'bg-accent border-border text-muted-foreground hover:text-foreground'}`}
+                        >
+                          <QrCode className="h-4 w-4" />
                         </button>
                         <button
                           onClick={() => handleEdit(entry)}
@@ -329,13 +377,29 @@ export default function V1AdminPortal() {
                           Delete
                         </button>
                       </div>
+                      {tableQR === entry.trackingNumber && (
+                        <div className="mt-2 flex items-center gap-3 p-2 bg-accent/20 rounded-lg border border-border/50 animate-in slide-in-from-top-1 duration-200">
+                          <div className="bg-white p-2 rounded-lg border border-border shrink-0">
+                            <QRCodeSVG value={getTrackingUrl(entry.trackingNumber)} size={64} level="M" />
+                          </div>
+                          <div className="min-w-0 flex-1">
+                            <p className="text-[10px] text-muted-foreground font-mono truncate">{getTrackingUrl(entry.trackingNumber)}</p>
+                            <button
+                              onClick={() => handleCopyLink(getTrackingUrl(entry.trackingNumber))}
+                              className="mt-1 text-[10px] text-primary hover:underline flex items-center gap-1"
+                            >
+                              <Copy className="h-3 w-3" /> Copy Link
+                            </button>
+                          </div>
+                        </div>
+                      )}
                     </td>
                   </tr>
                 ))}
               </tbody>
             </table>
           </div>
-          <p className="text-xs text-muted-foreground mt-3">
+          <p className="text-xs text-muted-foreground">
             Tip: Share the tracking number with family or staff. No PHI is stored. Old entries auto-delete after ~48 hours.
           </p>
         </motion.div>

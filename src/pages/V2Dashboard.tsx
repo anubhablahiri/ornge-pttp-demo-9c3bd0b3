@@ -1,9 +1,10 @@
 import { useState, useEffect } from 'react';
 import { useParams, useNavigate, Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import { ArrowLeft, RefreshCw, Share2, Bell, QrCode, CheckCircle2, Circle, Clock } from 'lucide-react';
+import { ArrowLeft, RefreshCw, Share2, Bell, CheckCircle2, Circle, Clock } from 'lucide-react';
 import { mockTransports, Transport, getCurrentStatusIndex } from '@/data/mockTransports';
 import orngeLogo from '@/assets/ornge-logo.png';
+import { QRCodeSVG } from 'qrcode.react';
 
 // V2: 7-stage vertical timeline
 const V2_STAGES = [
@@ -61,7 +62,7 @@ export default function V2Dashboard() {
             </Link>
             <img src={orngeLogo} alt="Ornge" className="h-7" />
             <span className="text-sm font-semibold text-foreground hidden sm:inline">
-              Patient Transport Tracking (V2)
+              Patient Transport Tracking (v2)
             </span>
           </div>
           <button
@@ -78,7 +79,7 @@ export default function V2Dashboard() {
         {/* QR Code + Copy Link (grouped at top) */}
         <motion.div className="bg-card rounded-2xl p-5 border border-border shadow-sm flex flex-col items-center gap-3" {...anim(0)}>
           <div className="bg-white p-3 rounded-xl border border-border">
-            <QrCode className="h-14 w-14 text-foreground" />
+            <QRCodeSVG value={shareUrl} size={56} level="M" includeMargin={false} />
           </div>
           <p className="text-xs text-muted-foreground">Scan or copy link to share tracking</p>
           <button
