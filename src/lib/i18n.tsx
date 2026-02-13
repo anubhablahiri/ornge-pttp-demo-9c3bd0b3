@@ -14,7 +14,7 @@ interface AppContextType {
 
 const translations: Record<string, Record<Lang, string>> = {
   // Welcome page
-  'welcome.heroTitle': { en: 'Patient Transport Tracking Portal', fr: 'Portail de suivi de transport des patients' },
+  'welcome.heroTitle': { en: 'Patient Transport Tracking (V3)', fr: 'Suivi de transport des patients (V3)' },
   'welcome.heroSubtitle': { en: 'Stay informed about your loved one\'s critical care transport journey in real time.', fr: 'Restez informé du parcours de transport de soins intensifs de votre proche en temps réel.' },
   'welcome.modeTitle': { en: 'Select Transport Mode', fr: 'Sélectionner le mode de transport' },
   'welcome.modeSubtitle': { en: 'Choose the type of transport to track', fr: 'Choisissez le type de transport à suivre' },
