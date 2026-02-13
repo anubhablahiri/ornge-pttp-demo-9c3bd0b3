@@ -53,6 +53,14 @@ export default function FormatSelector() {
           {t('format.title')}
         </motion.p>
         <motion.p
+          className="mt-2 text-sm text-primary text-center max-w-md"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 0.2 }}
+        >
+          {t('format.description')}
+        </motion.p>
+        <motion.p
           className="mt-2 text-sm text-muted-foreground text-center max-w-sm"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
