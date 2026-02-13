@@ -118,6 +118,7 @@ export default function Dashboard() {
                 {/* Right column: Live Tracking + Transport Progress */}
                 <div className="space-y-4">
                   <motion.div {...anim(0.1)}><TrackingMap transport={transport} /></motion.div>
+                  <motion.div {...anim(0.15)}><ETADisplay transport={transport} /></motion.div>
                   <motion.div {...anim(0.2)}><StatusTimeline transport={transport} horizontal /></motion.div>
                 </div>
               </div>
