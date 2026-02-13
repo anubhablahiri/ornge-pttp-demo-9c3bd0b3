@@ -62,7 +62,7 @@ export default function VersionSelector() {
     {
       id: 'v4',
       label: 'Version 4',
-      subtitle: 'Coming Soon',
+      subtitle: 'TBD',
       description: 'To be determined.',
       features: [
         'TBD',
