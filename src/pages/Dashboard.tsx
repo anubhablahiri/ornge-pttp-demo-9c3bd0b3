@@ -6,7 +6,6 @@ import { mockTransports, Transport } from '@/data/mockTransports';
 import orngeLogo from '@/assets/ornge-logo.png';
 import TransportHeader from '@/components/transport/TransportHeader';
 import StatusTimeline from '@/components/transport/StatusTimeline';
-import LiveMap from '@/components/transport/LiveMap';
 import TrackingMap from '@/components/transport/TrackingMap';
 import ETADisplay from '@/components/transport/ETADisplay';
 import TransportDetails from '@/components/transport/TransportDetails';
@@ -119,7 +118,6 @@ export default function Dashboard() {
                 {/* Right column: Live Tracking + Transport Progress */}
                 <div className="space-y-4">
                   <motion.div {...anim(0.1)}><TrackingMap transport={transport} /></motion.div>
-                  <motion.div {...anim(0.15)}><LiveMap transport={transport} /></motion.div>
                   <motion.div {...anim(0.2)}><StatusTimeline transport={transport} horizontal /></motion.div>
                 </div>
               </div>
@@ -139,7 +137,6 @@ export default function Dashboard() {
               </div>
               <div className="space-y-4">
                 <motion.div {...anim(0.12)}><TrackingMap transport={transport} /></motion.div>
-                <motion.div {...anim(0.15)}><LiveMap transport={transport} /></motion.div>
                 <motion.div {...anim(0.25)}><NotificationFeed transport={transport} /></motion.div>
                 <motion.div {...anim(0.3)}><TransportDetails transport={transport} /></motion.div>
               </div>
@@ -156,7 +153,6 @@ export default function Dashboard() {
             <motion.div {...anim(0.05)}><ShareTracking transportId={transport.id} /></motion.div>
             <motion.div {...anim(0.1)}><ETADisplay transport={transport} /></motion.div>
             <motion.div {...anim(0.15)}><TrackingMap transport={transport} /></motion.div>
-            <motion.div {...anim(0.18)}><LiveMap transport={transport} /></motion.div>
             <motion.div {...anim(0.2)}><StatusTimeline transport={transport} /></motion.div>
             <motion.div {...anim(0.25)}><NotificationFeed transport={transport} /></motion.div>
             <motion.div {...anim(0.3)}><TransportDetails transport={transport} /></motion.div>
