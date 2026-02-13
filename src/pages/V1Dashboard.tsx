@@ -51,6 +51,9 @@ export default function V1Dashboard() {
               <ArrowLeft className="h-5 w-5 text-foreground" />
             </Link>
             <img src={orngeLogo} alt="Ornge" className="h-7" />
+            <span className="text-sm font-semibold text-foreground hidden sm:inline">
+              Patient Transport Tracking (V1)
+            </span>
           </div>
           <button
             onClick={() => setLastRefresh(new Date())}

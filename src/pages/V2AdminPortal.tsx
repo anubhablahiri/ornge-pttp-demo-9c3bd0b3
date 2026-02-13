@@ -74,8 +74,8 @@ export default function V2AdminPortal() {
             </Link>
             <img src={orngeLogo} alt="Ornge" className="h-8" />
             <div>
-              <h1 className="font-bold text-lg text-foreground leading-tight">Operations Dashboard</h1>
-              <p className="text-xs text-muted-foreground">Version 2</p>
+              <h1 className="font-bold text-lg text-foreground leading-tight">Operations Dashboard (V2)</h1>
+              <p className="text-xs text-muted-foreground">Ornge Transport Medicine</p>
             </div>
           </div>
           <div className="flex items-center gap-2 text-sm text-muted-foreground">
