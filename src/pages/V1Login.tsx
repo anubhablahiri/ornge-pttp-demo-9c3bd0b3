@@ -51,11 +51,8 @@ export default function V1Login() {
             animate={{ opacity: 1, scale: 1 }}
           />
           <h1 className="text-2xl font-bold text-center text-foreground">
-            Patient Transport Tracker
+            Patient Transport Tracking (V1)
           </h1>
-          <p className="mt-2 text-sm text-muted-foreground text-center">
-            Version 1 — Basic Tracker
-          </p>
         </div>
 
         <div className="bg-card rounded-2xl shadow-lg p-6 border border-border">
