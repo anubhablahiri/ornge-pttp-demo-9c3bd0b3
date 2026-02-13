@@ -1,9 +1,10 @@
 import { useState, useEffect } from 'react';
 import { useParams, useNavigate, Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import { ArrowLeft, RefreshCw, Share2, MessageSquare, QrCode, Check } from 'lucide-react';
+import { ArrowLeft, RefreshCw, Share2, MessageSquare, Check } from 'lucide-react';
 import { mockTransports, Transport, getCurrentStatusIndex } from '@/data/mockTransports';
 import orngeLogo from '@/assets/ornge-logo.png';
+import { QRCodeSVG } from 'qrcode.react';
 
 // V1: 5-stage horizontal timeline
 const V1_STAGES = [
@@ -52,7 +53,7 @@ export default function V1Dashboard() {
             </Link>
             <img src={orngeLogo} alt="Ornge" className="h-7" />
             <span className="text-sm font-semibold text-foreground hidden sm:inline">
-              Patient Transport Tracking (V1)
+              Patient Transport Tracking (v1)
             </span>
           </div>
           <button
@@ -73,7 +74,7 @@ export default function V1Dashboard() {
           animate={{ opacity: 1, y: 0 }}
         >
           <div className="bg-white p-3 rounded-xl border border-border">
-            <QrCode className="h-20 w-20 text-foreground" />
+            <QRCodeSVG value={shareUrl} size={80} level="M" includeMargin={false} />
           </div>
           <p className="text-xs text-muted-foreground">Scan to share tracking</p>
           <button

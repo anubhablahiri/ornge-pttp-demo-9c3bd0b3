@@ -22,7 +22,7 @@ export default function V2Welcome() {
           animate={{ opacity: 1, scale: 1 }}
         />
         <h1 className="text-2xl font-bold text-foreground mb-1">
-          Patient Transport Tracking (V2)
+          Patient Transport Tracking (v2)
         </h1>
         <p className="text-sm text-muted-foreground mb-2">Manual data posting of transport data from OCC with minimum real-time data from Flight Vector.</p>
         <p className="text-sm text-muted-foreground mb-10">

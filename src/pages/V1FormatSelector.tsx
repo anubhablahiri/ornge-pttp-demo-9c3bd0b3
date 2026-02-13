@@ -38,7 +38,7 @@ export default function V1FormatSelector() {
           animate={{ opacity: 1 }}
           transition={{ delay: 0.1 }}
         >
-          Patient Transport Tracking (V1)
+          Patient Transport Tracking (v1)
         </motion.h1>
         <motion.p
           className="mt-3 text-lg md:text-xl font-display font-semibold text-primary text-center"
