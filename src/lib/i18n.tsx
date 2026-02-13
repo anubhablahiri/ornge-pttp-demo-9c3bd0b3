@@ -41,7 +41,7 @@ const translations: Record<string, Record<Lang, string>> = {
   'login.subtitle': { en: 'Stay informed about your loved one\'s transport journey.', fr: 'Restez informé du parcours de transport de votre proche.' },
   'login.secure': { en: 'Secure & Private Access', fr: 'Accès sécurisé et privé' },
   'login.ref': { en: 'Transport Reference Number', fr: 'Numéro de référence du transport' },
-  'login.nickname': { en: 'Nickname', fr: 'Surnom' },
+  'login.nickname': { en: 'Nickname (Optional)', fr: 'Surnom (Facultatif)' },
   'login.nicknamePlaceholder': { en: 'e.g. Mom, Dad, Grandma', fr: 'ex. Maman, Papa, Grand-mère' },
   'login.lastName': { en: 'Patient Last Name', fr: 'Nom de famille du patient' },
   'login.track': { en: 'Track Transport', fr: 'Suivre le transport' },
