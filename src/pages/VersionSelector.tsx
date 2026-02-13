@@ -83,7 +83,7 @@ export default function VersionSelector() {
         transition={{ duration: 0.4 }}
       >
         <h1 className="text-3xl md:text-4xl font-bold text-foreground">
-          PTTP Prototype Versions
+          Patient Transport Tracking Portal (PTTP) Prototype Versions
         </h1>
         <p className="mt-3 text-muted-foreground text-sm md:text-base max-w-md mx-auto">
           Select a version to explore different iterations of the Patient Transport Tracking.
