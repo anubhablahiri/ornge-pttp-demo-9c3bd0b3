@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useParams, useNavigate, Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import { ArrowLeft, RefreshCw, Share2, MessageSquare, QrCode } from 'lucide-react';
+import { ArrowLeft, RefreshCw, Share2, MessageSquare, QrCode, Check } from 'lucide-react';
 import { mockTransports, Transport, getCurrentStatusIndex } from '@/data/mockTransports';
 import orngeLogo from '@/assets/ornge-logo.png';
 
@@ -129,25 +129,25 @@ export default function V1Dashboard() {
             {/* Connecting line */}
             <div className="absolute top-3 left-4 right-4 h-0.5 bg-border" />
             <div
-              className="absolute top-3 left-4 h-0.5 bg-primary transition-all duration-500"
+              className="absolute top-3 left-4 h-0.5 bg-success transition-all duration-500"
               style={{ width: `${(v1Stage / (V1_STAGES.length - 1)) * (100 - 8)}%` }}
             />
             {V1_STAGES.map((stage, i) => (
               <div key={i} className="flex flex-col items-center z-10 relative">
                 <div
-                  className={`w-6 h-6 rounded-full border-2 flex items-center justify-center text-xs font-bold transition-all ${
+                  className={`w-7 h-7 rounded-full flex items-center justify-center text-xs font-bold transition-all ${
                     i < v1Stage
-                      ? 'bg-primary border-primary text-primary-foreground'
+                      ? 'bg-success text-success-foreground'
                       : i === v1Stage
-                      ? 'bg-active border-active text-active-foreground animate-pulse'
-                      : 'bg-muted border-border text-muted-foreground'
+                      ? 'bg-active text-active-foreground animate-pulse-active'
+                      : 'bg-muted text-muted-foreground border-2 border-border'
                   }`}
                 >
-                  {i < v1Stage ? '✓' : i + 1}
+                  {i < v1Stage ? <Check className="h-3.5 w-3.5" /> : i + 1}
                 </div>
                 <span
                   className={`text-[10px] mt-1.5 text-center max-w-[60px] leading-tight ${
-                    i <= v1Stage ? 'text-foreground' : 'text-muted-foreground'
+                    i < v1Stage ? 'text-foreground font-medium' : i === v1Stage ? 'text-active font-semibold' : 'text-muted-foreground'
                   }`}
                 >
                   {stage.label}

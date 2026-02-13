@@ -136,8 +136,8 @@ export default function V2Dashboard() {
                         isDone
                           ? 'bg-success text-success-foreground'
                           : isActive
-                          ? 'bg-active text-active-foreground animate-pulse'
-                          : 'bg-muted text-muted-foreground'
+                          ? 'bg-active text-active-foreground animate-pulse-active'
+                          : 'bg-muted text-muted-foreground border-2 border-border'
                       }`}
                     >
                       {isDone ? (
