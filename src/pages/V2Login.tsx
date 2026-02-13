@@ -50,7 +50,7 @@ export default function V2Login() {
             animate={{ opacity: 1, scale: 1 }}
           />
           <h1 className="text-2xl font-bold text-center text-foreground">
-            Family Transport Tracking
+            Patient Transport Tracking
           </h1>
           <p className="mt-2 text-sm text-muted-foreground text-center">
             Version 2 — Card-Based Light Theme
