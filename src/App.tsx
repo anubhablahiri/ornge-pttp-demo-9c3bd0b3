@@ -26,6 +26,7 @@ import NotFound from "./pages/NotFound";
 import AdminPortal from "./pages/AdminPortal";
 import AdminLogin from "./pages/AdminLogin";
 import DeviceFrame from "./components/DeviceFrame";
+import GateGuard from "./components/GateGuard";
 
 const queryClient = new QueryClient();
 
@@ -53,6 +54,10 @@ function FramedDashboard() {
   return <DeviceFrame><Dashboard /></DeviceFrame>;
 }
 
+function G({ children }: { children: React.ReactNode }) {
+  return <GateGuard>{children}</GateGuard>;
+}
+
 const App = () => (
   <QueryClientProvider client={queryClient}>
     <AppProvider>
@@ -64,42 +69,42 @@ const App = () => (
             {/* Gate login */}
             <Route path="/" element={<GateLogin />} />
             {/* Version selector */}
-            <Route path="/versions" element={<VersionSelector />} />
+            <Route path="/versions" element={<G><VersionSelector /></G>} />
 
             {/* V1 routes */}
-            <Route path="/v1" element={<V1Welcome />} />
-            <Route path="/v1/platform" element={<V1FormatSelector />} />
-            <Route path="/v1/login" element={<V1FramedLogin />} />
-            <Route path="/v1/track/:id" element={<V1FramedDashboard />} />
-            <Route path="/v1/admin-login" element={<V1AdminLogin />} />
-            <Route path="/v1/admin" element={<V1AdminPortal />} />
+            <Route path="/v1" element={<G><V1Welcome /></G>} />
+            <Route path="/v1/platform" element={<G><V1FormatSelector /></G>} />
+            <Route path="/v1/login" element={<G><V1FramedLogin /></G>} />
+            <Route path="/v1/track/:id" element={<G><V1FramedDashboard /></G>} />
+            <Route path="/v1/admin-login" element={<G><V1AdminLogin /></G>} />
+            <Route path="/v1/admin" element={<G><V1AdminPortal /></G>} />
 
             {/* V2 routes */}
-            <Route path="/v2" element={<V2Welcome />} />
-            <Route path="/v2/platform" element={<V2FormatSelector />} />
-            <Route path="/v2/login" element={<V2FramedLogin />} />
-            <Route path="/v2/track/:id" element={<V2FramedDashboard />} />
-            <Route path="/v2/admin-login" element={<V2AdminLogin />} />
-            <Route path="/v2/admin" element={<V2AdminPortal />} />
+            <Route path="/v2" element={<G><V2Welcome /></G>} />
+            <Route path="/v2/platform" element={<G><V2FormatSelector /></G>} />
+            <Route path="/v2/login" element={<G><V2FramedLogin /></G>} />
+            <Route path="/v2/track/:id" element={<G><V2FramedDashboard /></G>} />
+            <Route path="/v2/admin-login" element={<G><V2AdminLogin /></G>} />
+            <Route path="/v2/admin" element={<G><V2AdminPortal /></G>} />
 
             {/* V3 routes (current full platform) */}
-            <Route path="/v3" element={<Welcome />} />
-            <Route path="/v3/platform" element={<FormatSelector />} />
-            <Route path="/v3/login" element={<FramedLogin />} />
-            <Route path="/v3/track/:id" element={<FramedDashboard />} />
-            <Route path="/v3/tablet/track/:id" element={<FramedDashboard />} />
-            <Route path="/v3/desktop/track/:id" element={<Dashboard />} />
-            <Route path="/v3/admin-login" element={<AdminLogin />} />
-            <Route path="/v3/admin" element={<AdminPortal />} />
+            <Route path="/v3" element={<G><Welcome /></G>} />
+            <Route path="/v3/platform" element={<G><FormatSelector /></G>} />
+            <Route path="/v3/login" element={<G><FramedLogin /></G>} />
+            <Route path="/v3/track/:id" element={<G><FramedDashboard /></G>} />
+            <Route path="/v3/tablet/track/:id" element={<G><FramedDashboard /></G>} />
+            <Route path="/v3/desktop/track/:id" element={<G><Dashboard /></G>} />
+            <Route path="/v3/admin-login" element={<G><AdminLogin /></G>} />
+            <Route path="/v3/admin" element={<G><AdminPortal /></G>} />
 
             {/* Legacy routes kept for compatibility */}
-            <Route path="/platform" element={<FormatSelector />} />
-            <Route path="/login" element={<FramedLogin />} />
-            <Route path="/track/:id" element={<FramedDashboard />} />
-            <Route path="/tablet/track/:id" element={<FramedDashboard />} />
-            <Route path="/desktop/track/:id" element={<Dashboard />} />
-            <Route path="/admin-login" element={<AdminLogin />} />
-            <Route path="/admin" element={<AdminPortal />} />
+            <Route path="/platform" element={<G><FormatSelector /></G>} />
+            <Route path="/login" element={<G><FramedLogin /></G>} />
+            <Route path="/track/:id" element={<G><FramedDashboard /></G>} />
+            <Route path="/tablet/track/:id" element={<G><FramedDashboard /></G>} />
+            <Route path="/desktop/track/:id" element={<G><Dashboard /></G>} />
+            <Route path="/admin-login" element={<G><AdminLogin /></G>} />
+            <Route path="/admin" element={<G><AdminPortal /></G>} />
 
             <Route path="*" element={<NotFound />} />
           </Routes>
