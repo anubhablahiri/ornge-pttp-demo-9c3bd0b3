@@ -1,461 +1,276 @@
-# Ornge Family Transport Tracking Platform (FTTP)
+# Ornge Patient Transport Tracking Portal (PTTP)
 
-> A multi-portal web application for **Ornge Transport Medicine**, Ontario's provider of critical care transport services. The platform delivers real-time family transport tracking and a centralized operations dashboard for logistics management across the province.
+> A multi-version prototype web application for **Ornge Transport Medicine**, Ontario's provider of critical care transport services. The portal keeps families informed about their loved one's transport journey and provides operations staff with centralized logistics management tools.
 
 ---
 
 ## 📋 Executive Overview
 
-The Ornge FTTP addresses a critical communication gap in emergency medical transport: keeping families informed about the status and location of their loved ones during critical care transfers across Ontario.
+The Ornge PTTP addresses a critical communication gap in emergency medical transport: keeping families informed about the status and location of their loved ones during critical care transfers across Ontario.
 
-### Problem Statement
+### The Problem
 
 When a patient requires inter-facility or scene-based critical care transport — by air ambulance (helicopter or fixed-wing aircraft) or land ambulance — families are often left in the dark about the transport's progress. This uncertainty adds significant stress during an already difficult time.
 
-### Solution
+### The Solution
 
-The FTTP provides two purpose-built portals:
+The PTTP provides two purpose-built portals across multiple prototype versions:
 
-1. **Family Transport Tracking Portal** — A patient-family-facing interface that provides real-time, non-clinical updates about a transport journey. Families can track their loved one's location on a live map, view milestone progress, and access support resources — all without exposing sensitive medical information.
+1. **Patient Transport Tracking** — A patient-family-facing interface that provides non-clinical updates about a transport journey. Families can track their loved one's progress through milestones, view estimated arrival times, and access support resources — all without exposing sensitive medical information.
 
-2. **Operations Dashboard (Admin Portal)** — A comprehensive logistics management interface for Ornge operations staff. It provides province-wide transport visibility, fleet management, crew scheduling, and analytics to support centralized coordination.
+2. **Operations Dashboard** — A logistics management interface for Ornge operations staff. It provides transport visibility, fleet management, tracking number generation, QR code sharing, and analytics to support coordination.
 
 ### Design Philosophy
 
 - **Non-clinical messaging**: All patient-facing status updates use reassuring, family-friendly language. No medical jargon, diagnosis information, or clinical records are displayed.
 - **Privacy-first**: Information is intentionally limited. The platform confirms transport status and location without exposing protected health information.
-- **Bilingual by default**: Full English/French support throughout the family portal, with layouts optimized for variable string lengths.
+- **Bilingual support** (V3): Full English/French support throughout the family portal.
 - **Multi-device**: Responsive layouts for mobile, tablet, and desktop — with realistic device frame previews for demonstration purposes.
 
 ---
 
 ## 🌐 Live Demo
 
-**Published URL:** [ornge-fttp-demo.lovable.app](https://ornge-fttp-demo.lovable.app)
+**Published URL:** [ornge-pttp-demo.lovable.app](https://ornge-pttp-demo.lovable.app)
 
-> All data is mock/demo data. No backend or database is connected. Admin login uses pre-filled demo credentials.
-
----
-
-## 🧭 Application Flow & Page-by-Page Breakdown
-
-```
-Landing Page (/)
-├── Family Transport Tracking
-│   ├── Select Transport Mode (Air / Land)
-│   ├── Select Platform (Mobile / Tablet / Desktop) — auto-skipped on mobile devices
-│   ├── Login (Transport Reference ID)
-│   └── Tracking Dashboard (/track/:id)
-│
-└── Operations Dashboard
-    ├── Admin Login (/admin-login)
-    └── Admin Portal (/admin)
-```
+> All data is mock/demo data. No backend or database is connected.
 
 ---
 
-### Page 1: Welcome / Landing Page (`/`)
+## 🔐 Secure Access Gate
 
-**File:** `src/pages/Welcome.tsx`
-
-The entry point to the application. Features a full-width hero banner showing an Ornge helicopter over Toronto with a gradient overlay transitioning into a white content card.
+The entire application is protected behind a login screen. Users must enter valid credentials to access any part of the prototype. After successful authentication, the user is taken to the Version Selection screen.
 
 **Features:**
-- **Portal Selection (Step 1):** Two large card buttons — "Family Transport Tracking" and "Operations Dashboard" — allowing users to choose their entry path.
-- **Transport Mode Selection (Step 2):** After selecting the family portal, users choose between "Air Transport" (helicopter & fixed-wing) and "Land Transport" (ground ambulance). This selection is stored in `sessionStorage` and used to filter mock data.
-- **Responsive Hero Banner:** Uses a landscape hero image on desktop (`hero-banner.png`) and a portrait-cropped version on mobile (`hero-banner-mobile.png`).
-- **Responsive Header:** Solid white background with orange Ornge logo on mobile; transparent overlay with white logo on desktop.
-- **Language Toggle:** Persistent EN/FR toggle accessible from all pages.
-- **Smart Navigation:** The "Back" button returns from mode selection to portal selection without page reload, preserving local state. When returning from the Platform Selector via browser history or the back link, the `location.state.portal` parameter restores the user directly to the transport mode selection view.
-- **Mobile Detection:** On touch-enabled small screens (≤768px), the platform selector is bypassed entirely and the user proceeds directly to login.
+- Username and password authentication
+- Rate limiting: 3 failed attempts trigger a 5-minute lockout with a visible countdown timer
+- Session-based security — navigating directly to any internal page without logging in redirects back to the login screen
 
 ---
 
-### Page 2: Transport Mode Selection (Embedded in `/`)
+## 🧭 Version Selection
 
-**File:** `src/pages/Welcome.tsx` (second step within the Welcome component)
+After logging in, users are presented with the Version Selection screen, which provides an overview of all prototype iterations. Each version is displayed as a card with its name, subtitle, description, and a list of key features.
 
-After selecting "Family Transport Tracking" on the portal selection screen, users are presented with a transport mode selection step — rendered inline on the same page without a route change.
+The four versions are:
+- **Version 1** — Manual Static Tracker
+- **Version 2** — Semi-Live Tracker
+- **Version 3** — Real-Time Platform
+- **Version 4** — TBD (not yet clickable)
+
+Users can click any active version card to explore that iteration. A logout button at the bottom returns to the secure login screen.
+
+---
+
+## 📦 Version 1 — Manual Static Tracker
+
+**Subtitle:** Manual data posting of transport data from PTAC and OCC. No real-time data.
+
+Version 1 represents the simplest iteration of the tracking concept. All transport data is manually entered by operations staff, and families see static updates that are refreshed only when staff post new information.
+
+### Portal Selection
+
+Upon entering Version 1, users choose between two access paths:
+- **Patient Tracking** — For families to track their loved one's transport
+- **Operations Dashboard** — For admin staff to manage and post transport updates
+
+A back link returns to the Version Selection screen.
+
+### Platform Selector
+
+On desktop browsers, users can choose how they want to view the demo: Mobile, Tablet, or Desktop. Each option is represented by a realistic device mockup image. On mobile devices, this step is skipped automatically.
+
+### Patient Login
+
+A simple login screen where families enter a Transport Reference ID to access the tracking view. The reference field is pre-filled with a demo value for easy testing.
+
+### Patient Tracking Dashboard
+
+The family-facing tracking view in V1 includes:
+
+- **QR Code & Share Link** — A QR code and a "Copy Tracking Link" button allow families to share the tracking page with others
+- **Patient & Route Information** — Displays the transport reference number, transport mode (Air or Land), origin and destination facilities, and estimated arrival time
+- **5-Stage Horizontal Timeline** — A simplified progress tracker showing five stages: Requested → Team Assigned → En Route to Pickup → In Transit → Arrived. Completed stages are highlighted, and the current stage pulses to indicate activity
+- **Special Message Box** — A dedicated area for operations staff to post contextual messages (e.g., delay notices, weather updates, or reassuring notes)
+- **Transport Details** — Shows care level, crew type, and vehicle information
+
+### Operations Dashboard (V1 Admin)
+
+The V1 admin portal is a **manual data entry system** designed for operations staff to create, update, and manage patient tracking entries. It functions as a simple content management tool.
 
 **Features:**
-- **Two Mode Options:** "Air Transport" (helicopter & fixed-wing aircraft) and "Land Transport" (ground ambulance), each displayed as a large card with a circular icon badge (Plane / Truck), bold label, and descriptive subtitle.
-- **Session Persistence:** The selected mode (`air` or `land`) is written to `sessionStorage` under the key `transportMode`. This value is used downstream to filter mock transport data and display mode-appropriate UI elements (altitude indicators, flight progress bars, etc.).
-- **Back Button:** An "← Back" link at the top left returns the user to the portal selection step (Step 1) without a page navigation, preserving smooth in-page transitions via local state.
-- **Mobile-Aware Routing:** On touch-enabled small screens (≤768px), selecting a transport mode navigates directly to `/login`, bypassing the Platform Selector. On desktop browsers, it navigates to `/platform` for device format selection.
-- **Full i18n Support:** Mode titles and descriptions are bilingual (`welcome.air`, `welcome.land`, `welcome.airDesc`, `welcome.landDesc`).
-- **Framer Motion Animations:** The section fades and slides in with `motion.div`. Each card responds to hover (scale up) and tap (scale down) interactions.
-- **State Restoration:** When navigating back from the Platform Selector page, `location.state.portal === 'family'` ensures users land on this transport mode step rather than resetting to the initial portal choice.
+- **Tracking Number Management** — Staff can manually enter or auto-generate 16-digit tracking numbers
+- **Mission Number Assignment** — Link each tracking entry to an internal mission number
+- **Status Selection** — Choose from six predefined statuses: Preparing for Transport, En Route to Patient Pickup, With Patient, En Route to Patient Dropoff, Arrived at Destination, Transport Complete
+- **ETA Entry** — Set estimated arrival times using a date/time picker
+- **Hospital Selection** — Choose the destination hospital from a predefined list of Ontario facilities
+- **Special Messages** — Attach predefined messages (e.g., Medical Delay, Weather Delay) or write custom notes
+- **QR Code Sharing** — Generate a QR code for each tracking entry to share with families
+- **Tracking Table** — A searchable table showing all active tracking entries with their tracking number, mission number, status, last updated time, and ETA. Staff can edit or delete entries directly from the table
+- **Filter/Search** — Quickly find entries by tracking number, mission number, or status
+
+The admin login uses pre-filled demo credentials — simply click Sign In to proceed.
 
 ---
 
-### Page 3: Platform Selector (`/platform`)
+## 📦 Version 2 — Semi-Live Tracker
 
-**File:** `src/pages/FormatSelector.tsx`
+**Subtitle:** Manual data posting of transport data from PTAC and OCC with minimum real-time data from Flight Vector.
 
-A device picker page that lets users choose how they want to experience the demo. This page is **only shown on desktop browsers** — mobile users skip it entirely.
+Version 2 builds on V1 by introducing a more detailed timeline, a notification feed, and a richer operations dashboard. While data is still primarily manually posted, minimal real-time data from Flight Vector begins to supplement the updates.
+
+### Portal Selection
+
+Same as V1 — users choose between Patient Tracking and Operations Dashboard.
+
+### Platform Selector
+
+Same as V1 — desktop users can choose between Mobile, Tablet, and Desktop views.
+
+### Patient Login
+
+A login screen where families enter a Transport Reference ID (e.g., ORN-2025-4821). Pre-filled with a demo value for easy testing.
+
+### Patient Tracking Dashboard
+
+The family-facing tracking view in V2 includes:
+
+- **QR Code & Share Link** — Same as V1, allowing families to scan or copy a link to share the tracking page
+- **Patient & Route Information** — Displays reference number, transport mode, origin/destination, and ETA with a highlighted time badge
+- **7-Stage Vertical Timeline** — An expanded progress tracker with seven stages: Transport Requested → Team Assigned → Team Dispatched → Arrived at Pickup → Patient Onboard → En Route to Destination → Transport Complete. Each stage shows a colored circle indicating completed, active (pulsing), or pending status
+- **Notification Feed** — A chronological list of transport updates, each with a message and timestamp. This is a new addition compared to V1, giving families a running log of events
+- **Transport Details** — Shows care level, crew type, and vehicle information
+- **Clinical Notes** — A brief, non-diagnostic summary of the patient's status (e.g., "Patient is stable and being monitored continuously")
+
+### Operations Dashboard (V2 Admin)
+
+The V2 admin portal is a **monitoring-focused dashboard** that provides at-a-glance visibility into transport operations. Unlike V1's manual data entry approach, V2 presents a summary view of all active and recent transports.
 
 **Features:**
-- **Three Device Options:** Mobile (iPhone), Tablet (iPad), and Desktop (Laptop) — each represented by a front-facing device mockup image with a visual size hierarchy (Laptop > Tablet > Smartphone).
-- **Device Mockup Images:** Custom assets (`device-iphone.png`, `device-ipad.png`, `device-laptop.png`) showing internal dashboard screenshots within the device frames.
-- **Framer Motion Animations:** Each device card animates in with a staggered fade-up effect and responds to hover/tap with scale transforms.
-- **Back Navigation:** A "← Select Transport Mode" link at the bottom navigates back to the Welcome page with `{ state: { portal: 'family' } }` to preserve the family portal context.
+- **Summary Statistics** — Six stat cards showing: Live Transports (7), Air Active (4), Land Active (3), Completed Today (23), Average Response Time (14 min), and Delays (2)
+- **Recent Transports Table** — A list of recent transports with patient name, reference ID, route (origin → destination), transport mode (Air or Land), and status badges (In Transit, Dispatched, or Completed)
+- **QR Code Sharing** — Each transport in the table has a QR code button. Clicking it reveals an inline panel with a scannable QR code, a copyable tracking link, and a description explaining how to share it with the patient's family
+- **Fleet Status** — Vehicle availability broken down by fleet type:
+  - Fixed-Wing (PC-12): 10 total, 4 active, 1 maintenance
+  - Rotor-Wing (AW139): 12 total, 6 active, 2 maintenance
+  - Land Ambulance: 20 total, 3 active, 3 maintenance
+  - Each type shows a visual progress bar and active/available/maintenance counts
+
+The admin login uses pre-filled demo credentials — simply click Sign In to proceed.
 
 ---
 
-### Page 4: Family Login (`/login`)
+## 📦 Version 3 — Real-Time Platform
 
-**File:** `src/pages/Login.tsx`
+**Subtitle:** Automated real-time data from PTAC, OCC, and Flight Vector.
 
-A secure-feeling login page where families enter their Transport Reference Number to access the tracking dashboard.
+Version 3 is the most advanced iteration, featuring live map tracking, full system integration, multi-device previews, and bilingual support. Transport data is fully automated with no manual data posting required.
 
-**Features:**
-- **Pre-filled Demo Credentials:** The reference number field is pre-filled with `ORN-2025-4821` for easy demo access.
-- **Reference Lookup:** On submit, the entered reference ID is matched against `mockTransports` data. If found, the user is navigated to the tracking dashboard; otherwise, an error message is displayed.
-- **Device-Aware Routing:** The login page routes to the correct URL prefix based on the selected device format (`/track/:id`, `/tablet/track/:id`, or `/desktop/track/:id`).
-- **Security Indicators:** A shield icon and "Secure & Private Access" label reinforce trust.
-- **Privacy Notice:** A footer message confirms that no medical records or diagnosis information are displayed.
-- **Back to Platform:** On non-mobile devices, a "← Select Platform" link returns to the format selector.
-- **Full i18n Support:** All labels, error messages, and placeholders are bilingual (EN/FR).
+### Landing Page
 
----
+The entry point features a full-width hero banner showing an Ornge helicopter over Toronto. Users choose between two portals:
+- **Patient Transport Tracking** — For families
+- **Operations Dashboard** — For admin staff
 
-### Page 5: Tracking Dashboard (`/track/:id`)
+After selecting Patient Transport Tracking, users choose between Air Transport and Land Transport.
 
-**File:** `src/pages/Dashboard.tsx`
+### Platform Selector
 
-The core family-facing interface. Displays comprehensive, real-time transport information in a non-clinical format. The layout adapts significantly across device formats.
+On desktop browsers, users choose a device view (Mobile, Tablet, or Desktop) using realistic device mockup images. Mobile users skip this step.
 
-**Layout Strategy:**
-- **Mobile:** Single-column vertical stack of all components.
-- **Tablet:** Two-column grid with transport info on the left and maps/updates on the right, plus a full-width bottom row for support and demo controls.
-- **Desktop:** Two-row layout — a top row with transport header and ETA side-by-side, followed by a main content area with a narrow left sidebar (support, updates, details, admin) and a wide right panel (maps, timeline).
+### Patient Login
 
-**Components (in display order):**
+A secure login screen with:
+- **Transport Reference ID** field (pre-filled with a demo value)
+- **Nickname** field — Families can optionally enter their name (e.g., "Mom") for a personalized experience
+- Privacy notice confirming no medical records or diagnosis information are displayed
+- Full bilingual support (English/French) with a language toggle
 
-#### 5a. Transport Header (`TransportHeader.tsx`)
-- Displays the Transport Reference ID (e.g., `ORN-2025-4821`), patient first name with possessive suffix (e.g., "Sarah's Transport"), transport mode badge (Air/Land with icon), care level badge (Critical Care / Advanced Care / Basic Care), and origin/destination facility names.
+### Patient Tracking Dashboard
 
-#### 5b. ETA Display (`ETADisplay.tsx`)
-- Shows estimated arrival time for either the pickup location or the destination, depending on the current transport phase.
-- **Smart Visibility:** ETA is hidden during patient transfer phases (milestone 5) and after arrival at destination (milestone 8+) to manage family expectations.
-- Includes a disclaimer: "Times are estimates and may change due to weather or operational factors."
+The most feature-rich family-facing view, with layout adapting across mobile, tablet, and desktop:
 
-#### 5c. Live Tracking Card (`LiveMap.tsx`)
-- A **five-phase horizontal progress bar** that condenses the 10 transport milestones into five visual stages: Preparing → En Route to Pickup → With Patient → En Route to Dropoff → Completed.
-- Each phase shows the transport mode icon (Plane or Truck) with the active phase pulsing.
-- Below the progress bar, a contextual status message describes the current phase in plain language.
-- For air transports in the "En Route to Destination" phase, an animated flight progress bar is displayed with a gradient fill.
-- Includes altitude display for air transports (e.g., "Alt: 24,000 ft").
+- **Transport Header** — Displays reference ID, patient first name with possessive (e.g., "Sarah's Transport"), transport mode badge (Air/Land), care level badge, and origin/destination facilities
+- **ETA Display** — Smart estimated arrival that changes based on the current transport phase and hides during patient transfer or after arrival
+- **Live Tracking Card** — A five-phase horizontal progress bar condensing the journey into: Preparing → En Route to Pickup → With Patient → En Route to Dropoff → Completed. Includes altitude display for air transports and an animated flight progress bar
+- **Interactive Map** — A live map showing three markers: origin (green), destination (red), and current vehicle position (pulsing orange). Dashed route line for the planned path and solid line for the completed portion
+- **10-Milestone Timeline** — A detailed timeline tracking all stages from "Preparing for Transport" through "Transport Completed." Each milestone shows completion timestamps and contextual messages
+- **Notification Feed** — Chronological updates with distinct icons for status changes, departures, arrivals, and delays
+- **Transport Details** — Expandable sections for crew information, equipment onboard, and a non-clinical patient summary
+- **Family Support** — An empathetic support card with the Transport Coordination hotline (1-800-461-1911) and a brief FAQ
+- **Demo Controls** — A testing panel allowing instant navigation to any transport milestone, delay simulation, and undo
 
-#### 5d. Interactive Map (`TrackingMap.tsx`)
-- **Leaflet/OpenStreetMap** interactive map with CartoDB Light tiles.
-- Three marker types: Green circle (origin), Red circle (destination), Pulsing orange circle (current vehicle position).
-- Route visualization: Dashed gray polyline for the full planned route; solid orange polyline for the completed portion.
-- **Auto-fit bounds:** Map automatically adjusts zoom and center to show all three points with padding.
-- Vehicle marker is hidden when transport is complete.
-- For air transports, an altitude badge appears in the card header.
+### Device Frame Previews
 
-#### 5e. Status Timeline (`StatusTimeline.tsx`)
-- A **10-milestone timeline** tracking the full transport journey from "Preparing for Transport" through "Transport Completed."
-- **Responsive orientation:** Vertical layout on mobile/tablet; horizontal layout on desktop.
-- Each milestone shows a numbered circle with three states: completed (green with checkmark), active (blue with pulse animation), or pending (gray).
-- Active and recently completed milestones display a contextual message (e.g., "The team is on the way to your family member").
-- Completed milestones show their completion timestamp.
+When viewing the demo on a desktop browser, the Mobile and Tablet views are wrapped in realistic device frames:
+- **Mobile:** iPhone-style frame with Dynamic Island notch, status bar, and home indicator
+- **Tablet:** iPad-style frame with minimal bezel and status bar
+- **Desktop:** No frame — content renders at full width
 
-##### The 10 Transport Milestones:
-1. Preparing for Transport
-2. Transport Team Assigned
-3. Team Dispatched
-4. En Route to Pickup Location
-5. Arrived at Pickup Location
-6. Patient Transfer in Progress
-7. Departed from Pickup
-8. En Route to Destination
-9. Arrived at Destination
-10. Transport Completed
+### Operations Dashboard (V3 Admin)
 
-#### 5f. Notification Feed (`NotificationFeed.tsx`)
-- A chronological (newest-first) list of transport updates.
-- Four notification types with distinct icons: `status` (ArrowRightLeft), `departure` (MapPin), `arrival` (MapPin), `delay` (AlertTriangle with warning styling).
-- Each notification shows its message and timestamp (HH:MM format).
+The most comprehensive operations dashboard with province-wide visibility:
 
-#### 5g. Transport Details (`TransportDetails.tsx`)
-- An **accordion-based** expandable section with three panels:
-  - **Crew Information:** Crew type (e.g., "Critical Care Paramedic + Flight Nurse") and vehicle ID (e.g., "Ornge Pilatus PC-12 (C-GORN)").
-  - **Equipment Onboard:** List of medical equipment as pill-shaped badges (e.g., Ventilator, Cardiac Monitor, IV Pumps, Blood Products).
-  - **Clinical Summary:** A brief, non-diagnostic summary of the patient's status (e.g., "Patient is stable and being monitored continuously").
+- **Summary Statistics** — Six stat cards: Live Transports, Air Active, Land Active, Completed Today, Average Response Time, and Delays
+- **Live Transport Map** — A province-wide interactive map of Ontario showing active transports with route lines, color-coded vehicle markers (orange for air, green for land), and Ornge base locations (Toronto, Sudbury, Thunder Bay, Ottawa). Click any transport for details
+- **Recent Transports Table** — Transport list with mode icons, patient names, routes, and status badges
+- **Crew Scheduling** — A roster of crew members with names, roles, assigned vehicles, shift hours, base locations, and status indicators (On Duty, En Route, On Call, Off Duty)
+- **Fleet Status** — Vehicle availability by fleet type with progress bars
+- **Transport Analytics** — Tabbed bar charts (Weekly/Monthly/Yearly) showing air vs. land transport volume, plus performance metrics: on-time rate, patient satisfaction, average response time, and care level breakdown
+- **Detailed Statistics** — Daily totals by response type and vehicle type, with CSV export for individual categories and full reports
 
-#### 5h. Family Support (`FamilySupport.tsx`)
-- A support card with an empathetic message: "We understand this is a stressful time."
-- **Transport Coordination hotline:** Clickable `tel:` link to 1-800-461-1911.
-- **FAQ section:** "What happens during transport?" with a brief reassuring answer.
+The admin login uses pre-filled demo credentials — simply click Sign In to proceed.
 
-#### 5i. Demo Controls (`AdminToggle.tsx`)
-- A collapsible panel (dashed warning-colored border) that provides demo-only controls for testing purposes.
-- **Jump to Status:** A grid of 10 buttons allowing instant navigation to any transport milestone.
-- **Simulate Delay:** Adds a mock delay notification ("A brief delay has been reported due to weather conditions").
-- **Undo Delay:** Removes the most recent delay notification.
-- When milestone 10 is selected, all milestones are marked complete and no milestone is active, reflecting a finished transport.
+### Bilingual Support (V3 Only)
+
+Version 3 includes full English/French language support:
+- A persistent language toggle (EN/FR) is accessible from all pages
+- Over 60 translated text strings covering the landing page, login, dashboard labels, milestone names and messages, support text, and format selector
+- The interface automatically adapts to French text lengths
 
 ---
 
-### Page 6: Device Frame Wrapper (`DeviceFrame.tsx`)
+## 🧪 Demo Data
 
-**File:** `src/components/DeviceFrame.tsx`
+Three pre-configured transport scenarios are available for testing:
 
-Not a page itself, but wraps the Login and Dashboard pages in a realistic device mockup when viewed on desktop browsers.
+| Reference | Patient | Route | Mode | Care Level | Current Status |
+|-----------|---------|-------|------|------------|----------------|
+| ORN-2025-4821 | Sarah Mitchell | Thunder Bay → Toronto | Air | Critical Care | En Route to Destination |
+| ORN-2025-4819 | James Chen | Brampton → Hamilton | Land | Advanced Care | Team Dispatched |
+| ORN-2025-4815 | Maria Santos | Sudbury → Ottawa | Air | Critical Care | Completed |
 
-**Features:**
-- **Mobile Frame:** iPhone-style frame with Dynamic Island notch, status bar (time, signal, WiFi, battery icons), and home indicator bar. Dimensions: 390×844px.
-- **Tablet Frame:** iPad-style frame with minimal bezel and status bar. Dimensions: 768×1024px.
-- **Desktop:** No frame wrapper — content renders at full width.
-- **Auto-bypass:** If the browser width is less than 1024px, the frame is not rendered regardless of the selected format.
-
----
-
-### Page 7: Admin Login (`/admin-login`)
-
-**File:** `src/pages/AdminLogin.tsx`
-
-A dedicated login page for operations staff to access the admin dashboard.
-
-**Features:**
-- **Pre-filled Demo Credentials:** Email (`admin@ornge.ca`) and password are pre-filled.
-- **Demo Mode Notice:** A highlighted banner explains that credentials are pre-filled for demo purposes.
-- **Simulated Authentication:** Clicking "Sign In" triggers an 800ms loading spinner before redirecting to `/admin`.
-- **Back Navigation:** A "← Back to Portal Selection" link returns to the Welcome page.
-
----
-
-### Page 8: Operations Dashboard / Admin Portal (`/admin`)
-
-**File:** `src/pages/AdminPortal.tsx`
-
-A comprehensive operations dashboard for Ornge's centralized logistics management. Uses a wide viewport (95vw) layout with a sticky header.
-
-**Sections (top to bottom):**
-
-#### 8a. Header
-- Sticky navigation bar with Ornge logo, "Operations Dashboard" title, subtitle "Ornge Transport Medicine," and the current date.
-- Back arrow returns to the root landing page.
-
-#### 8b. Operational Stat Cards (`AdminStatCard.tsx`)
-- Six summary cards in a responsive grid (6 columns on large screens, 4 on medium, 2 on mobile):
-  - **Live Transports:** 7 (primary accent)
-  - **Air Active:** 4 (primary accent)
-  - **Land Active:** 3 (primary accent)
-  - **Completed Today:** 23 (success/green accent)
-  - **Avg Response:** 14 min (warning/amber accent)
-  - **Delays:** 2 (destructive/red accent)
-
-#### 8c. Live Transport Map (`AdminMapView.tsx`)
-- A **province-wide Leaflet map** centered on Ontario showing:
-  - **5 active transports** with route polylines (solid completed, dashed remaining).
-  - Color-coded vehicle markers: Orange for air, green for land.
-  - **4 Ornge base locations** (Toronto, Sudbury, Thunder Bay, Ottawa) with darker markers.
-  - Popup details on click: transport ID, route, mode, and status.
-  - Map legend showing Air, Land, and Base marker types.
-
-#### 8d. Recent Transports Table (`AdminRecentTransports.tsx`)
-- A list of the 6 most recent transports with:
-  - Transport mode icon (Plane/Truck) with color-coded background.
-  - Patient name (abbreviated), reference ID, and route.
-  - Status badge: "In Transit" (primary), "Dispatched" (warning), or "Completed" (success).
-
-#### 8e. Crew Scheduling (`AdminCrewScheduling.tsx`)
-- A roster of 8 crew members with:
-  - Name, role (Flight Physician, Flight Paramedic, Pilot, Land Paramedic), assigned vehicle ID, shift hours, and base location.
-  - Status indicators: On Duty (green dot), En Route (blue dot), On Call (amber dot), Off Duty (gray dot).
-  - Summary counts: "X On Duty" and "X On Call" in the header.
-
-#### 8f. Fleet Status (`AdminFleetStatus.tsx`)
-- Vehicle availability broken down by fleet type:
-  - **Fixed-Wing (PC-12):** 10 total, 4 active, 1 maintenance.
-  - **Rotor-Wing (AW139):** 12 total, 6 active, 2 maintenance.
-  - **Land Ambulance:** 20 total, 3 active, 3 maintenance.
-- Each type shows a progress bar (active percentage) and active/available/maintenance counts.
-- Summary row: 42 Total Fleet, 13 Active Now, 23 Available.
-
-#### 8g. Transport Analytics (`AdminTransportChart.tsx` + `AdminPerformanceMetrics.tsx`)
-- **Tabbed interface** with Weekly / Monthly / Yearly views.
-- **Bar Chart (Recharts):** Stacked bar chart showing air vs. land transport volume over time. Uses Ornge brand orange for air and navy blue for land.
-- **Performance Metrics Panel:**
-  - Total Transports count
-  - On-Time Rate (percentage with progress bar, green)
-  - Patient Satisfaction (percentage with progress bar, primary blue)
-  - Average Response Time
-  - Breakdown by Care Level: Critical Care (red), Advanced Care (amber), Basic Care (green)
-
-#### 8h. Detailed Statistics (`AdminDetailedStats.tsx`)
-- **Summary Banner:** Total Daily Transports (64) with a "Download Full Report" button.
-- **By Response Type:** Scene (5), Modified-Scene (4), Interfacility (52), Life or Limb (11) — each with individual CSV download.
-- **By Vehicle:** Fixed-Wing (32), Rotor-Wing (9), Land Ambulance (23) — each with individual CSV download.
-- **Other Daily Statistics:** Longest Patient Transport (913 KM), Avg Transport Distance (287 KM), Total Flight Hours (142 hrs), Patients Transported (64).
-- **CSV Export:** Both individual stat downloads and a full composite report are generated as CSV blobs and triggered via `URL.createObjectURL`.
-
----
-
-## 🌍 Internationalization (i18n)
-
-**File:** `src/lib/i18n.tsx`
-
-A custom context-based i18n system providing:
-
-- **Supported Languages:** English (`en`) and French (`fr`).
-- **Translation Coverage:** ~60+ keyed strings covering all family-facing content: welcome page, login, dashboard labels, milestone names and messages, support text, admin controls, and format selector.
-- **Implementation:** A React Context (`AppProvider`) exposes a `t(key)` function and `lang` state. The `LanguageToggle` component provides a persistent toggle button accessible on all pages.
-- **Layout Optimization:** French translations are generally longer than English. The UI accommodates this with responsive text alignment, word-breaking, and flexible container sizing.
-
----
-
-## 🧪 Mock Data
-
-**File:** `src/data/mockTransports.ts`
-
-Three pre-configured transport scenarios:
-
-| ID | Reference | Patient | Route | Mode | Care Level | Status |
-|----|-----------|---------|-------|------|------------|--------|
-| T-1 | ORN-2025-4821 | Sarah Mitchell | Thunder Bay → Toronto | Air | Critical Care | En Route to Destination (Milestone 7) |
-| T-2 | ORN-2025-4819 | James Chen | Brampton → Hamilton | Land | Advanced Care | Team Dispatched (Milestone 2) |
-| T-3 | ORN-2025-4815 | Maria Santos | Sudbury → Ottawa | Air | Critical Care | Completed (All milestones done) |
-
-Each transport includes coordinates (origin, destination, current position), crew details, equipment lists, notification history, ETA values, and clinical notes.
-
----
-
-## 🛠 Tech Stack
-
-| Layer | Technology | Purpose |
-|-------|------------|---------|
-| Framework | React 18 + TypeScript | Component architecture & type safety |
-| Build Tool | Vite | Fast dev server & optimized production builds |
-| Styling | Tailwind CSS + shadcn/ui | Utility-first CSS with pre-built accessible components |
-| Animations | Framer Motion | Page transitions, hover effects, staggered reveals |
-| Routing | React Router v6 | Client-side routing with device-prefixed paths |
-| Charts | Recharts | Bar charts for transport volume analytics |
-| Maps | Leaflet + React Leaflet | Interactive maps with CartoDB Light tiles |
-| State | TanStack React Query | Server-state management (configured, used for future API integration) |
-| i18n | Custom React Context | Bilingual EN/FR support with keyed translations |
+Each transport includes coordinates, crew details, equipment lists, notification history, ETA values, and clinical notes.
 
 ---
 
 ## 🎨 Design System
 
-**File:** `src/index.css` + `tailwind.config.ts`
+### Brand Colors
 
-### Brand Colors (HSL)
-
-| Token | Light Mode | Purpose |
-|-------|-----------|---------|
-| `--primary` | `22 90% 54%` | Ornge brand orange — CTAs, active indicators, map routes |
-| `--secondary` | `224 70% 35%` | Ornge navy blue — admin header, foreground text, chart accents |
-| `--success` | `152 60% 40%` | Completed states, on-time rates, origin markers |
-| `--warning` | `38 92% 50%` | Delays, on-call crew, caution indicators |
-| `--destructive` | `0 72% 51%` | Critical alerts, destination markers, error states |
-| `--active` | `210 100% 52%` | Active milestone pulse animation |
-| `--foreground` | `224 70% 35%` | Primary text (navy blue, replacing standard black) |
+| Color | Purpose |
+|-------|---------|
+| **Ornge Orange** | Primary brand color — buttons, active indicators, map routes |
+| **Ornge Navy Blue** | Secondary color — admin headers, text, chart accents |
+| **Green** | Completed states, on-time rates, origin markers |
+| **Amber** | Delays, on-call crew, caution indicators |
+| **Red** | Critical alerts, destination markers, errors |
+| **Blue** | Active milestone pulse animation |
 
 ### Typography
 
-- **Display Font:** Plus Jakarta Sans (headings, stat values, labels) via `.font-display`
-- **Body Font:** Inter (body text, descriptions, metadata)
-- Both loaded via Google Fonts CDN.
+- **Display Font:** Plus Jakarta Sans (headings and labels)
+- **Body Font:** Inter (body text and descriptions)
 
-### Custom Animations
+### Visual Consistency
 
-- `animate-pulse-active`: Blue pulsing glow for active timeline milestones
-- `animate-vehicle-bounce`: Vertical bounce for vehicle indicators
-- Leaflet marker pulse: CSS keyframe animation for the pulsing orange vehicle marker on the map
-
-### Component Library
-
-All UI components are from **shadcn/ui**, customized with Ornge-themed semantic tokens. Key components used: Card, Badge, Button, Accordion, Tabs, Progress, Input, Label, Dialog.
+All four versions share a consistent light-themed design with the same color palette, typography, and card-based layouts. This ensures a cohesive look across all prototype iterations.
 
 ---
 
-## 📁 Project Structure
+## 🛠 Technology
 
-```
-src/
-├── assets/                    # Static images
-│   ├── ornge-logo.png         # Orange Ornge logo (for light backgrounds)
-│   ├── ornge-logo-white.png   # White Ornge logo (for dark/hero backgrounds)
-│   ├── hero-banner.png        # Landscape hero image (desktop)
-│   ├── hero-banner-mobile.png # Portrait hero image (mobile)
-│   ├── device-iphone.png      # iPhone mockup with dashboard screenshot
-│   ├── device-ipad.png        # iPad mockup with dashboard screenshot
-│   ├── device-laptop.png      # Laptop mockup with dashboard screenshot
-│   └── ontario-map.png        # Ontario map background
-│
-├── components/
-│   ├── admin/                 # Operations dashboard components
-│   │   ├── AdminStatCard.tsx       # Individual stat card with icon + accent color
-│   │   ├── AdminMapView.tsx        # Province-wide Leaflet map with live transports
-│   │   ├── AdminRecentTransports.tsx # Recent transport activity table
-│   │   ├── AdminCrewScheduling.tsx  # Crew roster with shift/status management
-│   │   ├── AdminFleetStatus.tsx     # Fleet availability by vehicle type
-│   │   ├── AdminTransportChart.tsx  # Recharts bar chart (air vs land volume)
-│   │   ├── AdminPerformanceMetrics.tsx # KPIs: on-time rate, satisfaction, response time
-│   │   └── AdminDetailedStats.tsx   # Granular breakdowns with CSV export
-│   │
-│   ├── transport/             # Family tracking dashboard components
-│   │   ├── TransportHeader.tsx     # Patient name, reference ID, mode, care level, route
-│   │   ├── ETADisplay.tsx          # Dynamic ETA with phase-aware visibility
-│   │   ├── LiveMap.tsx             # 5-phase horizontal progress bar + status message
-│   │   ├── TrackingMap.tsx         # Interactive Leaflet map with route polylines
-│   │   ├── StatusTimeline.tsx      # 10-milestone vertical/horizontal timeline
-│   │   ├── NotificationFeed.tsx    # Chronological update feed
-│   │   ├── TransportDetails.tsx    # Accordion: crew info, equipment, clinical summary
-│   │   ├── FamilySupport.tsx       # Support resources + hotline
-│   │   └── AdminToggle.tsx         # Demo controls for milestone jumping & delay simulation
-│   │
-│   ├── DeviceFrame.tsx        # iPhone/iPad device frame wrapper
-│   ├── LanguageToggle.tsx     # EN/FR language switch button
-│   ├── NavLink.tsx            # Navigation link component
-│   └── ui/                    # shadcn/ui base components (40+ components)
-│
-├── data/
-│   └── mockTransports.ts      # Transport type definitions, 3 mock records, helper functions
-│
-├── hooks/
-│   ├── use-mobile.tsx         # Mobile device detection hook
-│   └── use-toast.ts           # Toast notification hook
-│
-├── lib/
-│   ├── i18n.tsx               # App context: language state, translations, device format
-│   └── utils.ts               # Tailwind class merge utility (cn)
-│
-├── pages/
-│   ├── Welcome.tsx            # Landing page: portal selection + transport mode selection
-│   ├── FormatSelector.tsx     # Device format picker (mobile/tablet/desktop)
-│   ├── Login.tsx              # Family transport login
-│   ├── Dashboard.tsx          # Family tracking dashboard (multi-layout)
-│   ├── AdminLogin.tsx         # Operations staff login
-│   ├── AdminPortal.tsx        # Operations dashboard
-│   ├── Index.tsx              # Index redirect
-│   └── NotFound.tsx           # 404 page
-│
-├── App.tsx                    # Router configuration with device-prefixed routes
-├── main.tsx                   # Application entry point
-└── index.css                  # Design tokens, custom fonts, animations
-```
-
----
-
-## 🛣 Routing Configuration
-
-| Route | Component | Description |
-|-------|-----------|-------------|
-| `/` | `Welcome` | Landing page with portal selection |
-| `/platform` | `FormatSelector` | Device format picker |
-| `/login` | `FramedLogin` | Family login (wrapped in device frame) |
-| `/track/:id` | `FramedDashboard` | Mobile tracking dashboard (in device frame) |
-| `/tablet/track/:id` | `FramedDashboard` | Tablet tracking dashboard (in device frame) |
-| `/desktop/track/:id` | `Dashboard` | Desktop tracking dashboard (no frame) |
-| `/admin-login` | `AdminLogin` | Operations staff login |
-| `/admin` | `AdminPortal` | Operations dashboard |
-| `*` | `NotFound` | 404 catch-all |
+Built with React, TypeScript, Vite, Tailwind CSS, and shadcn/ui components. Maps are powered by Leaflet with OpenStreetMap tiles. Charts use Recharts. Animations are handled by Framer Motion.
 
 ---
 
@@ -480,11 +295,12 @@ The app will be available at `http://localhost:5173`.
 ## 📝 Important Notes
 
 - **All data is mock/demo data** — no backend, database, or API is connected.
-- **Admin login** uses pre-filled demo credentials (`admin@ornge.ca`) — click Sign In to proceed.
-- **Family login** accepts any Transport Reference ID that matches the mock data (e.g., `ORN-2025-4821`, `ORN-2025-4819`, `ORN-2025-4815`).
-- **Device frame previews** simulate realistic mobile/tablet chrome (Dynamic Island, status bar, home indicator) when viewed on desktop browsers.
-- **Demo Controls** (dashed-border panel in the tracking dashboard) allow instant jumping between transport milestones and delay simulation for testing all UI states.
-- **CSV exports** in the admin portal generate mock data files — the download functionality is fully functional but the data is static.
+- **Secure access** — The entire application requires login credentials. Without authentication, no internal pages can be accessed.
+- **Admin login** uses pre-filled demo credentials — click Sign In to proceed.
+- **Patient login** accepts Transport Reference IDs matching the demo data (e.g., ORN-2025-4821).
+- **Device frame previews** simulate realistic mobile/tablet appearance when viewed on desktop browsers.
+- **Demo Controls** (V3 only) allow instant jumping between transport milestones and delay simulation for testing all UI states.
+- **CSV exports** in the V3 admin portal generate mock data files — the download functionality works but the data is static.
 
 ---
 
