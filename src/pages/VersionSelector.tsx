@@ -15,7 +15,7 @@ export default function VersionSelector() {
   const versions = [
     {
       id: 'v1',
-      label: 'v1',
+      label: 'Version 1',
       subtitle: 'Manual Data Tracker',
       description: 'Manual data posting of transport data from PTAC and OCC. No real-time data.',
       features: [
@@ -30,7 +30,7 @@ export default function VersionSelector() {
     },
     {
       id: 'v2',
-      label: 'v2',
+      label: 'Version 2',
       subtitle: 'Manual Data Tracker with Partial Automation',
       description: 'Manual data posting of transport data from PTAC and OCC with minimum real-time data from Flight Vector.',
       features: [
@@ -45,7 +45,7 @@ export default function VersionSelector() {
     },
     {
       id: 'v3',
-      label: 'v3',
+      label: 'Version 3',
       subtitle: 'Real-Time Platform',
       description: 'Automated real-time data from PTAC, OCC, and Flight Vector.',
       features: [
@@ -61,7 +61,7 @@ export default function VersionSelector() {
     },
     {
       id: 'v4',
-      label: 'v4',
+      label: 'Version 4',
       subtitle: 'TBD',
       description: 'To be determined.',
       features: [
