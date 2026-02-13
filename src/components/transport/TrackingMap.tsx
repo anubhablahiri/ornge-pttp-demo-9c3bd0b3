@@ -31,8 +31,8 @@ const makeIcon = (color: string, size: number, pulse = false) =>
     iconAnchor: [size / 2, size / 2],
   });
 
-const originIcon = makeIcon('#16a34a', 24);
-const destIcon = makeIcon('#dc2626', 24);
+const originIcon = makeIcon('#dc2626', 24);
+const destIcon = makeIcon('#16a34a', 24);
 const vehicleIconAir = makeIcon('#ea580c', 28, true);
 const vehicleIconLand = makeIcon('#ea580c', 28, true);
 
@@ -70,7 +70,7 @@ export default function TrackingMap({ transport }: Props) {
     <div className="bg-card rounded-xl border border-border shadow-sm overflow-hidden">
       <div className="px-5 pt-4 pb-2 flex items-center justify-between">
         <h3 className="text-sm font-semibold text-foreground">
-          {lang === 'en' ? 'Live Map' : 'Carte en direct'}
+          {lang === 'en' ? 'Transport Progress/Live Map Tracking' : 'Progression du transport/Suivi en direct'}
         </h3>
         {isAir && transport.altitude && (
           <span className="text-xs text-muted-foreground bg-muted px-2 py-1 rounded-full">
@@ -95,10 +95,10 @@ export default function TrackingMap({ transport }: Props) {
           />
           <FitBounds points={allPoints} />
 
-          {/* Full route (dashed) */}
+          {/* Remaining route (dashed orange) */}
           <Polyline
-            positions={routePath}
-            pathOptions={{ color: '#94a3b8', weight: 2, opacity: 0.5, dashArray: '8 8' }}
+            positions={current ? [current, dest] : routePath}
+            pathOptions={{ color: '#ea580c', weight: 2, opacity: 0.6, dashArray: '8 8' }}
           />
 
           {/* Completed portion (solid) */}
@@ -120,11 +120,11 @@ export default function TrackingMap({ transport }: Props) {
       {/* Legend */}
       <div className="px-5 py-3 flex flex-wrap items-center gap-4 text-[11px] text-muted-foreground border-t border-border">
         <span className="flex items-center gap-1.5">
-          <span className="w-2.5 h-2.5 rounded-full bg-green-600 inline-block shrink-0" />
+          <span className="w-2.5 h-2.5 rounded-full bg-red-600 inline-block shrink-0" />
           {lang === 'en' ? 'Origin' : 'Origine'}
         </span>
         <span className="flex items-center gap-1.5">
-          <span className="w-2.5 h-2.5 rounded-full bg-red-600 inline-block shrink-0" />
+          <span className="w-2.5 h-2.5 rounded-full bg-green-600 inline-block shrink-0" />
           {lang === 'en' ? 'Destination' : 'Destination'}
         </span>
         {current && !complete && (
