@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
-import { useNavigate, Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import { ArrowRight, Lock, AlertCircle, Timer, BarChart3 } from 'lucide-react';
+import { ArrowRight, Lock, AlertCircle, Timer } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
@@ -12,10 +12,10 @@ const VALID_CREDENTIALS: Record<string, string> = {
   'matthew.blacklock@calian.com': 'Xp7#mQvL9$kR2wNd',
   'rola.darwish@calian.com': 'Tz4&bYcE8!hJ5gWs',
   'zdojcinovic@ornge.ca': 'Km9@nFrA3#pV6xUq',
-  'Arlan': 'aytron@cutest123!',
+  'arlan': 'alvar@123!@$',
 };
 
-const STATS_USER = 'Arlan';
+const STATS_USER = 'arlan';
 
 const MAX_ATTEMPTS = 3;
 const COOLDOWN_SECONDS = 300;
@@ -158,16 +158,6 @@ export default function GateLogin() {
             </Button>
           </form>
         </div>
-
-        {sessionStorage.getItem('stats_access') === 'true' && (
-          <Link
-            to="/stats"
-            className="flex items-center justify-center gap-1.5 mt-4 text-sm text-muted-foreground hover:text-foreground transition-colors"
-          >
-            <BarChart3 className="h-4 w-4" />
-            View Stats
-          </Link>
-        )}
       </motion.div>
     </div>
   );
