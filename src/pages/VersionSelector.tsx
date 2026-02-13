@@ -56,7 +56,8 @@ export default function VersionSelector() {
       ],
       icon: Globe,
       path: '/v3',
-      accent: 'hsl(22, 90%, 54%)',
+      accent: 'hsl(224, 70%, 35%)',
+      iconColor: 'hsl(22, 90%, 54%)',
     },
     {
       id: 'v4',
@@ -110,7 +111,7 @@ export default function VersionSelector() {
               className="w-14 h-14 rounded-xl flex items-center justify-center transition-colors"
               style={{ backgroundColor: v.accent }}
             >
-              <v.icon className="h-7 w-7 text-white" />
+              <v.icon className="h-7 w-7" style={{ color: v.iconColor || 'white' }} />
             </div>
             <div className="text-center">
               <span className="text-lg font-bold text-foreground block">{v.label}</span>
