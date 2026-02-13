@@ -120,7 +120,7 @@ export default function Welcome() {
                 <div className="w-16 h-16 rounded-full bg-primary flex items-center justify-center group-hover:bg-primary/90 transition-colors">
                   <Users className="h-8 w-8 text-primary-foreground" />
                 </div>
-                <span className="text-lg font-display font-bold text-foreground">Patient Transport Tracking (V3)</span>
+                <span className="text-lg font-display font-bold text-foreground">Patient Transport Tracking</span>
                 <span className="text-xs text-muted-foreground text-center">Track your loved one's transport journey in real-time</span>
               </motion.button>
 

@@ -86,7 +86,7 @@ export default function VersionSelector() {
           PTTP Prototype Versions
         </h1>
         <p className="mt-3 text-muted-foreground text-sm md:text-base max-w-md mx-auto">
-          Select a version to explore different iterations of the Patient Transport Tracking Portal.
+          Select a version to explore different iterations of the Patient Transport Tracking.
         </p>
       </motion.div>
 
