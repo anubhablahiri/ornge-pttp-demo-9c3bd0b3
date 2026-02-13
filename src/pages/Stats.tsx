@@ -64,12 +64,15 @@ export default function Stats() {
 
   const fetchLogs = async () => {
     setLoading(true);
-    const { data, error } = await supabase
-      .from('session_logs')
-      .select('*')
-      .order('login_time', { ascending: false });
-    if (!error && data) {
-      setLogs(data as SessionLog[]);
+    try {
+      const { data, error } = await supabase.functions.invoke('get-stats', {
+        body: { secret: 'arlan_stats_access_key' },
+      });
+      if (!error && data?.data) {
+        setLogs(data.data as SessionLog[]);
+      }
+    } catch (e) {
+      console.error('Failed to fetch stats:', e);
     }
     setLoading(false);
   };
