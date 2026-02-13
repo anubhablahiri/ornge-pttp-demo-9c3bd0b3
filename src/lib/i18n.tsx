@@ -37,7 +37,7 @@ const translations: Record<string, Record<Lang, string>> = {
   'format.desktop.desc': { en: 'Full dashboard experience', fr: 'Expérience tableau de bord complète' },
 
   // Login
-  'login.title': { en: 'Patient Transport Tracker', fr: 'Suivi de transport des patients' },
+  'login.title': { en: 'Patient Transport Tracking (V3)', fr: 'Suivi de transport des patients (V3)' },
   'login.subtitle': { en: 'Stay informed about your loved one\'s transport journey.', fr: 'Restez informé du parcours de transport de votre proche.' },
   'login.secure': { en: 'Secure & Private Access', fr: 'Accès sécurisé et privé' },
   'login.ref': { en: 'Transport Reference Number', fr: 'Numéro de référence du transport' },
