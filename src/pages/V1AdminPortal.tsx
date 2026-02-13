@@ -147,6 +147,7 @@ export default function V1AdminPortal() {
           transition={{ duration: 0.35 }}
           className="bg-card rounded-2xl border border-border shadow-sm p-6 space-y-6"
         >
+          <h2 className="text-xl font-bold text-foreground">Transport Entry</h2>
           {/* Row 1: Core fields */}
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
             <div>
@@ -257,10 +258,26 @@ export default function V1AdminPortal() {
             >
               {editingId ? 'Update Entry' : 'Save Entry'}
             </button>
-            <button className="bg-accent hover:bg-accent/80 border border-border text-accent-foreground font-medium px-5 py-2.5 rounded-md text-sm transition-colors flex items-center gap-2">
+          </div>
+        </motion.div>
+
+        {/* QR Sharing Section */}
+        <motion.div
+          initial={{ opacity: 0, y: 12 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.05, duration: 0.35 }}
+          className="bg-card rounded-2xl border border-border shadow-sm p-6 space-y-4"
+        >
+          <h2 className="text-xl font-bold text-foreground">Share Tracking Link</h2>
+          <p className="text-sm text-muted-foreground">Generate and share a QR code or direct link for the current tracking number so families can follow transport progress.</p>
+          <div className="flex items-center gap-4">
+            <button className="bg-primary hover:bg-primary/90 text-primary-foreground font-semibold px-5 py-2.5 rounded-md text-sm transition-colors flex items-center gap-2">
               <QrCode className="h-4 w-4" />
-              Share QR
+              Generate QR Code
             </button>
+            {trackingNumber && (
+              <span className="text-sm text-muted-foreground font-mono">Tracking #: {trackingNumber}</span>
+            )}
           </div>
         </motion.div>
 
