@@ -37,7 +37,7 @@ export default function AdminPortal() {
             </Link>
             <img src={orngeLogo} alt="Ornge" className="h-8 brightness-0 invert" />
             <div>
-              <h1 className="font-display font-bold text-lg leading-tight">Operations Dashboard</h1>
+              <h1 className="font-display font-bold text-lg leading-tight">Operations Dashboard (V3)</h1>
               <p className="text-xs opacity-70">Ornge Transport Medicine</p>
             </div>
           </div>
