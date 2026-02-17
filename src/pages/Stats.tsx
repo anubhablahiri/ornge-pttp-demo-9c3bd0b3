@@ -67,7 +67,7 @@ export default function Stats() {
   useEffect(() => {
     if (
       sessionStorage.getItem('stats_access') !== 'true' ||
-      sessionStorage.getItem('gate_username') !== 'arlan'
+      sessionStorage.getItem('gate_username') !== 'arlan.nugara@calian.com'
     ) {
       window.location.href = '/';
       return;
