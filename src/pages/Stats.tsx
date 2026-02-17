@@ -77,7 +77,10 @@ export default function Stats() {
 
   const fetchLogs = async () => {
     const statsSecret = sessionStorage.getItem('stats_secret');
-    if (!statsSecret) return;
+    if (!statsSecret) {
+      setLoading(false);
+      return;
+    }
     setLoading(true);
     try {
       const { data, error } = await supabase.functions.invoke('get-stats', {
