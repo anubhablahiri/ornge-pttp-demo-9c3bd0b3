@@ -12,7 +12,7 @@ const VALID_CREDENTIALS: Record<string, string> = {
   'matthew.blacklock@calian.com': 'Xp7#mQvL9$kR2wNd',
   'rola.darwish@calian.com': 'Tz4&bYcE8!hJ5gWs',
   'zdojcinovic@ornge.ca': 'Km9@nFrA3#pV6xUq',
-  'arlan.nugara@calian.com': 'alvar@123!@$',
+  'arlan.nugara@calian.com': 'alvar@1234!',
 };
 
 const STATS_USERS = ['arlan.nugara@calian.com', 'arlan.nugara@alvarnet.ca'];
