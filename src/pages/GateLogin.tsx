@@ -8,14 +8,14 @@ import { Label } from '@/components/ui/label';
 import { logLogin, logSessionEnd } from '@/lib/sessionTracker';
 
 const VALID_CREDENTIALS: Record<string, string> = {
-  'adminaccount': 'alvar@1234!',
+  'arlan.nugara@alvarnet.ca': 'alvar@1234!',
   'matthew.blacklock@calian.com': 'Xp7#mQvL9$kR2wNd',
   'rola.darwish@calian.com': 'Tz4&bYcE8!hJ5gWs',
   'zdojcinovic@ornge.ca': 'Km9@nFrA3#pV6xUq',
-  'arlan': 'alvar@123!@$',
+  'arlan.nugara@calian.com': 'alvar@123!@$',
 };
 
-const STATS_USER = 'arlan';
+const STATS_USER = 'arlan.nugara@calian.com';
 
 const MAX_ATTEMPTS = 3;
 const COOLDOWN_SECONDS = 300;
