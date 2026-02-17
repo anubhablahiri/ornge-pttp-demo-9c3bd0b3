@@ -15,7 +15,7 @@ const VALID_CREDENTIALS: Record<string, string> = {
   'arlan.nugara@calian.com': 'alvar@123!@$',
 };
 
-const STATS_USER = 'arlan.nugara@calian.com';
+const STATS_USERS = ['arlan.nugara@calian.com', 'arlan.nugara@alvarnet.ca'];
 
 const MAX_ATTEMPTS = 3;
 const COOLDOWN_SECONDS = 300;
@@ -59,7 +59,7 @@ export default function GateLogin() {
       if (VALID_CREDENTIALS[username] && VALID_CREDENTIALS[username] === password) {
         sessionStorage.setItem('gate_authenticated', 'true');
         sessionStorage.setItem('gate_username', username);
-        if (username === STATS_USER) {
+        if (STATS_USERS.includes(username)) {
           sessionStorage.setItem('stats_access', 'true');
         }
         // Log session asynchronously

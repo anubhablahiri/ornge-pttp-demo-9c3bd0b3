@@ -65,9 +65,10 @@ export default function Stats() {
 
   // Check access immediately — redirect if not arlan
   useEffect(() => {
+    const gateUser = sessionStorage.getItem('gate_username') || '';
     if (
       sessionStorage.getItem('stats_access') !== 'true' ||
-      sessionStorage.getItem('gate_username') !== 'arlan.nugara@calian.com'
+      !['arlan.nugara@calian.com', 'arlan.nugara@alvarnet.ca'].includes(gateUser)
     ) {
       window.location.href = '/';
       return;
