@@ -144,14 +144,15 @@ export default function Stats() {
                   <th className="text-left p-3 font-medium text-muted-foreground">OS</th>
                   <th className="text-left p-3 font-medium text-muted-foreground">Browser</th>
                   <th className="text-left p-3 font-medium text-muted-foreground">Login Time</th>
+                  <th className="text-left p-3 font-medium text-muted-foreground">Session End</th>
                   <th className="text-left p-3 font-medium text-muted-foreground">Duration</th>
                 </tr>
               </thead>
               <tbody>
                 {loading ? (
-                  <tr><td colSpan={8} className="p-8 text-center text-muted-foreground">Loading...</td></tr>
+                  <tr><td colSpan={9} className="p-8 text-center text-muted-foreground">Loading...</td></tr>
                 ) : logs.length === 0 ? (
-                  <tr><td colSpan={8} className="p-8 text-center text-muted-foreground">No sessions recorded yet.</td></tr>
+                  <tr><td colSpan={9} className="p-8 text-center text-muted-foreground">No sessions recorded yet.</td></tr>
                 ) : (
                   logs.map((log) => (
                     <tr key={log.id} className="border-b border-border/50 hover:bg-muted/30 transition-colors">
@@ -162,6 +163,7 @@ export default function Stats() {
                       <td className="p-3 text-muted-foreground">{log.os || '—'}</td>
                       <td className="p-3 text-muted-foreground">{log.browser || '—'}</td>
                       <td className="p-3 text-muted-foreground whitespace-nowrap">{formatDate(log.login_time)}</td>
+                      <td className="p-3 text-muted-foreground whitespace-nowrap">{log.session_end_time ? formatDate(log.session_end_time) : '—'}</td>
                       <td className="p-3">
                         <span className={`text-xs font-medium px-2 py-0.5 rounded-full ${
                           log.session_end_time 
