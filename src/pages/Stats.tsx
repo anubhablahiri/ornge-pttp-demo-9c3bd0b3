@@ -176,11 +176,11 @@ export default function Stats() {
         </div>
 
         <Link
-          to="/"
+          to="/versions"
           className="flex items-center gap-1.5 mt-6 text-sm text-muted-foreground hover:text-foreground transition-colors"
         >
           <ArrowLeft className="h-4 w-4" />
-          Back to Login
+          Back to Prototype Versions
         </Link>
       </motion.div>
     </div>
