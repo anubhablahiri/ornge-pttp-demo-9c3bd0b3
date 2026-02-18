@@ -6,7 +6,7 @@ const corsHeaders = {
 }
 
 const VALID_USERNAMES = [
-  'arlan.nugara@alvarnet.ca',
+  'arlan.nugara@ornge.ca',
   'matthew.blacklock@calian.com',
   'rola.darwish@calian.com',
   'zdojcinovic@ornge.ca',
@@ -85,7 +85,7 @@ Deno.serve(async (req) => {
 
       // If this is the stats user, return the stats secret too
       const responseData: Record<string, string> = { session_id: data.id }
-      if (['arlan.nugara@calian.com', 'arlan.nugara@alvarnet.ca'].includes(cleanUsername)) {
+      if (['arlan.nugara@calian.com', 'arlan.nugara@ornge.ca'].includes(cleanUsername)) {
         const statsSecret = Deno.env.get('STATS_ACCESS_SECRET')
         if (statsSecret) responseData.stats_secret = statsSecret
       }
