@@ -17,7 +17,7 @@ interface AdminAccount {
 
 const initialAccounts: AdminAccount[] = [
   { id: '1', name: 'Arlan Nugara', email: 'arlan.nugara@calian.com', role: 'full_admin', createdAt: '2025-12-01', lastLogin: '2026-02-18' },
-  { id: '2', name: 'Arlan Nugara', email: 'arlan.nugara@alvarnet.ca', role: 'full_admin', createdAt: '2026-01-15', lastLogin: '2026-02-18' },
+  { id: '2', name: 'Arlan Nugara', email: 'arlan.nugara@ornge.ca', role: 'full_admin', createdAt: '2026-01-15', lastLogin: '2026-02-18' },
   { id: '3', name: 'Sarah Mitchell', email: 'sarah.mitchell@ornge.ca', role: 'read_only', createdAt: '2026-01-20', lastLogin: '2026-02-17' },
   { id: '4', name: 'David Chen', email: 'david.chen@ornge.ca', role: 'full_admin', createdAt: '2026-02-01', lastLogin: '2026-02-16' },
   { id: '5', name: 'Lisa Nguyen', email: 'lisa.nguyen@ornge.ca', role: 'read_only', createdAt: '2026-02-10', lastLogin: '2026-02-15' },

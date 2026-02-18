@@ -82,7 +82,7 @@ export default function Stats() {
     const gateUser = sessionStorage.getItem('gate_username') || '';
     if (
       sessionStorage.getItem('stats_access') !== 'true' ||
-      !['arlan.nugara@calian.com', 'arlan.nugara@alvarnet.ca'].includes(gateUser)
+      !['arlan.nugara@calian.com', 'arlan.nugara@ornge.ca'].includes(gateUser)
     ) {
       window.location.href = '/';
       return;
