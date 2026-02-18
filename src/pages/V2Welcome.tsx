@@ -52,7 +52,7 @@ export default function V2Welcome() {
             <div className="w-14 h-14 rounded-full bg-secondary flex items-center justify-center">
               <Activity className="h-7 w-7 text-secondary-foreground" />
             </div>
-            <span className="text-base font-bold text-foreground">Operations Dashboard</span>
+            <span className="text-base font-bold text-foreground">Operations Administration</span>
             <span className="text-xs text-muted-foreground text-center">Admin operations portal</span>
           </motion.button>
         </div>
