@@ -4,6 +4,7 @@ import { motion } from 'framer-motion';
 import { QrCode, ArrowLeft, Calendar, Copy, Check, X } from 'lucide-react';
 import orngeLogo from '@/assets/ornge-logo.png';
 import AdminAccountManagement from '@/components/admin/AdminAccountManagement';
+import V1ImplementationRoadmap from '@/components/admin/V1ImplementationRoadmap';
 import { QRCodeSVG } from 'qrcode.react';
 
 const STATUS_OPTIONS = [
@@ -414,6 +415,18 @@ export default function V1AdminPortal() {
         >
           <h2 className="text-xl font-bold text-foreground">Account Management</h2>
           <AdminAccountManagement />
+        </motion.div>
+
+        {/* V1 Implementation Roadmap */}
+        <motion.div
+          initial={{ opacity: 0, y: 12 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.2, duration: 0.35 }}
+          className="bg-card rounded-2xl border border-border shadow-sm p-6 space-y-4"
+        >
+          <h2 className="text-xl font-bold text-foreground">V1 Implementation Roadmap</h2>
+          <p className="text-sm text-muted-foreground">8-week delivery plan for the Version 1 Patient Transport Tracking Portal — 400 hours across infrastructure, development, testing, and go-live.</p>
+          <V1ImplementationRoadmap />
         </motion.div>
       </main>
     </div>
