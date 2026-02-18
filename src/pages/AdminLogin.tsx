@@ -40,7 +40,7 @@ export default function AdminLogin() {
             transition={{ duration: 0.5 }}
           />
           <h1 className="text-2xl md:text-3xl font-display font-bold text-center text-foreground">
-            Operations Dashboard (v3)
+            Operations Administration (v3)
           </h1>
           <p className="mt-2 text-sm text-muted-foreground text-center max-w-xs">
             Sign in to access the admin operations portal

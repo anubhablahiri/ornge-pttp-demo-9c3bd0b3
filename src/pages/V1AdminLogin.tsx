@@ -29,7 +29,7 @@ export default function V1AdminLogin() {
       >
         <div className="flex flex-col items-center mb-8">
           <motion.img src={orngeLogo} alt="Ornge" className="h-14 mb-4" initial={{ opacity: 0, scale: 0.9 }} animate={{ opacity: 1, scale: 1 }} />
-          <h1 className="text-2xl font-bold text-center text-foreground">Operations Dashboard (v1)</h1>
+          <h1 className="text-2xl font-bold text-center text-foreground">Operations Administration (v1)</h1>
           <p className="mt-2 text-sm text-muted-foreground text-center">Sign in to access the admin portal</p>
         </div>
 

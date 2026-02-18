@@ -133,7 +133,7 @@ export default function Welcome() {
                 <div className="w-16 h-16 rounded-full bg-secondary flex items-center justify-center group-hover:bg-secondary/90 transition-colors">
                   <Activity className="h-8 w-8 text-secondary-foreground" />
                 </div>
-                <span className="text-lg font-display font-bold text-foreground">Operations Dashboard</span>
+                <span className="text-lg font-display font-bold text-foreground">Operations Administration</span>
                 <span className="text-xs text-muted-foreground text-center">Admin portal for transport operations management</span>
               </motion.button>
             </div>
