@@ -12,6 +12,7 @@ import { Progress } from '@/components/ui/progress';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { QRCodeSVG } from 'qrcode.react';
 import { cn } from '@/lib/utils';
+import AdminAccountManagement from '@/components/admin/AdminAccountManagement';
 
 const stats = [
   { icon: Activity, label: 'Live Transports', value: '7', color: 'text-primary' },
@@ -211,6 +212,18 @@ export default function V2AdminPortal() {
                   </div>
                 );
               })}
+            </CardContent>
+          </Card>
+        </motion.div>
+
+        {/* Account Management */}
+        <motion.div {...anim(0.2)}>
+          <Card>
+            <CardHeader className="pb-2">
+              <CardTitle className="text-base">Account Management</CardTitle>
+            </CardHeader>
+            <CardContent>
+              <AdminAccountManagement />
             </CardContent>
           </Card>
         </motion.div>

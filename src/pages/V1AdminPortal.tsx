@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { QrCode, ArrowLeft, Calendar, Copy, Check, X } from 'lucide-react';
 import orngeLogo from '@/assets/ornge-logo.png';
+import AdminAccountManagement from '@/components/admin/AdminAccountManagement';
 import { QRCodeSVG } from 'qrcode.react';
 
 const STATUS_OPTIONS = [
@@ -402,6 +403,17 @@ export default function V1AdminPortal() {
           <p className="text-xs text-muted-foreground">
             Tip: Share the tracking number with family or staff. No PHI is stored. Old entries auto-delete after ~48 hours.
           </p>
+        </motion.div>
+
+        {/* Account Management */}
+        <motion.div
+          initial={{ opacity: 0, y: 12 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.15, duration: 0.35 }}
+          className="bg-card rounded-2xl border border-border shadow-sm p-6 space-y-4"
+        >
+          <h2 className="text-xl font-bold text-foreground">Account Management</h2>
+          <AdminAccountManagement />
         </motion.div>
       </main>
     </div>
