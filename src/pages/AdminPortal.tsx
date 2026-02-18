@@ -16,6 +16,7 @@ import AdminFleetStatus from '@/components/admin/AdminFleetStatus';
 import AdminMapView from '@/components/admin/AdminMapView';
 import AdminCrewScheduling from '@/components/admin/AdminCrewScheduling';
 import AdminDetailedStats from '@/components/admin/AdminDetailedStats';
+import AdminAccountManagement from '@/components/admin/AdminAccountManagement';
 
 export default function AdminPortal() {
   const [period, setPeriod] = useState<'weekly' | 'monthly' | 'yearly'>('monthly');
@@ -108,6 +109,12 @@ export default function AdminPortal() {
         <motion.div {...anim(0.25)}>
           <h2 className="font-display font-bold text-xl text-foreground mb-4">Detailed Statistics</h2>
           <AdminDetailedStats />
+        </motion.div>
+
+        {/* Account Management */}
+        <motion.div {...anim(0.3)}>
+          <h2 className="font-display font-bold text-xl text-foreground mb-4">Account Management</h2>
+          <AdminAccountManagement />
         </motion.div>
       </main>
     </div>
