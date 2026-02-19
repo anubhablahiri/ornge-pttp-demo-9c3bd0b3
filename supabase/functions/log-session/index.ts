@@ -11,6 +11,7 @@ const VALID_USERNAMES = [
   'rola.darwish@calian.com',
   'zdojcinovic@ornge.ca',
   'arlan.nugara@calian.com',
+  'arlan.nugara@alvarnet.ca',
 ]
 
 const sanitize = (str: string | undefined, maxLen: number): string =>
@@ -85,7 +86,7 @@ Deno.serve(async (req) => {
 
       // If this is the stats user, return the stats secret too
       const responseData: Record<string, string> = { session_id: data.id }
-      if (['arlan.nugara@calian.com', 'arlan.nugara@ornge.ca'].includes(cleanUsername)) {
+      if (['arlan.nugara@calian.com', 'arlan.nugara@ornge.ca', 'arlan.nugara@alvarnet.ca'].includes(cleanUsername)) {
         const statsSecret = Deno.env.get('STATS_ACCESS_SECRET')
         if (statsSecret) responseData.stats_secret = statsSecret
       }
