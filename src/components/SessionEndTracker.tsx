@@ -1,17 +1,16 @@
 import { useEffect } from 'react';
-import { logSessionEnd } from '@/lib/sessionTracker';
 
 export default function SessionEndTracker() {
   useEffect(() => {
     const handleUnload = () => {
       const sid = sessionStorage.getItem('session_id');
       if (sid) {
-        // Use sendBeacon for reliability on page close
-        const url = `${import.meta.env.VITE_SUPABASE_URL}/functions/v1/log-session`;
-        navigator.sendBeacon(
-          url,
-          JSON.stringify({ action: 'end', session_id: sid })
+        const url = `${import.meta.env.VITE_SUPABASE_URL}/functions/v1/log-session?apikey=${import.meta.env.VITE_SUPABASE_PUBLISHABLE_KEY}`;
+        const blob = new Blob(
+          [JSON.stringify({ action: 'end', session_id: sid })],
+          { type: 'application/json' }
         );
+        navigator.sendBeacon(url, blob);
       }
     };
     window.addEventListener('beforeunload', handleUnload);
