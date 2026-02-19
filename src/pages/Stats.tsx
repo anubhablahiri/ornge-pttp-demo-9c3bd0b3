@@ -170,7 +170,7 @@ export default function Stats() {
               <BarChart3 className="h-5 w-5 text-primary" />
             </div>
             <div>
-              <h1 className="text-2xl font-bold text-foreground">Session Analytics</h1>
+              <h1 className="text-2xl font-bold text-foreground">PTTP Session Analytics</h1>
               <p className="text-sm text-muted-foreground">
                 {totalSessions} sessions from {uniqueUsers} users
                 {hasActiveFilters && <span className="text-primary ml-1">(filtered)</span>}
