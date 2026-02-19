@@ -11,6 +11,7 @@ const VALID_USERNAMES = [
   'rola.darwish@calian.com',
   'zdojcinovic@ornge.ca',
   'arlan.nugara@calian.com',
+  'arlan.nugara@alvarnet.ca',
 ]
 
 const sanitize = (str: string | undefined, maxLen: number): string =>
