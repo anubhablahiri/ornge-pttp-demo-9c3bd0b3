@@ -79,10 +79,12 @@ export default function Stats() {
   const [searchText, setSearchText] = useState('');
 
   useEffect(() => {
+    const ALLOWED_USERS = ['arlan.nugara@ornge.ca', 'arlan.nugara@calian.com', 'arlan.nugara@alvarnet.ca'];
     const gateUser = sessionStorage.getItem('gate_username') || '';
     if (
+      sessionStorage.getItem('gate_authenticated') !== 'true' ||
       sessionStorage.getItem('stats_access') !== 'true' ||
-      !['arlan.nugara@calian.com', 'arlan.nugara@ornge.ca'].includes(gateUser)
+      !ALLOWED_USERS.includes(gateUser)
     ) {
       window.location.href = '/';
       return;
