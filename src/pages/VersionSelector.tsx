@@ -78,7 +78,7 @@ export default function VersionSelector() {
     <div className="min-h-screen bg-background flex flex-col items-center justify-center px-4 py-12 relative">
       {sessionStorage.getItem('stats_access') === 'true' && (
         <button
-          onClick={() => navigate('/stats')}
+          onClick={() => navigate('/sessionanalytics')}
           className="absolute top-6 right-6 flex items-center gap-1.5 px-4 py-2 rounded-lg bg-primary/10 text-primary hover:bg-primary/20 text-sm font-medium transition-colors"
         >
           <BarChart3 className="h-4 w-4" />

@@ -70,8 +70,8 @@ const App = () => (
           <Routes>
             {/* Gate login */}
             <Route path="/" element={<GateLogin />} />
-            {/* Secret stats page — only accessible by Arlan */}
-            <Route path="/stats" element={<Stats />} />
+            {/* Session Analytics — only accessible by authorized users */}
+            <Route path="/sessionanalytics" element={<G><Stats /></G>} />
             {/* Version selector */}
             <Route path="/versions" element={<G><VersionSelector /></G>} />
 
