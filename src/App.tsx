@@ -25,6 +25,7 @@ import Login from "./pages/Login";
 import Dashboard from "./pages/Dashboard";
 import NotFound from "./pages/NotFound";
 import AdminPortal from "./pages/AdminPortal";
+import AccountManagement from "./pages/AccountManagement";
 import AdminLogin from "./pages/AdminLogin";
 import DeviceFrame from "./components/DeviceFrame";
 import GateGuard from "./components/GateGuard";
