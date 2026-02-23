@@ -1,7 +1,7 @@
 import { useNavigate } from 'react-router-dom';
 import { useEffect } from 'react';
 import { motion } from 'framer-motion';
-import { Layers, LayoutGrid, Globe, Rocket, ArrowRight, LogOut, BarChart3 } from 'lucide-react';
+import { Layers, LayoutGrid, Globe, Rocket, ArrowRight, LogOut } from 'lucide-react';
 
 export default function VersionSelector() {
   const navigate = useNavigate();
