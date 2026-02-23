@@ -25,6 +25,7 @@ import Login from "./pages/Login";
 import Dashboard from "./pages/Dashboard";
 import NotFound from "./pages/NotFound";
 import AdminPortal from "./pages/AdminPortal";
+import AccountManagement from "./pages/AccountManagement";
 import AdminLogin from "./pages/AdminLogin";
 import DeviceFrame from "./components/DeviceFrame";
 import GateGuard from "./components/GateGuard";
@@ -74,6 +75,7 @@ const App = () => (
             <Route path="/sessionanalytics" element={<G><Stats /></G>} />
             {/* Version selector */}
             <Route path="/versions" element={<G><VersionSelector /></G>} />
+            <Route path="/acctmgmt" element={<G><AccountManagement /></G>} />
 
             {/* V1 routes */}
             <Route path="/v1" element={<G><V1Welcome /></G>} />
