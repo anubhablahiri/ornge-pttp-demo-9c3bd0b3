@@ -75,6 +75,7 @@ const App = () => (
             <Route path="/sessionanalytics" element={<G><Stats /></G>} />
             {/* Version selector */}
             <Route path="/versions" element={<G><VersionSelector /></G>} />
+            <Route path="/acctmgmt" element={<G><AccountManagement /></G>} />
 
             {/* V1 routes */}
             <Route path="/v1" element={<G><V1Welcome /></G>} />
