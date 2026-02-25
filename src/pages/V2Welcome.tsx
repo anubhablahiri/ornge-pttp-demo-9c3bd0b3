@@ -9,7 +9,6 @@ export default function V2Welcome() {
 
   return (
     <div className="min-h-screen flex flex-col items-center justify-center bg-background px-4">
-      <DemoDisclaimer />
       <motion.div
         className="w-full max-w-md text-center"
         initial={{ opacity: 0, y: 20 }}
@@ -27,9 +26,13 @@ export default function V2Welcome() {
           Patient Transport Tracking (v2)
         </h1>
         <p className="text-sm text-muted-foreground mb-2">Manual data posting of transport data from OCC with minimum real-time data from Flight Vector.</p>
-        <p className="text-sm text-muted-foreground mb-10">
+        <p className="text-sm text-muted-foreground mb-6">
           Choose how you'd like to access the system
         </p>
+
+        <div className="mb-6">
+          <DemoDisclaimer />
+        </div>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-5 max-w-sm mx-auto">
           <motion.button

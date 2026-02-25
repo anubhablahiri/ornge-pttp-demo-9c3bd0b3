@@ -25,7 +25,6 @@ export default function FormatSelector() {
 
   return (
     <div className="min-h-screen flex flex-col bg-background">
-      <DemoDisclaimer />
       <div className="px-6 pt-10 pb-14 flex flex-col items-center text-foreground relative">
         <div className="absolute top-4 right-4">
           <LanguageToggle />
@@ -70,6 +69,10 @@ export default function FormatSelector() {
         >
           {t('format.subtitle')}
         </motion.p>
+
+        <div className="mt-4">
+          <DemoDisclaimer />
+        </div>
       </div>
 
       <div className="mx-4 md:mx-auto md:max-w-3xl flex-1">

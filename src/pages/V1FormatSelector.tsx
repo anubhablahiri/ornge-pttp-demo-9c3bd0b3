@@ -24,7 +24,6 @@ export default function V1FormatSelector() {
 
   return (
     <div className="min-h-screen flex flex-col bg-background">
-      <DemoDisclaimer />
       <div className="px-6 pt-10 pb-14 flex flex-col items-center text-foreground">
         <motion.img
           src={orngeLogo}
@@ -66,6 +65,10 @@ export default function V1FormatSelector() {
         >
           Choose a device view for the demo experience
         </motion.p>
+
+        <div className="mt-4">
+          <DemoDisclaimer />
+        </div>
       </div>
 
       <div className="mx-4 md:mx-auto md:max-w-3xl flex-1">
