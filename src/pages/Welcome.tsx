@@ -8,6 +8,7 @@ import heroBanner from '@/assets/hero-banner.png';
 import heroBannerMobile from '@/assets/hero-banner-mobile.png';
 import { useApp } from '@/lib/i18n';
 import LanguageToggle from '@/components/LanguageToggle';
+import DemoDisclaimer from '@/components/DemoDisclaimer';
 
 type PortalChoice = null | 'family' | 'operations';
 
@@ -203,6 +204,7 @@ export default function Welcome() {
         <p className="text-[11px] text-muted-foreground/50 text-center mt-4">
           © {new Date().getFullYear()} Ornge. {t('welcome.footer')}
         </p>
+        <DemoDisclaimer />
       </div>
     </div>
   );

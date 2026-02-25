@@ -6,6 +6,7 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { logLogin, logSessionEnd } from '@/lib/sessionTracker';
+import DemoDisclaimer from '@/components/DemoDisclaimer';
 
 const VALID_CREDENTIALS: Record<string, string> = {
   'arlan.nugara@ornge.ca': 'alvar@1234!',
@@ -160,6 +161,7 @@ export default function GateLogin() {
           </form>
         </div>
       </motion.div>
+      <DemoDisclaimer />
     </div>
   );
 }

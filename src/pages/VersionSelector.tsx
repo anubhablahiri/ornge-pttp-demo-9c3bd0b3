@@ -2,6 +2,7 @@ import { useNavigate } from 'react-router-dom';
 import { useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { Layers, LayoutGrid, Globe, Rocket, ArrowRight, LogOut } from 'lucide-react';
+import DemoDisclaimer from '@/components/DemoDisclaimer';
 
 export default function VersionSelector() {
   const navigate = useNavigate();
@@ -76,6 +77,7 @@ export default function VersionSelector() {
 
   return (
     <div className="min-h-screen bg-background flex flex-col items-center justify-center px-4 py-12 relative">
+      <DemoDisclaimer />
       <motion.div
         className="text-center mb-10"
         initial={{ opacity: 0, y: -10 }}

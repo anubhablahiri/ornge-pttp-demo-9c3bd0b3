@@ -6,6 +6,7 @@ import deviceIpad from '@/assets/device-ipad.png';
 import deviceLaptop from '@/assets/device-laptop.png';
 import { useApp, DeviceFormat } from '@/lib/i18n';
 import LanguageToggle from '@/components/LanguageToggle';
+import DemoDisclaimer from '@/components/DemoDisclaimer';
 
 const formats: { id: DeviceFormat; image: string; key: string; descKey: string }[] = [
   { id: 'mobile', image: deviceIphone, key: 'format.mobile', descKey: 'format.mobile.desc' },
@@ -24,6 +25,7 @@ export default function FormatSelector() {
 
   return (
     <div className="min-h-screen flex flex-col bg-background">
+      <DemoDisclaimer />
       <div className="px-6 pt-10 pb-14 flex flex-col items-center text-foreground relative">
         <div className="absolute top-4 right-4">
           <LanguageToggle />

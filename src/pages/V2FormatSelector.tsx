@@ -5,6 +5,7 @@ import deviceIphone from '@/assets/device-iphone.png';
 import deviceIpad from '@/assets/device-ipad.png';
 import deviceLaptop from '@/assets/device-laptop.png';
 import { useApp, DeviceFormat } from '@/lib/i18n';
+import DemoDisclaimer from '@/components/DemoDisclaimer';
 
 const formats: { id: DeviceFormat; image: string; label: string; desc: string }[] = [
   { id: 'mobile', image: deviceIphone, label: 'Mobile', desc: 'Optimized for smartphones' },
@@ -23,6 +24,7 @@ export default function V2FormatSelector() {
 
   return (
     <div className="min-h-screen flex flex-col bg-background">
+      <DemoDisclaimer />
       <div className="px-6 pt-10 pb-14 flex flex-col items-center text-foreground">
         <motion.img
           src={orngeLogo}
