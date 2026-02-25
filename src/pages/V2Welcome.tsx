@@ -2,12 +2,14 @@ import { useNavigate, Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { Users, Activity, ArrowLeft } from 'lucide-react';
 import orngeLogo from '@/assets/ornge-logo.png';
+import DemoDisclaimer from '@/components/DemoDisclaimer';
 
 export default function V2Welcome() {
   const navigate = useNavigate();
 
   return (
     <div className="min-h-screen flex flex-col items-center justify-center bg-background px-4">
+      <DemoDisclaimer />
       <motion.div
         className="w-full max-w-md text-center"
         initial={{ opacity: 0, y: 20 }}
