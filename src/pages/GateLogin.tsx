@@ -102,6 +102,10 @@ export default function GateLogin() {
           </p>
         </div>
 
+        <div className="mb-4">
+          <DemoDisclaimer />
+        </div>
+
         <div className="bg-card rounded-2xl shadow-lg p-6 border border-border">
           <form onSubmit={handleSubmit} className="space-y-4">
             <div className="space-y-1.5">
@@ -160,9 +164,8 @@ export default function GateLogin() {
             </Button>
           </form>
         </div>
-        <div className="mt-6">
-          <DemoDisclaimer />
-        </div>
+
+
       </motion.div>
     </div>
   );
