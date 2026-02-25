@@ -144,7 +144,7 @@ export default function VersionSelector() {
           sessionStorage.removeItem('gate_authenticated');
           navigate('/', { replace: true });
         }}
-        className="mt-10 flex items-center gap-2 px-6 py-3 rounded-xl border-2 border-primary bg-primary text-secondary font-medium transition-all hover:opacity-90"
+        className="mt-10 flex items-center gap-2 px-6 py-3 rounded-xl border-2 border-primary bg-primary text-primary-foreground font-medium transition-all hover:opacity-90"
       >
         <LogOut className="h-5 w-5" />
         Logout
