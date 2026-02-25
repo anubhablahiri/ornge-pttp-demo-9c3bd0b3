@@ -160,8 +160,10 @@ export default function GateLogin() {
             </Button>
           </form>
         </div>
+        <div className="mt-6">
+          <DemoDisclaimer />
+        </div>
       </motion.div>
-      <DemoDisclaimer />
     </div>
   );
 }
