@@ -77,9 +77,8 @@ export default function VersionSelector() {
 
   return (
     <div className="min-h-screen bg-background flex flex-col items-center justify-center px-4 py-12 relative">
-      <DemoDisclaimer />
       <motion.div
-        className="text-center mb-10"
+        className="text-center mb-6"
         initial={{ opacity: 0, y: -10 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.4 }}
@@ -92,7 +91,9 @@ export default function VersionSelector() {
         </p>
       </motion.div>
 
-       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 max-w-5xl w-full items-stretch">
+      <DemoDisclaimer />
+
+       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 max-w-5xl w-full items-stretch mt-4">
         {versions.map((v, i) => (
           <motion.button
             key={v.id}
