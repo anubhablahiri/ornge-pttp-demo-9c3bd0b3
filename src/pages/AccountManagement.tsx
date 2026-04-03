@@ -42,6 +42,7 @@ const initialAccounts: Account[] = [
   { id: '4', email: 'matthew.blacklock@calian.com', password: 'Xp7#mQvL9$kR2wNd', logins: 0, sessionAnalytics: true, acctMgmt: false, status: true },
   { id: '5', email: 'rola.darwish@calian.com', password: 'Tz4&bYcE8!hJ5gWs', logins: 0, sessionAnalytics: false, acctMgmt: false, status: true },
   { id: '6', email: 'zdojcinovic@ornge.ca', password: 'Km9@nFrA3#pV6xUq', logins: 0, sessionAnalytics: false, acctMgmt: false, status: true },
+  { id: '7', email: 'ajit.upadhyaya@calian.com', password: 'xzp2050@1!2!@1234!', logins: 0, sessionAnalytics: false, acctMgmt: false, status: true },
 ];
 
 const initialActivity: ActivityEntry[] = [

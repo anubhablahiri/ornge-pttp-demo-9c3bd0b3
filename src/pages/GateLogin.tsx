@@ -15,6 +15,7 @@ const VALID_CREDENTIALS: Record<string, string> = {
   'zdojcinovic@ornge.ca': 'Km9@nFrA3#pV6xUq',
   'arlan.nugara@calian.com': 'alvar@1234!',
   'arlan.nugara@alvarnet.ca': 'alvar@1234!',
+  'ajit.upadhyaya@calian.com': 'xzp2050@1!2!@1234!',
 };
 
 const STATS_USERS = ['arlan.nugara@calian.com', 'arlan.nugara@ornge.ca', 'arlan.nugara@alvarnet.ca'];
