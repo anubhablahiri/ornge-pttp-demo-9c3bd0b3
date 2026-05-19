@@ -7,6 +7,7 @@ import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { logLogin, logSessionEnd } from '@/lib/sessionTracker';
 import DemoDisclaimer from '@/components/DemoDisclaimer';
+import { supabase } from '@/integrations/supabase/client';
 
 const VALID_CREDENTIALS: Record<string, string> = {
   'arlan.nugara@ornge.ca': 'alvar@1234!',
