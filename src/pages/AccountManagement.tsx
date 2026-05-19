@@ -10,6 +10,7 @@ import { Switch } from '@/components/ui/switch';
 import { Badge } from '@/components/ui/badge';
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
+import { supabase } from '@/integrations/supabase/client';
 
 const ALLOWED_USERS = [
   'arlan.nugara@ornge.ca',
@@ -61,19 +62,7 @@ function formatTimestamp(iso: string) {
   });
 }
 
-const ACCOUNTS_STORAGE_KEY = 'pttp_accounts';
 const ACTIVITY_STORAGE_KEY = 'pttp_account_activity';
-
-function loadAccounts(): Account[] {
-  try {
-    const raw = localStorage.getItem(ACCOUNTS_STORAGE_KEY);
-    if (raw) {
-      const parsed = JSON.parse(raw);
-      if (Array.isArray(parsed) && parsed.length) return parsed;
-    }
-  } catch {}
-  return initialAccounts;
-}
 
 function loadActivity(): ActivityEntry[] {
   try {
@@ -86,9 +75,22 @@ function loadActivity(): ActivityEntry[] {
   return initialActivity;
 }
 
+// Map DB row -> Account (UI shape). acctMgmt is derived from ALLOWED_USERS list.
+function rowToAccount(row: any): Account {
+  return {
+    id: row.id,
+    email: row.email,
+    password: row.password,
+    logins: 0,
+    sessionAnalytics: !!row.session_analytics,
+    acctMgmt: ALLOWED_USERS.includes(row.email),
+    status: !!row.status,
+  };
+}
+
 export default function AccountManagement() {
   const [authorized, setAuthorized] = useState(false);
-  const [accounts, setAccounts] = useState<Account[]>(loadAccounts);
+  const [accounts, setAccounts] = useState<Account[]>([]);
   const [activity, setActivity] = useState<ActivityEntry[]>(loadActivity);
   const [visiblePasswords, setVisiblePasswords] = useState<Set<string>>(new Set());
   const [deleteConfirm, setDeleteConfirm] = useState<string | null>(null);
@@ -111,11 +113,43 @@ export default function AccountManagement() {
     setAuthorized(true);
   }, []);
 
-  // Persist accounts & activity so they survive reloads and so the login
-  // gate can authenticate accounts added here.
+  // Load accounts from Supabase (shared across all browsers/devices).
+  // Seed the table with initial accounts on first run if empty.
+  const refreshAccounts = async () => {
+    const { data, error } = await supabase
+      .from('pttp_accounts')
+      .select('*')
+      .order('created_at', { ascending: true });
+    if (error) {
+      console.error('Failed to load accounts:', error);
+      return;
+    }
+    if (!data || data.length === 0) {
+      const seed = initialAccounts.map(a => ({
+        email: a.email,
+        password: a.password,
+        status: a.status,
+        session_analytics: a.sessionAnalytics,
+      }));
+      const { data: inserted, error: insErr } = await supabase
+        .from('pttp_accounts')
+        .insert(seed)
+        .select();
+      if (insErr) {
+        console.error('Failed to seed accounts:', insErr);
+        return;
+      }
+      setAccounts((inserted || []).map(rowToAccount));
+    } else {
+      setAccounts(data.map(rowToAccount));
+    }
+  };
+
   useEffect(() => {
-    try { localStorage.setItem(ACCOUNTS_STORAGE_KEY, JSON.stringify(accounts)); } catch {}
-  }, [accounts]);
+    if (authorized) refreshAccounts();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [authorized]);
+
   useEffect(() => {
     try { localStorage.setItem(ACTIVITY_STORAGE_KEY, JSON.stringify(activity)); } catch {}
   }, [activity]);
@@ -148,44 +182,60 @@ export default function AccountManagement() {
     setTimeout(() => setCopiedId(null), 1500);
   };
 
-  const toggleField = (id: string, field: 'sessionAnalytics' | 'acctMgmt' | 'status') => {
-    setAccounts(prev => prev.map(a => a.id === id ? { ...a, [field]: !a[field] } : a));
+  const toggleField = async (id: string, field: 'sessionAnalytics' | 'acctMgmt' | 'status') => {
     const acct = accounts.find(a => a.id === id);
-    if (acct) {
-      const fieldLabels = { sessionAnalytics: 'Session Analytics', acctMgmt: 'Acct Mgmt', status: 'Status' };
-      const newVal = !acct[field];
-      logActivity(`${fieldLabels[field]} ${newVal ? 'enabled' : 'disabled'}`, acct.email);
+    if (!acct) return;
+    const newVal = !acct[field];
+    // acctMgmt is derived from ALLOWED_USERS (not persisted in DB) — UI-only.
+    setAccounts(prev => prev.map(a => a.id === id ? { ...a, [field]: newVal } : a));
+    if (field !== 'acctMgmt') {
+      const dbField = field === 'sessionAnalytics' ? 'session_analytics' : 'status';
+      const { error } = await supabase
+        .from('pttp_accounts')
+        .update({ [dbField]: newVal })
+        .eq('id', id);
+      if (error) console.error('Toggle failed:', error);
     }
+    const fieldLabels = { sessionAnalytics: 'Session Analytics', acctMgmt: 'Acct Mgmt', status: 'Status' };
+    logActivity(`${fieldLabels[field]} ${newVal ? 'enabled' : 'disabled'}`, acct.email);
   };
 
-  const handleDelete = (id: string) => {
+  const handleDelete = async (id: string) => {
     const acct = accounts.find(a => a.id === id);
     if (acct) logActivity('Account deleted', acct.email);
     setAccounts(prev => prev.filter(a => a.id !== id));
     setDeleteConfirm(null);
+    const { error } = await supabase.from('pttp_accounts').delete().eq('id', id);
+    if (error) console.error('Delete failed:', error);
   };
 
-  const handleResetPassword = (id: string) => {
+  const handleResetPassword = async (id: string) => {
     if (!newPassword.trim() || newPassword.length < 6) return;
-    setAccounts(prev => prev.map(a => a.id === id ? { ...a, password: newPassword } : a));
     const acct = accounts.find(a => a.id === id);
+    setAccounts(prev => prev.map(a => a.id === id ? { ...a, password: newPassword } : a));
     if (acct) logActivity('Password reset', acct.email);
     setResetConfirm(null);
+    const pwd = newPassword;
     setNewPassword('');
+    const { error } = await supabase.from('pttp_accounts').update({ password: pwd }).eq('id', id);
+    if (error) console.error('Password reset failed:', error);
   };
 
-  const handleAddAccount = () => {
+  const handleAddAccount = async () => {
     if (!newEmail.trim() || !newPwd.trim() || newPwd.length < 6) return;
-    setAccounts(prev => [...prev, {
-      id: Date.now().toString(),
-      email: newEmail.trim(),
-      password: newPwd,
-      logins: 0,
-      sessionAnalytics: false,
-      acctMgmt: false,
-      status: true,
-    }]);
-    logActivity('Account created', newEmail.trim());
+    const email = newEmail.trim();
+    const { data, error } = await supabase
+      .from('pttp_accounts')
+      .insert({ email, password: newPwd, status: true, session_analytics: false })
+      .select()
+      .single();
+    if (error) {
+      console.error('Add account failed:', error);
+      alert(`Failed to add account: ${error.message}`);
+      return;
+    }
+    setAccounts(prev => [...prev, rowToAccount(data)]);
+    logActivity('Account created', email);
     setNewEmail('');
     setNewPwd('');
     setShowAddForm(false);
@@ -234,7 +284,7 @@ export default function AccountManagement() {
                       <Plus className="h-4 w-4" /> Add Account
                     </Button>
                   )}
-                  <Button variant="outline" size="sm" className="gap-1.5">
+                  <Button variant="outline" size="sm" className="gap-1.5" onClick={refreshAccounts}>
                     <RefreshCw className="h-4 w-4" /> Refresh
                   </Button>
                 </div>

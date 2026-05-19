@@ -7,6 +7,7 @@ import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { logLogin, logSessionEnd } from '@/lib/sessionTracker';
 import DemoDisclaimer from '@/components/DemoDisclaimer';
+import { supabase } from '@/integrations/supabase/client';
 
 const VALID_CREDENTIALS: Record<string, string> = {
   'arlan.nugara@ornge.ca': 'alvar@1234!',
@@ -59,29 +60,27 @@ export default function GateLogin() {
       return;
     }
     setLoading(true);
-    setTimeout(() => {
-      // Built-in credentials + any accounts added via /acctmgmt (persisted in localStorage)
-      let dynamicCreds: Record<string, { password: string; status: boolean; sessionAnalytics: boolean }> = {};
+    (async () => {
+      // Built-in credentials + any accounts added via /acctmgmt (stored in Supabase, shared cross-browser)
+      let dynamicEntry: { password: string; status: boolean; sessionAnalytics: boolean } | undefined;
       try {
-        const raw = localStorage.getItem('pttp_accounts');
-        if (raw) {
-          const parsed = JSON.parse(raw);
-          if (Array.isArray(parsed)) {
-            parsed.forEach((a: any) => {
-              if (a?.email && a?.password) {
-                dynamicCreds[a.email] = {
-                  password: a.password,
-                  status: a.status !== false,
-                  sessionAnalytics: !!a.sessionAnalytics,
-                };
-              }
-            });
-          }
+        const { data } = await supabase
+          .from('pttp_accounts')
+          .select('email,password,status,session_analytics')
+          .eq('email', username)
+          .maybeSingle();
+        if (data) {
+          dynamicEntry = {
+            password: data.password,
+            status: data.status !== false,
+            sessionAnalytics: !!data.session_analytics,
+          };
         }
-      } catch {}
+      } catch (e) {
+        console.error('Account lookup failed:', e);
+      }
 
       const builtInMatch = VALID_CREDENTIALS[username] && VALID_CREDENTIALS[username] === password;
-      const dynamicEntry = dynamicCreds[username];
       const dynamicMatch = dynamicEntry && dynamicEntry.status && dynamicEntry.password === password;
 
       if (builtInMatch || dynamicMatch) {
@@ -96,6 +95,7 @@ export default function GateLogin() {
           if (sid) sessionStorage.setItem('session_id', sid);
         });
         setFailedAttempts(0);
+        setLoading(false);
         navigate('/versions');
       } else {
         const newAttempts = failedAttempts + 1;
@@ -106,9 +106,9 @@ export default function GateLogin() {
         } else {
           setError(`Invalid credentials. ${MAX_ATTEMPTS - newAttempts} attempt(s) remaining.`);
         }
+        setLoading(false);
       }
-      setLoading(false);
-    }, 600);
+    })();
   };
 
   return (

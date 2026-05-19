@@ -14,6 +14,39 @@ export type Database = {
   }
   public: {
     Tables: {
+      pttp_accounts: {
+        Row: {
+          created_at: string
+          email: string
+          id: string
+          last_login: string | null
+          password: string
+          session_analytics: boolean
+          status: boolean
+          updated_at: string
+        }
+        Insert: {
+          created_at?: string
+          email: string
+          id?: string
+          last_login?: string | null
+          password: string
+          session_analytics?: boolean
+          status?: boolean
+          updated_at?: string
+        }
+        Update: {
+          created_at?: string
+          email?: string
+          id?: string
+          last_login?: string | null
+          password?: string
+          session_analytics?: boolean
+          status?: boolean
+          updated_at?: string
+        }
+        Relationships: []
+      }
       session_logs: {
         Row: {
           browser: string | null
