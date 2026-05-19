@@ -284,7 +284,7 @@ export default function AccountManagement() {
                       <Plus className="h-4 w-4" /> Add Account
                     </Button>
                   )}
-                  <Button variant="outline" size="sm" className="gap-1.5">
+                  <Button variant="outline" size="sm" className="gap-1.5" onClick={refreshAccounts}>
                     <RefreshCw className="h-4 w-4" /> Refresh
                   </Button>
                 </div>
