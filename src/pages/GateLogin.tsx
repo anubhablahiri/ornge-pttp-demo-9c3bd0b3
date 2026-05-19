@@ -59,10 +59,35 @@ export default function GateLogin() {
     }
     setLoading(true);
     setTimeout(() => {
-      if (VALID_CREDENTIALS[username] && VALID_CREDENTIALS[username] === password) {
+      // Built-in credentials + any accounts added via /acctmgmt (persisted in localStorage)
+      let dynamicCreds: Record<string, { password: string; status: boolean; sessionAnalytics: boolean }> = {};
+      try {
+        const raw = localStorage.getItem('pttp_accounts');
+        if (raw) {
+          const parsed = JSON.parse(raw);
+          if (Array.isArray(parsed)) {
+            parsed.forEach((a: any) => {
+              if (a?.email && a?.password) {
+                dynamicCreds[a.email] = {
+                  password: a.password,
+                  status: a.status !== false,
+                  sessionAnalytics: !!a.sessionAnalytics,
+                };
+              }
+            });
+          }
+        }
+      } catch {}
+
+      const builtInMatch = VALID_CREDENTIALS[username] && VALID_CREDENTIALS[username] === password;
+      const dynamicEntry = dynamicCreds[username];
+      const dynamicMatch = dynamicEntry && dynamicEntry.status && dynamicEntry.password === password;
+
+      if (builtInMatch || dynamicMatch) {
         sessionStorage.setItem('gate_authenticated', 'true');
         sessionStorage.setItem('gate_username', username);
-        if (STATS_USERS.includes(username)) {
+        const hasStats = STATS_USERS.includes(username) || (dynamicEntry && dynamicEntry.sessionAnalytics);
+        if (hasStats) {
           sessionStorage.setItem('stats_access', 'true');
         }
         // Log session asynchronously
