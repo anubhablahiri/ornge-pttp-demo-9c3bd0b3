@@ -61,10 +61,35 @@ function formatTimestamp(iso: string) {
   });
 }
 
+const ACCOUNTS_STORAGE_KEY = 'pttp_accounts';
+const ACTIVITY_STORAGE_KEY = 'pttp_account_activity';
+
+function loadAccounts(): Account[] {
+  try {
+    const raw = localStorage.getItem(ACCOUNTS_STORAGE_KEY);
+    if (raw) {
+      const parsed = JSON.parse(raw);
+      if (Array.isArray(parsed) && parsed.length) return parsed;
+    }
+  } catch {}
+  return initialAccounts;
+}
+
+function loadActivity(): ActivityEntry[] {
+  try {
+    const raw = localStorage.getItem(ACTIVITY_STORAGE_KEY);
+    if (raw) {
+      const parsed = JSON.parse(raw);
+      if (Array.isArray(parsed)) return parsed;
+    }
+  } catch {}
+  return initialActivity;
+}
+
 export default function AccountManagement() {
   const [authorized, setAuthorized] = useState(false);
-  const [accounts, setAccounts] = useState<Account[]>(initialAccounts);
-  const [activity, setActivity] = useState<ActivityEntry[]>(initialActivity);
+  const [accounts, setAccounts] = useState<Account[]>(loadAccounts);
+  const [activity, setActivity] = useState<ActivityEntry[]>(loadActivity);
   const [visiblePasswords, setVisiblePasswords] = useState<Set<string>>(new Set());
   const [deleteConfirm, setDeleteConfirm] = useState<string | null>(null);
   const [resetConfirm, setResetConfirm] = useState<string | null>(null);
@@ -85,6 +110,15 @@ export default function AccountManagement() {
     }
     setAuthorized(true);
   }, []);
+
+  // Persist accounts & activity so they survive reloads and so the login
+  // gate can authenticate accounts added here.
+  useEffect(() => {
+    try { localStorage.setItem(ACCOUNTS_STORAGE_KEY, JSON.stringify(accounts)); } catch {}
+  }, [accounts]);
+  useEffect(() => {
+    try { localStorage.setItem(ACTIVITY_STORAGE_KEY, JSON.stringify(activity)); } catch {}
+  }, [activity]);
 
   if (!authorized) return null;
 
